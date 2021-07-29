@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_fraemwork'
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -75,10 +75,23 @@ WSGI_APPLICATION = 'codeArena.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+MONGODB_USER = config("MONGODB_USER")
+MONGODB_USER_PASS = config("MONGODB_USER_PASS")
+MONGODB_HOST = config("MONGODB_HOST")
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+    },
+    'mongo': {
+        'ENGINE': 'djongo',
+        'NAME': 'codearena_mdb',
+        'ENFORCE_SCHEMA': False,
+        'CLIENT': {
+            'host': f'mongodb://{MONGODB_USER}:{MONGODB_USER_PASS}@{MONGODB_HOST}/codearena_mdb?retryWrites=true&w=majority'
+        }
     }
 }
 
