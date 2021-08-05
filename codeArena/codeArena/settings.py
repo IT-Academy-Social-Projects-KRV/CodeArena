@@ -83,20 +83,12 @@ MONGODB_HOST = config("MONGODB_HOST")
 DATABASES = {
 
     'default': {
-
-
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-
         'NAME': config('DB_NAME'),
-
         'USER': config('DB_USER'),
-
         'PASSWORD': config('DB_PASSWORD'),
-
         'HOST': config('PG_HOST', default='127.0.0.1'),
-
         'PORT': config('DB_PORT', default=5050, cast=int),
-
     },
     'mongo':{
         'ENGINE': 'djongo',
