@@ -93,9 +93,9 @@ DATABASES = {
 
         'PASSWORD': config('DB_PASSWORD'),
 
-        'HOST': config('DB_HOST'),
+        'HOST': config('PG_HOST', default='127.0.0.1'),
 
-        'PORT': '',
+        'PORT': config('DB_PORT', default=5050, cast=int),
 
     },
     'mongo':{
