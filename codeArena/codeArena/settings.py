@@ -14,7 +14,7 @@ from pathlib import Path
 from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -37,8 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'rest_framework'
+    'django.contrib.staticfiles', 
+    'rest_framework',
+
 ]
 
 MIDDLEWARE = [
@@ -80,14 +81,25 @@ MONGODB_USER_PASS = config("MONGODB_USER_PASS")
 MONGODB_HOST = config("MONGODB_HOST")
 
 DATABASES = {
+
     'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('PG_HOST', default='127.0.0.1'),
+        'PORT': config('DB_PORT', default=5050, cast=int),
+    },
+    'mongo':{
         'ENGINE': 'djongo',
         'NAME': 'codearena_mdb',
         'ENFORCE_SCHEMA': False,
         'CLIENT': {
             'host': f'mongodb://{MONGODB_USER}:{MONGODB_USER_PASS}@{MONGODB_HOST}/codearena_mdb?retryWrites=true&w=majority'
         }
+
     }
+
 }
 
 
@@ -133,3 +145,5 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+ALLOWED_HOSTS = ['127.0.0.1']
