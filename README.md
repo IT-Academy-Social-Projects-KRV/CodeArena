@@ -1,10 +1,10 @@
 # CodeArena-Django
 
-CodeArena is a web application for coders to increase their knowledge of the programming language by solving tasks, which gives the opportunity to find their first job. This repository includes a back-end, that send responses for front-end.
+CodeArena is a web application for coders to increase their knowledge of the programming language by solving tasks, which gives the opportunity to find their first job. This repository includes a back-end and front-end as well.
 
 ## About Project
 
-This project is being developed by SoftServe trainees as part of a Python and web development training course at IT Academy.
+This project is being developed by SoftServe trainees as part of Python and web development training course at IT Academy.
 The main goals of this project are to give opportunity for:
 * coders to improve their knowledge of programming languages ​​by solving tasks, raise their rating, discuss tasks, add their own and find their first job;
 * recruiters to post vacancies, create competitions and select the best coders for recruitment.
@@ -12,6 +12,9 @@ The main goals of this project are to give opportunity for:
 ### Built With
 
 * [Django REST](https://www.django-rest-framework.org/)
+* [React](https://reactjs.org/)
+* [MongoDB](https://www.mongodb.com/)
+* [PostgreSQL](https://www.postgresql.org/)
 
 ### Project Status
 
@@ -21,7 +24,7 @@ This project is currently on skeleton stage.
 
 Open terminal and follow next steps to run this project.
 
-Check if Python is installed on your machine:
+Check if Python installed on your machine:
 ```bash
 python -V
 ```
@@ -35,6 +38,11 @@ Make sure that you have pip installed:
 ```bash
 pip -V
 ```
+Check if Node.js installed on your machine:
+```bash
+node -v
+```
+This command should give you version of installed Node.js. If you get an error, than go to [Node.js site](https://nodejs.org/en/), download current version and follow README to install. Also, you can go to [this page](https://nodejs.org/uk/download/package-manager/) and follow the instructions for installing it via your package manager.
 
 Create new directory (if you want to) and go to it:
 ```bash
@@ -62,6 +70,16 @@ Clone repository and go to CodeArena-Django directory:
 git clone https://github.com/IT-Academy-Social-Projects-KRV/CodeArena-Django.git
 cd CodeArena-Django
 ```
+
+For starting Django app go to CodeArena directory and run command:
+```bash
+python manage.py runserver
+```
+For starting React app go to front-end directory and run command:
+```bash
+npm start
+```
+
 
 ## License
 
