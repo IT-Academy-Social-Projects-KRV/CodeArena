@@ -1,0 +1,28 @@
+.green_block {
+    padding: 10px;
+    background: #31AB29;
+    width: 350px;
+    max-width: 100%;
+}
+
+.achievements ol {
+    padding: 0 0 0 20px;
+}
+
+.news ol {
+    list-style-type: none;
+    padding: 0;
+}
+
+.news ol li a, .achievements ol li {
+    color: #fff;
+    text-align: left;
+}
+
+.news ol li a {
+    text-decoration: none;
+}
+
+.news ol li a:hover {
+    text-decoration: underline;
+}
