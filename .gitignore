@@ -18,6 +18,8 @@ jspm_packages/
 .env.development.local
 .env.test.local
 .env.production.local
+v
+.env
 
 # logs
 npm-debug.log*
