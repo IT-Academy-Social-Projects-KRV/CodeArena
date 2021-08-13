@@ -1,0 +1,42 @@
+.launguages {
+    background: #fff;
+    width: 600px;
+    padding: 20px;
+    max-height: 500px;
+}
+
+.launguages span {
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.launguages_wrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.launguages_wrapper a {
+    flex: 0 0 50%;
+    display: block;
+    margin: 20px 0;
+}
+
+.launguages_wrapper a > div {
+    margin: 0 auto;
+    width: 150px;
+    height: 150px;
+    background-size: contain !important;
+}
+
+.launguages_wrapper .js {
+    background: url(./images/js.png) no-repeat center center;
+}
+.launguages_wrapper .css {
+    background: url(./images/css.png) no-repeat center center;
+}
+.launguages_wrapper .python {
+    background: url(./images/python.png) no-repeat center center;
+}
+.launguages_wrapper .html {
+    background: url(./images/html.png) no-repeat center center;
+}

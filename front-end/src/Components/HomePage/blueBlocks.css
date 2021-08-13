@@ -1,0 +1,20 @@
+.blue_block {
+    padding: 10px;
+    background: #2C6AA0;
+    width: 350px;
+    max-width: 100%;
+}
+
+.blue_block ol li {
+    color: #fff;
+    text-align: left;
+}
+  
+.raiting ol {
+    padding: 0 0 0 20px;
+}
+
+.competitions ol {
+    list-style-type: none;
+    padding: 0;
+}
