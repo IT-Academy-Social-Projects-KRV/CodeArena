@@ -2,7 +2,6 @@ import React from 'react';
 import './greenBlocks.css';
 
 function News () {
-    // Place for future function
     return (
         <section className="news green_block">
             <h2>News</h2>
