@@ -1,9 +1,6 @@
 # get python image
 FROM python:latest
 
-# python output is sent straight to terminal without being buffered 
-ENV PYTHONUNBUFFERED=1
-
 # make directory and go inside it
 RUN mkdir -p /usr/src/api
 WORKDIR /usr/src/api
