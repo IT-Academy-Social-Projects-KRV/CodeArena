@@ -28,11 +28,11 @@ services:
 
 # TODO mongodb
 
-  front-end:
+  ui:
     build:
       context: .
-      dockerfile: front-end.Dockerfile
-    container_name: front-end
+      dockerfile: ui.Dockerfile
+    container_name: ui
     ports:
       - 80:8080
     depends_on:
