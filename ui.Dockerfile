@@ -1,5 +1,5 @@
 # get node image
-FROM node:alpine as build-stage
+FROM node:alpine
 
 # make directory and go to it
 RUN mkdir -p /usr/src/front-end
@@ -13,10 +13,15 @@ RUN npm install
 # build react app
 RUN npm run build
 
-# get nginx image
-FROM nginx:alpine
-
-# copy builded react app from previous image
-COPY --from=build-stage /usr/src/front-end/build /var/www/react
+# install nginx
+RUN apk add nginx
+# add folder for nginx file
+RUN mkdir -p /run/nginx
 # copy nginx configuration to image
 COPY ./etc/nginx.conf /etc/nginx/conf.d/default.conf
+
+# copy builded react app to nginx folder
+RUN cp -r /usr/src/front-end/build /var/www/react
+
+# start nginx
+CMD ["nginx", "-g", "daemon off;"] 
