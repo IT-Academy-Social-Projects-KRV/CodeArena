@@ -26,7 +26,14 @@ services:
     depends_on:
       - postgres
 
-# TODO mongodb
+  mongo:
+    image: mongo
+    container_name: mongo
+    environment:
+      - MONGO_INITDB_DATABASE=codearena_mdb
+    volumes:
+      - ./bin/mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh:ro
+      - mongo_db:/var/lib/mongodb/data
 
   ui:
     build:
@@ -40,3 +47,4 @@ services:
 
 volumes:
   postgres_db:
+  mongo_db:
