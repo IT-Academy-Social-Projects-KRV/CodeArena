@@ -26,7 +26,15 @@ services:
     depends_on:
       - postgres
 
-# TODO mongodb
+  mongo:
+    image: mongo
+    container_name: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGODB_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_USER_PASS}
+      - MONGO_INITDB_DATABASE=${MONGODB_NAME}
+    volumes:
+      - mongo_db:/var/lib/mongodb/data
 
   ui:
     build:
@@ -40,3 +48,4 @@ services:
 
 volumes:
   postgres_db:
+  mongo_db:

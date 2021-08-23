@@ -96,7 +96,7 @@ DATABASES = {
         'NAME': 'codearena_mdb',
         'ENFORCE_SCHEMA': False,
         'CLIENT': {
-            'host': f'mongodb://{MONGODB_USER}:{MONGODB_USER_PASS}@{MONGODB_HOST}/codearena_mdb?retryWrites=true&w=majority'
+            'host': f'mongodb://{MONGODB_USER}:{MONGODB_USER_PASS}@{MONGODB_HOST}/admin?retryWrites=true&w=majority'
         }
 
     }
