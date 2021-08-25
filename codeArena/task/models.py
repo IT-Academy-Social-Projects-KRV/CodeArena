@@ -39,3 +39,13 @@ class Task(models.Model):
     def __str__(self):
         return self.name
 
+
+class CoderTask(models.Model):
+    coder_id = models.CharField(max_length=36, default='')
+    task_id = models.ForeignKey(
+        Task,
+        on_delete=models.CASCADE,
+    )
+    solution = models.TextField()
+    status = models.BooleanField()
+
