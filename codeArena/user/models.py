@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models.fields import CharField
+from user.enums import UserStatus
 
 class Role(models.Model):
     name = models.CharField(max_length=100)
@@ -16,7 +17,7 @@ class User(models.Model):
     role_id = models.ForeignKey(Role, on_delete=models.CASCADE)
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
-    status = models.BooleanField() #deleted or active
+    status = models.CharField(max_length=10, choices=[(tag, tag.value) for tag in UserStatus])
 
     def __str__(self):
         return f'{self.pk}, {self.email}, {self.nickname}, {self.first_name}, {self.last_name} \
