@@ -1,6 +1,6 @@
 class PostgresRouter:
     # List what contain apps what can use default database.
-    route_app_labels = {'auth', 'contenttypes', 'sessions', 'admin'}
+    route_app_labels = {'auth', 'contenttypes', 'sessions', 'admin', 'user'}
 
     def db_for_read(self, model, **hints):
         """
