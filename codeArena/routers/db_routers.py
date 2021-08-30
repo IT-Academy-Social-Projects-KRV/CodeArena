@@ -42,7 +42,14 @@ class PostgresRouter:
 
 class MongoRouter:
     # List what contain apps what can use mongo database.
-    route_app_labels = {'task', 'auth', 'contenttypes', 'sessions', 'admin'}
+    route_app_labels = {
+        'auth',
+        'contenttypes',
+        'sessions',
+        'admin',
+        'task',
+        'competition'
+    }
 
     def db_for_read(self, model, **hints):
         """
