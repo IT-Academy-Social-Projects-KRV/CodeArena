@@ -4,6 +4,7 @@ jspm_packages/
 /.pnp
 .pnp.js
 .npm/
+__pycache__/
 
 # testing
 /coverage

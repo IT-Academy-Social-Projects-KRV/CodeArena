@@ -1,0 +1,43 @@
+
+.App {
+    /* text-align: center; */
+    background-color: #292929;
+  }
+  
+  .header {
+    background-color: #fff;
+    min-height: 50px;
+    font-size: calc(10px + 2vmin);
+    color: #000;
+    text-transform: uppercase;
+  }
+  
+  .mainheader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 30px;
+  }
+  
+  .mainheader > div:first-child {
+    font-weight: 700;
+    font-size: 1.9rem;
+  }
+  
+  .top_menu {
+    background-color: #292929;
+    padding: 0px 0;
+  }
+  
+  .top_menu div {
+    text-align: right;
+    padding: 0 10px;
+  }
+  
+  @media screen and (max-width: 700px) {
+    .header {
+      flex-direction: column;
+      padding: 0;
+    }
+  }
