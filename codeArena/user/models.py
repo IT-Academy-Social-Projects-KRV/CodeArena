@@ -44,7 +44,7 @@ class Coder(models.Model):
 
 class Link(models.Model):
     coder_id = models.ForeignKey(Coder, on_delete=models.CASCADE)
-    hyperlink = models.URLField()
+    url = models.URLField()
 
     def __str__(self):
         return f'{self.coder_id}, {self.hyperlink}'
