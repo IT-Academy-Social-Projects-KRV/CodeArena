@@ -24,3 +24,28 @@ class User(models.Model):
             {(True if self.password is not None else False)}, {self.role_id}, {self.created_at}, {self.updated_at}, {self.status}'
 
 
+class Level(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
+class Coder(models.Model):
+    id = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    city = models.CharField(max_length=100)
+    description = models.TextField()
+    phone_number = models.CharField(max_length=15)
+    level_id = models.ForeignKey(Level, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return f'{self.id}, {self.city}, {self.description}, {self.phone_number}, {self.level_id}'
+
+
+class Link(models.Model):
+    coder_id = models.ForeignKey(Coder, on_delete=models.CASCADE)
+    url = models.URLField()
+
+    def __str__(self):
+        return f'{self.coder_id}, {self.hyperlink}'
+
