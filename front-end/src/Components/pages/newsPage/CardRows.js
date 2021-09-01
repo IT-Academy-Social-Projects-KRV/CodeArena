@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Container, Row, Col} from "react-bootstrap"
+import { Container, Row, Col } from "react-bootstrap"
 import CardNews from './CardNews'
 
 
@@ -40,30 +40,28 @@ class CardRows extends Component {
                     title: "88888The real victims of mass crypto-hacks that keep happening",
                     src: "https://images.pexels.com/photos/33684/astronaut-spacewalk-iss-tools.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
                 },
-                
             ]
-        }        
-        
+        }
     }
 
 
     render() {
-        const {news} = this.state
-        return  (
-        <Container>
+        const { news } = this.state
+        return (
+            <Container>
 
-        <Row className="my-2">
-           {news.map(card => {
-            return(  
-            <Col md={3}>
-                <CardNews card={card} />
-            </Col>
-            );
-        })}
-        </Row>
-        <Row className="my-3"></Row>
-        </Container>
-    )
-}}
+                <Row className="my-2">
+                    {news.map(card => {
+                        return (
+                            <Col md={3}>
+                                <CardNews card={card} />
+                            </Col>
+                        );
+                    })}
+                </Row>
+                <Row className="my-3"></Row>
+            </Container>
+        )
+    }
+}
 export default CardRows;
-

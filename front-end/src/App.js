@@ -8,7 +8,6 @@ function App() {
     <>
       <Auth_Header />
       {/* <Header /> */}
-      
     </>
   );
 }
