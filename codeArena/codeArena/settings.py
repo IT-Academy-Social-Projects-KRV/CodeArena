@@ -18,10 +18,10 @@ from decouple import config
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'erofeorpegiheigeporg'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG')
 
 ALLOWED_HOSTS = []
 
@@ -37,9 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles', 
     'rest_framework',
     'task',
+    'competition',
     'user',
-    'vacancies',
-
+    'vacancies'
 ]
 
 MIDDLEWARE = [
@@ -76,26 +76,26 @@ WSGI_APPLICATION = 'codeArena.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-MONGODB_USER = 'dbuser'
-MONGODB_USER_PASS = 'dbuser'
-MONGODB_HOST = 'localhost'
+MONGODB_USER = config("MONGODB_USER")
+MONGODB_USER_PASS = config("MONGODB_USER_PASS")
+MONGODB_HOST = config("MONGODB_HOST")
 
 DATABASES = {
 
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'db_postgres',
-        'USER': 'dbuser',
-        'PASSWORD': 'dbuser',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('PG_HOST', default='127.0.0.1'),
+        'PORT': config('DB_PORT', default=5050, cast=int),
     },
     'mongo':{
         'ENGINE': 'djongo',
         'NAME': 'codearena_mdb',
         'ENFORCE_SCHEMA': False,
         'CLIENT': {
-            'host': 'localhost'
+            'host': f'mongodb://{MONGODB_USER}:{MONGODB_USER_PASS}@{MONGODB_HOST}/admin?retryWrites=true&w=majority'
         }
 
     }
