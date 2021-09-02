@@ -19,14 +19,14 @@ class UserSerializer(serializers.ModelSerializer):
 def create(self, validated_data):
     if "password" in validated_data:
         from django.contrib.auth.hashers import make_password
-        validated_data["password"] = make_password(validated_data["password"])
+        validated_data['password'] = make_password(validated_data['password'])
     return super(UserSerializer, self).create(validated_data)
 
 
 def update(self, instance, validated_data):
     if "password" in validated_data:
         from django.contrib.auth.hashers import make_password
-        validated_data["password"] = make_password(validated_data["password"])
+        validated_data['password'] = make_password(validated_data['password'])
     return super(UserSerializer, self).update(instance, validated_data)
 
 
