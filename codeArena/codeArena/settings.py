@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'task',
     'competition',
     'user',
-    'vacancies'
+    'vacancies',
 ]
 
 MIDDLEWARE = [
