@@ -1,10 +1,9 @@
 import React from 'react';
 import { Navbar, Nav, Button } from 'react-bootstrap';
-import './functional.css';
 
 export default function Functional() {
     return (
-        <Navbar collapseOnSelect expand="md" className="item">
+        <Navbar collapseOnSelect expand="md" className="grey">
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="ms-4">

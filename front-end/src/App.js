@@ -1,17 +1,13 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Footer from '../src/Components/Footer/Footer';
-import MainContainer from '../src/Components/HomePage/MainContainer';
-import Auth_Header from '../src/Components/Auth_Header/Auth_Header';
+import Auth_Header from './Components/Header/Auth_Header';
+import Header from '../src/Components/Header/Header';
 
 function App() {
   return (
     <>
       <Auth_Header />
-      <li className='App'>
-        <MainContainer />
-        <Footer />
-      </li>
+      {/* <Header /> */}
     </>
   );
 }

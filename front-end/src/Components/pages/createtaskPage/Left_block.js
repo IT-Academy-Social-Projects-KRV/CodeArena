@@ -5,7 +5,7 @@ export default function Left_block() {
 
     return (
         <>
-            <h3 className="text-center m-3">Creating task</h3>
+            <h3 className="text-center m-3 type">Creating task</h3>
             <Col className="ms-2">
                 <Container className="m-2" >
                     <CardGroup className="my-1" style={{ height: '33rem' }} >
