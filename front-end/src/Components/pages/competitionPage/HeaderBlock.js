@@ -12,10 +12,8 @@ class HeaderBlock extends Component {
         return (
             <>
             <div className="blue">
-                <Card.Header >
-                    
-                    <h2 >{card.name} </h2>
-                    
+                <Card.Header >                   
+                    <h2 >{card.name} </h2>                
                 </Card.Header>
                 </div>
             </>
