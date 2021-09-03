@@ -4,8 +4,7 @@ import { Navbar, Container, Row, } from 'react-bootstrap';
 import MainBlockCard from './MainBlockCard';
 
 export default function Block() {
-    return (
-        <>
+    return (        
             <Navbar collapseOnSelect expand="md" className="grey">
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
@@ -15,7 +14,6 @@ export default function Block() {
                         </Container>                        
                     </Row>                                      
                 </Navbar.Collapse>                
-            </Navbar>           
-        </>
+            </Navbar>                   
     )
 }
