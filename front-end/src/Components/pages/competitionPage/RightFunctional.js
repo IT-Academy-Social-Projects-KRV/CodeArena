@@ -1,9 +1,6 @@
 import React from 'react';
 import { Nav, Button, Form, FormControl, Dropdown } from 'react-bootstrap';
 
-
-
-
 export default function RightFunctional() {
     return (
         <>
