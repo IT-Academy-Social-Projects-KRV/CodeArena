@@ -6,8 +6,8 @@ import Header from '../src/Components/Header/Header';
 function App() {
   return (
     <>
-      <Auth_Header />
-      {/* <Header /> */}
+      {/* <Auth_Header /> */}
+      <Header />
     </>
   );
 }
