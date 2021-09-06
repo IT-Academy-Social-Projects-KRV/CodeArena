@@ -3,21 +3,18 @@ import Navigation from './Navigation';
 import './header.css';
 import { BrowserRouter as Router, Switch, Route, } from "react-router-dom"
 import { Button, InputGroup, Form, Modal, Row, Col } from 'react-bootstrap';
-
-
 import MainContainer from '../pages/homePage/MainContainer';
 import NewsPage from '../pages/newsPage/NewsPage';
 
 function Header() {
 
-    const [showIn, setShowIn] = useState(false);
-    const handleCloseIn = () => setShowIn(false);
-    const handleShowIn = () => setShowIn(true);
-
     const [showUp, setShowUp] = useState(false);
     const handleCloseUp = () => setShowUp(false);
     const handleShowUp = () => setShowUp(true);
 
+    const [showIn, setShowIn] = useState(false);
+    const handleCloseIn = () => setShowIn(false);
+    const handleShowIn = () => setShowIn(true);
 
     return (
         <>
@@ -35,22 +32,15 @@ function Header() {
                     <Navigation />
                 </div>
             </header>
-            <Router>
-                <Switch>
-                    <Route exact path="/" component={MainContainer} />
-                    <Route exact path="/news" component={NewsPage} />
-                </Switch>
-            </Router>
             <Modal show={showUp} onHide={handleCloseUp}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Sign up</Modal.Title>
+                    <Modal.Title>Registration</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
                         <Form.Group className="mb-3" contriolId="fromBasicEmail">
                             <Form.Label>Email Adress</Form.Label>
                             <Form.Control type="email" placeholder="Enter email" />
-                            <Form.Text className="text muted">We'll never share your email with anyone else</Form.Text>
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Username</Form.Label>
@@ -62,8 +52,12 @@ function Header() {
                         <Form.Group className="mb-3" contriolId="fromBasicPassword">
                             <Form.Label>Password</Form.Label>
                             <Form.Control type="password" placeholder="Enter password" />
+                            <Form.Text className="text muted">Min 8 characters, use upper and lowercase letters, numbers</Form.Text>
                         </Form.Group>
-
+                        <Form.Group className="mb-3" contriolId="fromBasicPassword">
+                            <Form.Label>Confirm Password</Form.Label>
+                            <Form.Control type="password" placeholder="Confirm password" />
+                        </Form.Group>
                         <fieldset>
                             <Form.Group as={Row} className="mb-3">
                                 <Form.Label as="legend" column sm={2}>
@@ -82,34 +76,9 @@ function Header() {
                                         name="formHorizontalRadios"
                                         id="formHorizontalRadios2"
                                     />
-                                    <Form.Check
-                                        type="radio"
-                                        label="moderator"
-                                        name="formHorizontalRadios"
-                                        id="formHorizontalRadios2"
-                                    />
-                                    <Form.Check
-                                        type="radio"
-                                        label="admin"
-                                        name="formHorizontalRadios"
-                                        id="formHorizontalRadios3"
-                                    />
                                 </Col>
                             </Form.Group>
                         </fieldset>
-
-
-                        <Form.Group className="mb-3">
-                            <Form.Label>Role</Form.Label>
-                            <Form.Select>
-                                <option>Select your role from the drop-down list</option>
-                                <option value="1">coder</option>
-                                <option value="2">recruiter</option>
-                                <option value="3">moderator</option>
-                                <option value="4">admin</option>
-                            </Form.Select>
-                        </Form.Group>
-                        
                         <Form.Group className="mb-4" contriolId="fromBasicCheckbox">
                             <Form.Check type="checkbox" label="Remember me" />
                         </Form.Group>
@@ -119,7 +88,6 @@ function Header() {
                     </Form>
                 </Modal.Body>
             </Modal>
-
             <Modal show={showIn} onHide={handleCloseIn}>
                 <Modal.Header className="type" closeButton>
                     <Modal.Title>Log in</Modal.Title>
@@ -146,6 +114,12 @@ function Header() {
                     </Form>
                 </Modal.Body>
             </Modal>
+            <Router>
+                <Switch>
+                    <Route exact path="/" component={MainContainer} />
+                    <Route exact path="/news" component={NewsPage} />
+                </Switch>
+            </Router>
         </>
     )
 }
