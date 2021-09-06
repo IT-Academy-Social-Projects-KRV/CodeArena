@@ -16,7 +16,7 @@ export default function Right_block() {
                                     <Form.Control
                                         as="textarea"
                                         placeholder="Leave a comment here"
-                                        style={{ height: '415px' }}
+                                        style={{ height: '415px' }}                                        
                                     />
                                 </FloatingLabel>
                             </Card.Body>

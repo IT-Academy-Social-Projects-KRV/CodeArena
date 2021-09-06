@@ -10,18 +10,16 @@ class LeftBlock extends Component {
     render() {
         const { card } = this.props
         return (
-            <>
-                <Card bg="light" style={{ width: '24rem' }} >
-                    <Card.Body style={{ height: '17rem' }}>
-                        <Card.Text className="text-start " > <h4>Language: {card.name_language}</h4>
-                            <h5>Recomend level: {card.level} </h5>
-                            <div>Time for competition: {card.time} </div>
-                            <h5>Start in:{card.start_time} </h5>
-                            <h6>Author: {card.author}</h6>
-                        </Card.Text>
-                    </Card.Body>
-                </Card>
-            </>
+            <Card bg="light" style={{ width: '20rem' }} >
+                <Card.Body style={{ height: '17rem' }}>
+                    <Card.Text className="text-start " > <h4>Language: {card.name_language}</h4>
+                        <h5>Recomend level: {card.level} </h5>
+                        <div>Time for competition: {card.time} </div>
+                        <h5>Start in:{card.start_time} </h5>
+                        <h6>Author: {card.author}</h6>
+                    </Card.Text>
+                </Card.Body>
+            </Card>
         )
     }
 }

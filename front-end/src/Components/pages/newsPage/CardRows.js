@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Container, Row, Col } from "react-bootstrap"
 import CardNews from './CardNews'
 
-
 class CardRows extends Component {
     constructor() {
         super();
@@ -44,22 +43,20 @@ class CardRows extends Component {
         }
     }
 
-
     render() {
         const { news } = this.state
         return (
-            <Container>
-
-                <Row className="my-2">
+            <Container >
+                <Row className="m-2">
                     {news.map(card => {
                         return (
-                            <Col md={3}>
+                            <Col >
                                 <CardNews card={card} />
                             </Col>
                         );
                     })}
                 </Row>
-                <Row className="my-3"></Row>
+                <Row className="m-3"></Row>
             </Container>
         )
     }

@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { Card } from "react-bootstrap";
 
-
-class PeopleCard extends Component {
+class CardNews extends Component {
     constructor(props) {
         super(props);
     }
-
-
+    
     render() {
         var colorArray = ["success", "primary", "light"]
         const randomColour = colorArray[(Math.random() * colorArray.length) | 0]
@@ -15,7 +13,7 @@ class PeopleCard extends Component {
         return (
             <a href="/news_id">
                 <Card
-                    className="my-3"
+                    className="m-3"
                     bg={randomColour}
                     style={{ width: '16rem' }}
                     text={randomColour === 'light' ? 'dark' : 'white'}
@@ -33,4 +31,4 @@ class PeopleCard extends Component {
     }
 }
 
-export default PeopleCard;
+export default CardNews;
