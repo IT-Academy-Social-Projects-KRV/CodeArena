@@ -56,7 +56,7 @@ class CardRows extends Component {
                         );
                     })}
                 </Row>
-                <Row className="m-3"></Row>
+                <Row className="m-5"></Row>
             </Container>
         )
     }
