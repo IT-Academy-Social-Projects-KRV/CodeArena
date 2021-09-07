@@ -2,11 +2,10 @@ import React from 'react';
 import Navigation from './Navigation';
 import './header.css';
 import { BrowserRouter as Router, Switch, Route, } from "react-router-dom"
-import { Nav } from 'react-bootstrap';
-
 
 import MainContainer from '../pages/homePage/MainContainer';
 import NewsPage from '../pages/newsPage/NewsPage';
+import VacanciesPage from '../pages/vacanciesPage/VacanciesPage';
 
 function Header() {
     return (
@@ -29,6 +28,7 @@ function Header() {
                 <Switch>
                     <Route exact path="/" component={MainContainer} />
                     <Route exact path="/news" component={NewsPage} />
+                    <Route exact path="/jobs" component={VacanciesPage}/>
                 </Switch>
             </Router>
         </>
