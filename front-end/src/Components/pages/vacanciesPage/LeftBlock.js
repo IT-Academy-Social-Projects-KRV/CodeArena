@@ -10,8 +10,8 @@ class LeftBlock extends Component {
     render() {
         const { card } = this.props
         return (
-            <Card bg="light" style={{ width: '40rem' }} border="light" >
-                <Card.Body style={{ height: '10rem' }}>
+            <Card bg="light" style={{ width: '37rem' }} border="light" >
+                <Card.Body style={{ height: 'auto' }}>
                     <Card.Text className="text-start " >
                         <h5> Recomend level: {card.level}</h5>
                         <div>{card.discription} </div>

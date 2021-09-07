@@ -11,7 +11,7 @@ class RightBlock extends Component {
         const { card } = this.props
         return (
             <Card bg="light" style={{ width: '12.5rem' }} border="light" >
-                <Card.Body style={{ height: '10rem' }}>
+                <Card.Body style={{ height: 'auto' }}>
                     <Card.Img style={{ width: '10rem' }} position="top" src={card.src}  />
                 </Card.Body>
             </Card>

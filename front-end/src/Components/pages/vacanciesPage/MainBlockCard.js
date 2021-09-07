@@ -39,7 +39,7 @@ class MainBlockCard extends Component {
             <>
                 {parametrs.map(card => {
                     return (
-                        <Card className="mt-4" border="success">
+                        <Card className="m-4" border="success">
                             <HeaderBlock card={card} />
                             <CardGroup>
                                 <div className="ms-3">
