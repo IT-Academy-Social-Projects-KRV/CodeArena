@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { Col, Card, Row, Container, CardGroup, } from 'react-bootstrap';
+import { Card, Row, CardGroup, } from 'react-bootstrap';
 import HeaderBlock from './HeaderBlock';
 import LeftBlock from './LeftBlock';
 import RightBlock from './RightBlock';
@@ -37,25 +37,22 @@ class MainBlockCard extends Component {
         const { parametrs } = this.state
         return (
             <>
-                
-                    {parametrs.map(card => {
-                        return (
-                            <Card className="mt-4" border="success">
-                                <HeaderBlock card={card} />
-                                <CardGroup>
-                               <div className="ms-3">
-                                <Row >
-                                    <LeftBlock card={card} />
-                                    <RightBlock card={card} />
-                                </Row>
+                {parametrs.map(card => {
+                    return (
+                        <Card className="mt-4" border="success">
+                            <HeaderBlock card={card} />
+                            <CardGroup>
+                                <div className="ms-3">
+                                    <Row >
+                                        <LeftBlock card={card} />
+                                        <RightBlock card={card} />
+                                    </Row>
                                 </div>
-                                </CardGroup>
-                              
-                            </Card>
-                        );
-                    })}
-                
-                </>
+                            </CardGroup>
+                        </Card>
+                    );
+                })}
+            </>
         )
     }
 }

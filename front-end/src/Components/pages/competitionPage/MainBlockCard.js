@@ -73,11 +73,11 @@ class MainBlockCard extends Component {
     render() {
         const { parametrs } = this.state
         return (
-            <Row >
-                <Container style={{ width: '80rem' }}>
+            <Row style={{height:'auto'}} >
+                <Container style={{ width: '90rem' }}>
                     {parametrs.map(card => {
                         return (
-                            <CardGroup className="m-2" style={{ height: '25rem' }} >
+                            <CardGroup className="m-2" style={{ height: 'auto' }} >
                                 <Card >
                                     <HeaderBlock card={card} />
                                     <Col >

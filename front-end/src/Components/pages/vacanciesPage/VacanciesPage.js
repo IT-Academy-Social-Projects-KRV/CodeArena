@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Container, Navbar, Row} from 'react-bootstrap';
+import Footer from '../../Footer/Footer';
 import ChooseCategory from './ChooseCategory';
 import WindowVacancy from './WindowVacancy';
 
@@ -13,6 +14,7 @@ class VacanciesPage extends Component {
                         <Row >
                             <ChooseCategory />
                             <WindowVacancy />
+                            <Footer/>
                         </Row>
                     </Container>
                 </Navbar.Collapse>
