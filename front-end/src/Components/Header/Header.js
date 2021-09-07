@@ -3,6 +3,7 @@ import Navigation from './Navigation';
 import './header.css';
 import { BrowserRouter as Router, Switch, Route, } from "react-router-dom"
 import { Nav } from 'react-bootstrap';
+import AboutPage from '../pages/aboutPage/AboutPage';
 
 
 import MainContainer from '../pages/homePage/MainContainer';
@@ -29,6 +30,7 @@ function Header() {
                 <Switch>
                     <Route exact path="/" component={MainContainer} />
                     <Route exact path="/news" component={NewsPage} />
+                    <Route exact path="/about" component={AboutPage} />
                 </Switch>
             </Router>
         </>

@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Switch, Route,  } from "react-router-dom"
 import MainContainer from '../pages/homePage/MainContainer';
 import CreatePage from '../pages/createtaskPage/CreatePage';
 import NewsPage from '../pages/newsPage/NewsPage';
+import AboutPage from '../pages/aboutPage/AboutPage';
 
 export default class Auth_Header extends Component {
     render() {
@@ -47,6 +48,7 @@ export default class Auth_Header extends Component {
                         <Route exact path="/" component={MainContainer} />
                         <Route exact path="/creating_task" component={CreatePage} />
                         <Route exact path="/news" component={NewsPage} />
+                        <Route exact path="/about" component={AboutPage} />
                     </Switch>
                 </Router>
             </>
