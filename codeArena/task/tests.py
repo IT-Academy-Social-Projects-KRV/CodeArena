@@ -1,6 +1,10 @@
 import uuid
 from django.test import TestCase
-from .models import CoderTask, Task
+from rest_framework import status
+from rest_framework.test import APITestCase
+import json
+
+from .models import CoderTask, Task, Language, Category
 
 
 class CoderTaskTestCase(TestCase):
@@ -62,3 +66,65 @@ class TaskModelTestCase(TestCase):
         after_updated = t1.created_at
         self.assertEqual(before_updated, after_updated)
 
+
+class CreatingTaskTestCase(APITestCase):
+    multi_db = True
+    databases = {'default', 'mongo'}
+
+    path = '/api/task/create_task/'
+
+    valid_data = {
+        "name": "task1",
+        "description": "lorem",
+        "user_id": "de305d54-75b4-431b-adb2-eb6b9e546013",
+        "rate": 42,
+        "level": "lorem",
+        "languages": ["a", "b"],
+        "categories": ["1", "2"],
+        "status": "DR",
+        "unit_test": None
+    }
+    unvalid_data = {
+        "name": "task2",
+        "description": "lorem",
+        "user_id": "de305d54-75b4-431b-adb2-eb6b9e546013",
+        "rate": 42,
+        "level": "lorem",
+        "languages": ["c", "b"],
+        "categories": ["3", "2"],''
+        "status": "42",
+        "unit_test": None
+    }
+
+    def setUp(self):
+        # create Languages
+        l1 = Language.objects.create(name='a')
+        l2 = Language.objects.create(name='b')
+
+        # create Categories
+        c1 = Category.objects.create(name='1')
+        c2 = Category.objects.create(name='2')
+
+    def test_creating_task(self):
+        """
+        Testing serializer validator
+        """
+
+        # vaid data
+        request = self.client.post(
+            path=self.path,
+            data=json.dumps(self.valid_data),
+            content_type='application/json'
+        )
+
+        self.assertEqual(request.status_code, status.HTTP_201_CREATED)
+
+        # unvalid data
+        request = self.client.post(
+            path=self.path,
+            data=json.dumps(self.unvalid_data),
+            content_type='application/json'
+        )
+
+        self.assertEqual(request.status_code,
+                         status.HTTP_422_UNPROCESSABLE_ENTITY)
