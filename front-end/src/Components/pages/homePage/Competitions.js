@@ -7,9 +7,9 @@ function Competition () {
             <h2>Competition</h2>
             <div>
                 <ol>
-                    <li><a href="/">Competition from first company</a></li>
-                    <li><a href="/">Competition from first company</a></li>
-                    <li><a href="/">Competition from another company</a></li>      
+                    <li><a href="/competitions">Competition from first company</a></li>
+                    <li><a href="/competitions">Competition from first company</a></li>
+                    <li><a href="/competitions">Competition from another company</a></li>      
                 </ol>
             </div>
         </section>
