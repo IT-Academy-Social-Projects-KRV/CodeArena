@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Card } from "react-bootstrap";
 
 
-class PeopleCard extends Component {
+class NewsCard extends Component {
     constructor(props) {
         super(props);
     }
@@ -33,4 +33,4 @@ class PeopleCard extends Component {
     }
 }
 
-export default PeopleCard;
+export default NewsCard;
