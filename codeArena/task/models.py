@@ -18,6 +18,13 @@ class Category(models.Model):
 
 
 class Task(models.Model):
+
+
+    class Status(models.TextChoices):
+        DRAFT = "DR"
+        PUBLISHED = "PB"
+
+
     _id = models.ObjectIdField()
     name = models.CharField(max_length=150, unique=True)
     description = models.TextField()
@@ -25,15 +32,13 @@ class Task(models.Model):
     unit_test = models.FileField(max_length=500)   # todo: upload_to= ?
     rate = models.IntegerField()
     level = models.CharField(max_length=20)        # todo: choices
-    status = models.CharField(max_length=20)       # todo: choices
-    languages = models.ArrayReferenceField(
-        to=Language,
-        on_delete=models.CASCADE,
-    )
-    categories = models.ArrayReferenceField(
-        to=Category,
-        on_delete=models.CASCADE,
-    )
+    status = models.CharField(
+        max_length=2,
+        choices=Status.choices,
+        default=Status.DRAFT
+        )
+    languages = models.JSONField()
+    categories = models.JSONField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = models.DjongoManager()
@@ -43,6 +48,7 @@ class Task(models.Model):
 
 
 class CoderTask(models.Model):
+    _id = models.ObjectIdField()
     coder_id = models.CharField(max_length=36, default='')
     task_id = models.ForeignKey(
         Task,
