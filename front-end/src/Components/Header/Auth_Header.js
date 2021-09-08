@@ -26,8 +26,6 @@ export default class Auth_Header extends Component {
                                         <Nav.Link href="/competitions">List of competitions</Nav.Link>
                                         <Nav.Link href="/jobs">Vacancies list</Nav.Link>
                                         <Nav.Link href="/creating_task">Creating task</Nav.Link>
-
-
                                     </Nav>
                                     <Nav.Link href="exit" className="ms-auto">
                                         <Button variant="danger" className="me-2" >sign out</Button >
