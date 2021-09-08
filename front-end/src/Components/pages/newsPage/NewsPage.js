@@ -1,7 +1,6 @@
 import { Component } from "react"
 import { Navbar } from "react-bootstrap"
 import CardRows from "./CardRows";
-import Footer from "../../Footer/Footer"
 
 
 export default class NewsPage extends Component {
