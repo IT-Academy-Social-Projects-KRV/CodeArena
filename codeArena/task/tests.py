@@ -1,6 +1,8 @@
 import uuid
 from django.test import TestCase
-from .models import CoderTask, Task
+
+from .models import CoderTask, Task, Language
+from .serializers import LanguageSerializer
 
 
 class CoderTaskTestCase(TestCase):
@@ -62,3 +64,20 @@ class TaskModelTestCase(TestCase):
         after_updated = t1.created_at
         self.assertEqual(before_updated, after_updated)
 
+
+class LanguageSerializerTestCase(TestCase):
+    multi_db = True
+    databases = {'default', 'mongo'}
+
+    def setUp(self):
+        self.language = {'name': 'a'}
+
+        self.new_language = Language.objects.create(**self.language)
+
+        self.language['_id'] = str(self.new_language._id)
+
+    def test_language_serializer(self):
+        serialized_language = LanguageSerializer(instance=self.new_language).data
+
+        self.assertEqual(self.language['_id'], serialized_language['_id'])
+        self.assertEqual(self.language['name'], serialized_language['name'])
