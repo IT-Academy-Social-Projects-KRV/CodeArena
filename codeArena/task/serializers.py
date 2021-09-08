@@ -17,8 +17,7 @@ class CreateTaskSerializer(serializers.ModelSerializer):
         Checks for languages in the database.
         """
 
-        language_list = [language.name
-                         for language in Language.objects.all()]
+        language_list = Language.objects.values_list('name', flat=True)
 
         if all(language in language_list for language in value):
             return value
@@ -31,8 +30,7 @@ class CreateTaskSerializer(serializers.ModelSerializer):
         Checks for categories in the database.
         """
 
-        category_list = [category.name
-                         for category in Category.objects.all()]
+        category_list = Category.objects.values_list('name', flat=True)
 
         if all(category in category_list for category in value):
             return value
