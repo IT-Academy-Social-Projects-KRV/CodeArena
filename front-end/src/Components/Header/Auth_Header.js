@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import Navigation from '../Header/Navigation';
 import { Navbar, Nav, Button } from 'react-bootstrap';
 import { BrowserRouter as Router, Switch, Route,  } from "react-router-dom"
-
-
 import MainContainer from '../pages/homePage/MainContainer';
 import CreatePage from '../pages/createtaskPage/CreatePage';
 import NewsPage from '../pages/newsPage/NewsPage';
+import AboutPage from '../pages/aboutPage/AboutPage';
 import CompetitionPage from '../pages/competitionPage/CompetitionPage';
 
 export default class Auth_Header extends Component {
@@ -48,6 +47,7 @@ export default class Auth_Header extends Component {
                         <Route exact path="/" component={MainContainer} />
                         <Route exact path="/creating_task" component={CreatePage} />
                         <Route exact path="/news" component={NewsPage} />
+                        <Route exact path="/about" component={AboutPage} />
                         <Route exact path="/competitions" component={CompetitionPage}/>
                     </Switch>
                 </Router>

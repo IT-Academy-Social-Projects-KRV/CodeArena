@@ -5,7 +5,7 @@ import News from './News';
 import Raiting from './Raiting';
 import Launguages from './Languages';
 import './mainContainer.css';
-import Footer from "../../Footer/Footer"
+
 
 function MainContainer() {
     return (
@@ -22,7 +22,6 @@ function MainContainer() {
                     <Competition />
                 </div>
             </main>
-            <Footer />
         </div>
     )
 }
