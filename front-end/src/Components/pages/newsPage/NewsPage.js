@@ -15,7 +15,6 @@ export default class NewsPage extends Component {
                 <div className="grey text-white">
                     <h1 className="text-center type">NEWS</h1>
                     <CardRows />
-                    <Footer />
                 </div>
             </>
         )
