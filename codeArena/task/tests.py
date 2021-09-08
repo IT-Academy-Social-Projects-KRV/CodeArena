@@ -1,6 +1,8 @@
 import uuid
 from django.test import TestCase
-from .models import CoderTask, Task
+
+from .models import CoderTask, Task, Category
+from .serializers import CategorySerializer
 
 
 class CoderTaskTestCase(TestCase):
@@ -62,3 +64,20 @@ class TaskModelTestCase(TestCase):
         after_updated = t1.created_at
         self.assertEqual(before_updated, after_updated)
 
+
+class CategorySerializerTestCase(TestCase):
+    multi_db = True
+    databases = {'default', 'mongo'}
+
+    def setUp(self):
+        self.category = {'name': 'a'}
+
+        self.new_category = Category.objects.create(**self.category)
+
+        self.category['_id'] = str(self.new_category._id)
+
+    def test_category_serializer(self):
+        serialized_category = CategorySerializer(instance=self.new_category).data
+
+        self.assertEqual(self.category['_id'], serialized_category['_id'])
+        self.assertEqual(self.category['name'], serialized_category['name'])
