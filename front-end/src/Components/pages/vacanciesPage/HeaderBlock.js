@@ -1,7 +1,6 @@
 import React from 'react';
 import { Component } from 'react';
 import { Card, } from 'react-bootstrap';
-import '../../../App.css';
 
 class HeaderBlock extends Component {
     constructor(props) {
@@ -10,13 +9,12 @@ class HeaderBlock extends Component {
     render() {
         const { card } = this.props
         return (
-            <>
-                <div className="blue">
-                    <Card.Header >
-                        <h2 >{card.name} </h2>
-                    </Card.Header>
-                </div>
-            </>
+            <div className="green">
+                <Card.Header>
+                    <h2>{card.name_vacancy} </h2>
+                    <h4>{card.name_company}</h4>
+                </Card.Header>
+            </div>
         )
     }
 }

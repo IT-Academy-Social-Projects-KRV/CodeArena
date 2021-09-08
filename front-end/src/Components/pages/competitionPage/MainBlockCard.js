@@ -1,7 +1,6 @@
 import React from 'react';
 import { Component } from 'react';
 import { Button, Col, Container, CardGroup, Card, Row, } from 'react-bootstrap';
-
 import HeaderBlock from './HeaderBlock';
 import LeftBlock from './LeftBlock';
 import MiddleBlock from './MiddleBlock';
@@ -74,11 +73,11 @@ class MainBlockCard extends Component {
     render() {
         const { parametrs } = this.state
         return (
-            <Row className="ms-5">
-                <Container className="ms-4">
+            <Row style={{height:'auto'}} >
+                <Container style={{ width: '90rem' }}>
                     {parametrs.map(card => {
                         return (
-                            <CardGroup className="m-2" style={{ height: '25rem' }} >
+                            <CardGroup className="m-2" style={{ height: 'auto' }} >
                                 <Card >
                                     <HeaderBlock card={card} />
                                     <Col >

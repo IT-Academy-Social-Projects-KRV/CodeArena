@@ -49,8 +49,7 @@ class CardRows extends Component {
         const { news } = this.state
         return (
             <Container>
-
-                <Row className="my-2">
+                <Row >
                     {news.map(card => {
                         return (
                             <Col md={3}>
@@ -59,7 +58,6 @@ class CardRows extends Component {
                         );
                     })}
                 </Row>
-                <Row className="my-3"></Row>
             </Container>
         )
     }
