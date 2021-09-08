@@ -71,32 +71,32 @@ class CreatingTaskTestCase(APITestCase):
     multi_db = True
     databases = {'default', 'mongo'}
 
-    path = '/api/task/create_task/'
-
-    valid_data = {
-        "name": "task1",
-        "description": "lorem",
-        "user_id": "de305d54-75b4-431b-adb2-eb6b9e546013",
-        "rate": 42,
-        "level": "lorem",
-        "languages": ["a", "b"],
-        "categories": ["1", "2"],
-        "status": "DR",
-        "unit_test": None
-    }
-    unvalid_data = {
-        "name": "task2",
-        "description": "lorem",
-        "user_id": "de305d54-75b4-431b-adb2-eb6b9e546013",
-        "rate": 42,
-        "level": "lorem",
-        "languages": ["c", "b"],
-        "categories": ["3", "2"],''
-        "status": "42",
-        "unit_test": None
-    }
-
     def setUp(self):
+        self.path = '/api/task/create_task/'
+
+        self.valid_data = {
+            'name': 'task1',
+            'description': 'lorem',
+            'user_id': 'de305d54-75b4-431b-adb2-eb6b9e546013',
+            'rate': 42,
+            'level': 'lorem',
+            'languages': ['a', 'b'],
+            'categories': ['1', '2'],
+            'status': 'DR',
+            'unit_test': None
+        }
+        self.unvalid_data = {
+            'name': 'task2',
+            'description': 'lorem',
+            'user_id': 'de305d54-75b4-431b-adb2-eb6b9e546013',
+            'rate': 42,
+            'level': 'lorem',
+            'languages': ['c', 'b'],
+            'categories': ['3', '2'],
+            'status': '42',
+            'unit_test': None
+        }
+
         # create Languages
         l1 = Language.objects.create(name='a')
         l2 = Language.objects.create(name='b')
