@@ -19,7 +19,7 @@ class CreateTaskSerializer(serializers.ModelSerializer):
 
         language_list = Language.objects.values_list('name', flat=True)
 
-        if all(language in language_list for language in value):
+        if set(value).issubset(set(language_list)):
             return value
 
         raise serializers.ValidationError(
@@ -32,7 +32,7 @@ class CreateTaskSerializer(serializers.ModelSerializer):
 
         category_list = Category.objects.values_list('name', flat=True)
 
-        if all(category in category_list for category in value):
+        if set(value).issubset(set(category_list)):
             return value
 
         raise serializers.ValidationError(
