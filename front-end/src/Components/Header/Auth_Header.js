@@ -7,6 +7,7 @@ import CreatePage from '../pages/createtaskPage/CreatePage';
 import NewsPage from '../pages/newsPage/NewsPage';
 import AboutPage from '../pages/aboutPage/AboutPage';
 import CompetitionPage from '../pages/competitionPage/CompetitionPage';
+import AchievementsPage from '../pages/achievementsPage/AchievementsPage';
 
 export default class Auth_Header extends Component {
     render() {
@@ -25,6 +26,7 @@ export default class Auth_Header extends Component {
                                         <Nav.Link href="/list_competitions">List of competitions</Nav.Link>
                                         <Nav.Link href="/list_vacancies">Vacancies list</Nav.Link>
                                         <Nav.Link href="/creating_task">Creating task</Nav.Link>
+                                        <Nav.Link href="/achievements">Achievements</Nav.Link>
 
 
                                     </Nav>
@@ -49,6 +51,7 @@ export default class Auth_Header extends Component {
                         <Route exact path="/news" component={NewsPage} />
                         <Route exact path="/about" component={AboutPage} />
                         <Route exact path="/competitions" component={CompetitionPage}/>
+                        <Route exact path="/achievements" component={AchievementsPage}/>
                     </Switch>
                 </Router>
             </>
