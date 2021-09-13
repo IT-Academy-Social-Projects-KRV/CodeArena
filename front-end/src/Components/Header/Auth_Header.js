@@ -8,6 +8,7 @@ import NewsPage from '../pages/newsPage/NewsPage';
 import AboutPage from '../pages/aboutPage/AboutPage';
 import CompetitionPage from '../pages/competitionPage/CompetitionPage';
 import VacanciesPage from '../pages/vacanciesPage/VacanciesPage';
+import CreateVacancy from '../pages/createVacancyPage/CreateVacancy';
 
 export default class Auth_Header extends Component {
     render() {
@@ -26,6 +27,7 @@ export default class Auth_Header extends Component {
                                         <Nav.Link href="/competitions">List of competitions</Nav.Link>
                                         <Nav.Link href="/jobs">Vacancies list</Nav.Link>
                                         <Nav.Link href="/creating_task">Creating task</Nav.Link>
+                                        <Nav.Link href="/creating_vacancy">Creating vacancy</Nav.Link>
                                     </Nav>
                                     <Nav.Link href="exit" className="ms-auto">
                                         <Button variant="danger" className="me-2" >sign out</Button >
@@ -49,6 +51,7 @@ export default class Auth_Header extends Component {
                         <Route exact path="/about" component={AboutPage} />
                         <Route exact path="/competitions" component={CompetitionPage}/>
                         <Route exact path="/jobs" component={VacanciesPage}/>
+                        <Route exact path="/creating_vacancy" component={CreateVacancy}/>
                     </Switch>
                 </Router>
             </>
