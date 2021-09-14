@@ -1,3 +1,4 @@
+from django.db.utils import DatabaseError
 from rest_framework import generics, status as http_status
 from .serializers import *
 from .models import *
@@ -28,3 +29,19 @@ class GetTaskDetailView(APIView):
             return Response(serializer.data)
         else:
             return Response(status=http_status.HTTP_400_BAD_REQUEST)
+
+
+class CreateTaskView(APIView):
+    def post(self, request, format='json'):
+        task = CreateTaskSerializer(data=request.data)
+
+        if task.is_valid():
+            try:
+                task.save()
+            except django.db.utils.DatabaseError:
+                return Response(
+                    status=status.HTTP_409_CONFLICT)
+
+            return Response(status=status.HTTP_201_CREATED)
+
+        return Response(status=status.HTTP_422_UNPROCESSABLE_ENTITY)

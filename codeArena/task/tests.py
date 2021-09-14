@@ -1,6 +1,11 @@
 import uuid
 from django.test import TestCase
-from .models import CoderTask, Task
+from rest_framework import status
+from rest_framework.test import APITestCase
+import json
+
+from .models import CoderTask, Task, Language, Category
+from .serializers import CategorySerializer, LanguageSerializer
 
 
 class CoderTaskTestCase(TestCase):
@@ -62,3 +67,101 @@ class TaskModelTestCase(TestCase):
         after_updated = t1.created_at
         self.assertEqual(before_updated, after_updated)
 
+
+class LanguageSerializerTestCase(TestCase):
+    multi_db = True
+    databases = {'default', 'mongo'}
+
+    def setUp(self):
+        self.language = {'name': 'a'}
+
+        self.new_language = Language.objects.create(**self.language)
+
+        self.language['_id'] = str(self.new_language._id)
+
+    def test_language_serializer(self):
+        serialized_language = LanguageSerializer(instance=self.new_language).data
+
+        self.assertEqual(self.language['_id'], serialized_language['_id'])
+        self.assertEqual(self.language['name'], serialized_language['name'])
+
+
+class CategorySerializerTestCase(TestCase):
+    multi_db = True
+    databases = {'default', 'mongo'}
+
+    def setUp(self):
+        self.category = {'name': 'a'}
+
+        self.new_category = Category.objects.create(**self.category)
+
+        self.category['_id'] = str(self.new_category._id)
+
+    def test_category_serializer(self):
+        serialized_category = CategorySerializer(instance=self.new_category).data
+
+        self.assertEqual(self.category['_id'], serialized_category['_id'])
+        self.assertEqual(self.category['name'], serialized_category['name'])
+
+
+class CreatingTaskTestCase(APITestCase):
+    multi_db = True
+    databases = {'default', 'mongo'}
+
+    def setUp(self):
+        self.path = '/api/task/create_task/'
+
+        self.valid_data = {
+            'name': 'task1',
+            'description': 'lorem',
+            'user_id': 'de305d54-75b4-431b-adb2-eb6b9e546013',
+            'rate': 42,
+            'level': 'lorem',
+            'languages': ['a', 'b'],
+            'categories': ['1', '2'],
+            'status': 'DR',
+            'unit_test': None
+        }
+        self.unvalid_data = {
+            'name': 'task2',
+            'description': 'lorem',
+            'user_id': 'de305d54-75b4-431b-adb2-eb6b9e546013',
+            'rate': 42,
+            'level': 'lorem',
+            'languages': ['c', 'b'],
+            'categories': ['3', '2'],
+            'status': '42',
+            'unit_test': None
+        }
+
+        # create Languages
+        l1 = Language.objects.create(name='a')
+        l2 = Language.objects.create(name='b')
+
+        # create Categories
+        c1 = Category.objects.create(name='1')
+        c2 = Category.objects.create(name='2')
+
+    def test_creating_task(self):
+        """
+        Testing serializer validator
+        """
+
+        # vaid data
+        request = self.client.post(
+            path=self.path,
+            data=json.dumps(self.valid_data),
+            content_type='application/json'
+        )
+
+        self.assertEqual(request.status_code, status.HTTP_201_CREATED)
+
+        # unvalid data
+        request = self.client.post(
+            path=self.path,
+            data=json.dumps(self.unvalid_data),
+            content_type='application/json'
+        )
+
+        self.assertEqual(request.status_code,
+                         status.HTTP_422_UNPROCESSABLE_ENTITY)
