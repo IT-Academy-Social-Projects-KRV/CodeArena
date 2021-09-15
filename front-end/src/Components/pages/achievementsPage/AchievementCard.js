@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Card } from "react-bootstrap";
 import Badge from "./Badge";
 
-
 class AchievementCard extends Component {
     constructor(props) {
         super(props);
