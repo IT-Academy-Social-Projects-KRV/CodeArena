@@ -1,7 +1,18 @@
 from rest_framework import serializers
-from rest_framework.validators import UniqueValidator
 
 from .models import Task, Language, Category
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = '__all__'
+
+
+class LanguageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Language
+        fields = '__all__'
 
 
 class CreateTaskSerializer(serializers.ModelSerializer):
