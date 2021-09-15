@@ -16,14 +16,12 @@ export default class Step3 extends Component {
         this.setState({
             discription: event.target.value
         });
-
     }
 
     handleChange2(event) {
         this.setState({
             img: event.target.value
         });
-
     }
     render() {
         return (
