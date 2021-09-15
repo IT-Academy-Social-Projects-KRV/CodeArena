@@ -27,24 +27,13 @@ class AchievementsPage extends Component {
         }
     }
 
-
     render() {
         const { achievements } = this.state
         return (
             <>
                 <div className="achievementsWrapper">
                     <h1 className="text-center">Achievements</h1>
-                    <div className="HeadContainer">
-                        <div className="HeadInnerContainer">
-
-                        </div>
-                    </div>
-                    {achievements.map(card => {
-                        return (
-                            <AchievementCard card={card} />
-
-                        );
-                    })}
+                    {achievements.map(card => <AchievementCard card={card} />)}
                 </div>
             </>
         )
