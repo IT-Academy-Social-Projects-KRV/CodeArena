@@ -11,7 +11,6 @@ class AchievementCard extends Component {
 	render() {
 		const { card } = this.props
 		return (
-
 			<Card className="achievementCard">
 				<Card.Body>
 					<div className="achievementCardTitle">
@@ -29,7 +28,6 @@ class AchievementCard extends Component {
 					</div>
 				</Card.Body>
 			</Card>
-
 		)
 	}
 }
