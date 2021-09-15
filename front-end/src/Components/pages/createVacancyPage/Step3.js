@@ -4,27 +4,27 @@ import { Form, FloatingLabel } from 'react-bootstrap';
 export default class Step3 extends Component {
     constructor(props) {
         super(props);
-        this.state ={
-            discription:"",
-            img:"",
+        this.state = {
+            discription: "",
+            img: "",
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleChange2 = this.handleChange2.bind(this);
     }
 
-    handleChange(event){
+    handleChange(event) {
         this.setState({
-            discription:event.target.value
+            discription: event.target.value
         });
 
-    } 
+    }
 
-    handleChange2(event){
+    handleChange2(event) {
         this.setState({
-            img:event.target.value
+            img: event.target.value
         });
 
-    } 
+    }
     render() {
         return (
             <>
@@ -37,7 +37,7 @@ export default class Step3 extends Component {
                         style={{ height: '150px' }}
                         className="my-2"
                         type="text"
-                        value={this.state.discription} 
+                        value={this.state.discription}
                         onChange={this.handleChange}
                     />
                 </FloatingLabel>
