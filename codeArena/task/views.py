@@ -28,7 +28,7 @@ class GetTaskDetailView(APIView):
             serializer.is_valid()
             return Response(serializer.data)
         else:
-            return Response(status=http_status.HTTP_400_BAD_REQUEST)
+            return Response(status=http_status.HTTP_404_NOT_FOUND)
 
 
 class CreateTaskView(APIView):
