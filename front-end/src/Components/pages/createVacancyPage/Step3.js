@@ -8,21 +8,12 @@ export default class Step3 extends Component {
             description: "",
             img: "",
         };
-        this.handleChangeDescription = this.handleChangeDescription.bind(this);
-        this.handleChangeImg = this.handleChangeImg.bind(this);
     }
 
-    handleChangeDescription(event) {
-        this.setState({
-            discription: event.target.value
-        });
-    }
+    handleChangeDescription = (event) => { this.setState({ description: event.target.value }); }
 
-    handleChangeImg(event) {
-        this.setState({
-            img: event.target.value
-        });
-    }
+    handleChangeImg =(event) => {this.setState({img: event.target.value});}
+
     render() {
         return (
             <>
