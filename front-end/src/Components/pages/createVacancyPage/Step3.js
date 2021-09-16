@@ -5,21 +5,21 @@ export default class Step3 extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            discription: "",
+            description: "",
             img: "",
         };
-        this.handleChange = this.handleChange.bind(this);
-        this.handleChange2 = this.handleChange2.bind(this);
+        this.handleChangeDescription = this.handleChangeDescription.bind(this);
+        this.handleChangeImg = this.handleChangeImg.bind(this);
     }
 
-    handleChange(event) {
+    handleChangeDescription(event) {
         this.setState({
             discription: event.target.value
         });
 
     }
 
-    handleChange2(event) {
+    handleChangeImg(event) {
         this.setState({
             img: event.target.value
         });
@@ -37,8 +37,8 @@ export default class Step3 extends Component {
                         style={{ height: '150px' }}
                         className="my-2"
                         type="text"
-                        value={this.state.discription}
-                        onChange={this.handleChange}
+                        value={this.state.description}
+                        onChange={this.handleChangeDescription}
                     />
                 </FloatingLabel>
                 <Form.Group controlId="formFile" className="mb-3">
@@ -46,7 +46,7 @@ export default class Step3 extends Component {
                     <Form.Control
                         type="file"
                         value={this.state.img}
-                        onChange={this.handleChange2}
+                        onChange={this.handleChangeImg}
                     />
                 </Form.Group>
             </>

@@ -9,11 +9,7 @@ export default function ModalBlock() {
     return (
         <>
             <div className="d-grid gap-2" >
-                <Button style={{ width: 'auto' }}
-                    variant="outline-dark"
-                    onClick={handleShow}>
-                    Add vacancy
-                </Button>
+                <Button style={{ width: 'auto' }} variant="outline-dark" onClick={handleShow}> Add vacancy </Button>
                 <Modal show={showWarning} onHide={handleClose} >
                     <Modal.Header closeButton>
                         <Modal.Title>Warning</Modal.Title>

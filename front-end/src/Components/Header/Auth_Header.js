@@ -7,8 +7,8 @@ import CreatePage from '../pages/createtaskPage/CreatePage';
 import NewsPage from '../pages/newsPage/NewsPage';
 import AboutPage from '../pages/aboutPage/AboutPage';
 import CompetitionPage from '../pages/competitionPage/CompetitionPage';
-import VacanciesPage from '../pages/vacanciesPage/VacanciesPage';
 import CreateVacancy from '../pages/createVacancyPage/CreateVacancy';
+import VacanciesPage from '../pages/vacanciesPage/VacanciesPage';
 
 export default class Auth_Header extends Component {
     render() {
