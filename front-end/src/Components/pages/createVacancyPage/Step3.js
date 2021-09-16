@@ -12,7 +12,7 @@ export default class Step3 extends Component {
 
     handleChangeDescription = (event) => { this.setState({ description: event.target.value }); }
 
-    handleChangeImg =(event) => {this.setState({img: event.target.value});}
+    handleChangeImg = (event) => {this.setState({img: event.target.value});}
 
     render() {
         return (
