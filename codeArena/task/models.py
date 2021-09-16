@@ -48,6 +48,7 @@ class Task(models.Model):
 
 
 class CoderTask(models.Model):
+    _id = models.ObjectIdField()
     coder_id = models.CharField(max_length=36, default='')
     task_id = models.ForeignKey(
         Task,
