@@ -1,0 +1,53 @@
+.achievementsWrapper {
+    font-family: Rubik, serif;
+    width: 100%;
+    align-content: center;
+    background-color: #292929;
+    padding: 5px;
+    color: aliceblue;
+}
+
+.achievementCard {
+    margin: 10px auto;
+    width: 75%;
+    text-align: center;
+    padding: 10px;
+    background-color: #353535;
+    color: #bbbbbb;
+    box-shadow: 2px 2px 10px #000000;
+    min-height: 100px;
+}
+
+.achievementCardTitle{
+    text-align: left;
+}
+
+.achievementIcon {
+    text-align: center;
+    display: inline-block;
+    width: 15%;
+    margin: auto;
+}
+
+.achievementContent{
+    display: inline-block;
+
+}
+
+.achievementTitle {
+    padding-left: 20px;
+    font-size: 40px;
+    color: #ffffff;
+    display: inline-block;
+}
+
+.achievementDescription{
+    float: right;
+    width: 85%;
+}
+
+.achievementDescriptionText {
+    color: #aaaaaa;
+    text-align: center;
+    font-size: large;
+}
