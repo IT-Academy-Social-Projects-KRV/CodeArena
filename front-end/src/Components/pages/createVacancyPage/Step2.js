@@ -18,14 +18,12 @@ export default class Step2 extends Component {
         this.setState({
             vacancy: event.target.value
         });
-
     }
 
     handleChangeCompany(event) {
         this.setState({
             company: event.target.value
         });
-
     }
 
     render() {
