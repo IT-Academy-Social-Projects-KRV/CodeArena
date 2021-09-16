@@ -1,9 +1,56 @@
 from django.shortcuts import render
-
-# Create your views here.
-
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from bson.objectid import ObjectId
 from .models import News
+from .serializers import NewsListSerializer, CreateNewsSerializer
 from .forms import NewsForm
+
+from django.core.files.storage import default_storage
+
+class NewsView(APIView):
+
+    def get(self, request):
+        news = News.objects.all()
+        serializer = NewsListSerializer(news, many=True)
+        return Response(serializer.data)
+
+
+class GetNewsDetailView(APIView):
+
+    def get(self, request, pk, format=None):
+        one_news = News.objects.filter(_id=ObjectId(pk))
+        if one_news:
+            serializer = NewsListSerializer(data=one_news, many=True)
+            serializer.is_valid()
+            return Response(serializer.data)
+        else:
+            return Response(status=404)
+
+    def delete(self, request, pk):
+        new_id = News.objects.filter(_id=ObjectId(pk))
+        new_id.delete()
+        return Response({"message": f'Article with id {pk} has been deleted.'}, status=204)
+
+    def put(self, request, pk):
+        saved_news = News.objects.filter(_id=ObjectId(pk)).first()
+        data = request.data.get('one_news')
+        serializer = CreateNewsSerializer(
+            instance=saved_news, data=data, partial=True)
+        if serializer.is_valid(raise_exception=True):
+            one_news_saved = serializer.save()
+        return Response({
+            "success": f'The news {one_news_saved.title} updated successfully'
+        })
+
+
+class CreateNewsView(APIView):
+
+    def post(self, request, format='json'):
+        one_news = CreateNewsSerializer(data=request.data)
+        if one_news.is_valid(raise_exception=True):
+            one_news_saved = one_news.save()
+        return Response({"success": f'News {one_news_saved.title} created successfully'})
 
 
 def add_news(request):
