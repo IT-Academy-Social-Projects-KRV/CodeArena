@@ -52,3 +52,10 @@ class GetLanguageListView(APIView):
         serializer = LanguageSerializer(data=Language.objects.all(), many=True)
         serializer.is_valid()
         return Response(data=serializer.data, status=http_status.HTTP_200_OK)
+
+
+class GetCategoryListView(APIView):
+    def get(self, request, format='json'):
+        serializer = CategorySerializer(data=Category.objects.all(), many=True)
+        serializer.is_valid()
+        return Response(data=serializer.data, status=http_status.HTTP_200_OK)
