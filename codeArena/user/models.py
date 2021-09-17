@@ -1,6 +1,5 @@
 from django.db import models
 from django.db.models.fields import CharField
-from user.enums import UserStatus
 from django.db import transaction
 from django.contrib.auth.models import (
     AbstractBaseUser, PermissionsMixin, BaseUserManager
@@ -9,12 +8,10 @@ from django.contrib.auth.models import (
 class Role(models.Model):
     name = models.CharField(max_length=100)
 
+
     def __str__(self):
         return self.name
 
-from django.contrib.auth.models import (
-    AbstractBaseUser, PermissionsMixin, BaseUserManager
-)
  
 class UserManager(BaseUserManager):
  
@@ -45,15 +42,23 @@ class UserManager(BaseUserManager):
         return self._create_user(email, password=password, **extra_fields)
 
 class User(AbstractBaseUser, PermissionsMixin):
+    class UserStatus(models.TextChoices):
+        ON = "Active"
+        BANNED = "Banned"
+        DEL = "Deleted"
+
+    status = models.CharField(max_length=10, choices=UserStatus.choices, default=UserStatus.ON)
+    
+        
     email = models.EmailField(unique=True)
     nickname = models.CharField(max_length=70, unique=True)
     first_name = models.CharField(max_length=70)
     last_name = models.CharField(max_length=70)
     password = models.CharField(max_length=70)
     role_id = models.ForeignKey(Role, on_delete=models.CASCADE)
-    created_at = models.DateField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=10, choices=[(tag, tag.value) for tag in UserStatus])
+    
 
     objects = UserManager()
  
