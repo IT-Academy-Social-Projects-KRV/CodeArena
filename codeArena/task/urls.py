@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import CreateTaskView, GetTaskListView, GetTaskDetailView, GetLanguageListView, GetCategoryListView
+from .views import *
 
 
 app_name = 'task'
