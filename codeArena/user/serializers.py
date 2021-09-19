@@ -6,15 +6,44 @@ from django.contrib.auth.hashers import make_password
 
 
 class UserSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(
+
+    class Meta:
+        model = User
+        fields = ['id', 'email', 'nickname', 'first_name', 'last_name',
+                  'password', 'role_id', 'created_at', 'updated_at', 'status']
+        extra_kwargs = {
+                'password': {'write_only': True}
+        }
+
+class UserRegistrationSerializer(serializers.ModelSerializer):
+    password2 = serializers.CharField(
         write_only=True,
         required=True
     )
 
     class Meta:
         model = User
-        fields = ['id', 'email', 'nickname', 'first_name', 'last_name',
-                  'password', 'role_id', 'created_at', 'updated_at', 'status']
+        fields = ['email', 'nickname', 'password', 'password2', 'role_id']
+        extra_kwargs = {
+                'password': {'write_only': True}
+        }
+    
+    def save(self):
+        user = User(
+            email = self.validated_data['email'],
+            nickname = self.validated_data['nickname'],
+            role_id = self.validated_data['role_id'],
+        )
+        password = self.validated_data['password']
+        password2 = self.validated_data['password2']
+
+        if password != password2:
+            raise serializers.ValidationError({'password': 'Password must match.'})
+        
+        user.set_password(password)
+        user.save()
+
+
 
 
 def create(self, validated_data):
