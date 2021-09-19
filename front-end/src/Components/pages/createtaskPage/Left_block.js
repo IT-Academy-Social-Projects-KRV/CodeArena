@@ -19,7 +19,7 @@ class Left_block extends React.Component {
     }
 
     async getCategory() {
-        // Geting list of language from API
+        // Geting list of category from API
 
         const response = await axios.get("/task/get_category/");
         return response.data;
