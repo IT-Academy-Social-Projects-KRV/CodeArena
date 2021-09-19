@@ -1,8 +1,41 @@
 import React from 'react';
 import { Container, Card, CardGroup, Button, Form, Col, FloatingLabel } from 'react-bootstrap';
+import axios from "axios";
 
-export default function Left_block() {
+class Left_block extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            languages: [],
+            categories: [],
+        };
+    }
 
+    async getLanguage() {
+        // Geting list of language from API
+
+        const response = await axios.get("/task/get_language/");
+        return response.data;
+    }
+
+    async getCategory() {
+        // Geting list of language from API
+
+        const response = await axios.get("/task/get_category/");
+        return response.data;
+    }
+
+    componentDidMount() {
+        this.getLanguage().then(response => {
+            this.setState({ languages: response });
+        });
+        this.getCategory().then(response => {
+            this.setState({ categories: response });
+        });
+    }
+
+    render(){
+    const { languages, categories } = this.state
     return (
         <>
             <h3 className="text-center m-3 type">Creating task</h3>
@@ -13,19 +46,24 @@ export default function Left_block() {
                             <Card.Body >
                                 <Card.Text className="text-center m-3" > Select options to create task  </Card.Text>
                                 <Form.Select className="my-3" aria-label="Default select example">
-                                    <option>Choose language</option>
-                                    <option value="1">Java</option>
-                                    <option value="2">С</option>
-                                    <option value="3">C++</option>
-                                    <option value="4">Python</option>
-                                    <option value="5">CSS</option>
-                                    <option value="6">Javascript</option>
+                                    <option selected disabled>
+                                        Choose language
+                                    </option>
+                                    {languages.map(language => (
+                                        <option value={language.name}>
+                                            {language.name}
+                                        </option>
+                                    ))};
                                 </Form.Select>
                                 <Form.Select className="my-3" aria-label="Default select example">
-                                    <option >Choose category</option>
-                                    <option value="1">Functions and modules</option>
-                                    <option value="2">Сlasses and objects</option>
-                                    <option value="3">SOLID</option>
+                                    <option selected disabled>
+                                        Choose category
+                                    </option>
+                                    {categories.map(category => (
+                                        <option value={category.name}>
+                                            {category.name}
+                                        </option>
+                                    ))};
                                 </Form.Select>
                                 <Form.Group className="my-3" controlId="formGroupText">
                                     <Form.Label>Enter name of task:</Form.Label>
@@ -53,5 +91,8 @@ export default function Left_block() {
                 </Container>
             </Col>
         </>
-    )
+    );
+    }
 }
+
+export default Left_block;
