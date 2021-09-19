@@ -1,6 +1,6 @@
 from django.db import models
 from rest_framework import serializers
-from user.models import User, Coder
+from user.models import User, Coder, Role
 from django.contrib.auth.hashers import make_password
 
 
@@ -33,3 +33,9 @@ class CoderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Coder
         fields = ['id', 'city', 'description', 'phone_number', 'level_id']
+
+
+class RoleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Role
+        fields = '__all__'
