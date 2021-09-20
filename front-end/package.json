@@ -2,6 +2,7 @@
   "name": "code_arena",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://127.0.0.1:8000/api/",
   "dependencies": {
     "@popperjs/core": "^2.10.1",
     "@testing-library/jest-dom": "^5.14.1",
