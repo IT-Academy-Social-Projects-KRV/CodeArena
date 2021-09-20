@@ -25,9 +25,11 @@ from news import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/task/', include('task.urls')),
+    path('api/user/', include('user.urls')),
     path('api/news/', include('news.urls')),
     path('upload/', views.add_news),
 ]
+
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)

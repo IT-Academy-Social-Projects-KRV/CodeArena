@@ -1,6 +1,6 @@
 from django.db import migrations, models
 import django.db.models.deletion
-import user.enums
+
 
 
 class Migration(migrations.Migration):
@@ -36,7 +36,6 @@ class Migration(migrations.Migration):
                 ('password', models.CharField(max_length=70)),
                 ('created_at', models.DateField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now_add=True)),
-                ('status', models.CharField(choices=[(user.enums.UserStatus['ON'], 'Active'), (user.enums.UserStatus['BANNED'], 'Banned'), (user.enums.UserStatus['DEL'], 'Deleted')], max_length=10)),
                 ('role_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='user.role')),
             ],
         ),
