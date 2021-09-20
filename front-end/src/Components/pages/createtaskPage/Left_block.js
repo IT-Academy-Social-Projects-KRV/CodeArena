@@ -2,6 +2,8 @@ import React from 'react';
 import { Container, Card, CardGroup, Button, Form, Col, FloatingLabel } from 'react-bootstrap';
 import axios from "axios";
 
+import LanguagesDropDown from '../../Common/LanguagesDropDown';
+
 class Left_block extends React.Component {
     constructor(props) {
         super(props);
@@ -9,13 +11,6 @@ class Left_block extends React.Component {
             languages: [],
             categories: [],
         };
-    }
-
-    async getLanguage() {
-        // Geting list of language from API
-
-        const response = await axios.get("/task/get_language/");
-        return response.data;
     }
 
     async getCategory() {
@@ -26,16 +21,13 @@ class Left_block extends React.Component {
     }
 
     componentDidMount() {
-        this.getLanguage().then(response => {
-            this.setState({ languages: response });
-        });
         this.getCategory().then(response => {
             this.setState({ categories: response });
         });
     }
 
     render(){
-    const { languages, categories } = this.state
+    const { categories } = this.state
     return (
         <>
             <h3 className="text-center m-3 type">Creating task</h3>
@@ -45,16 +37,7 @@ class Left_block extends React.Component {
                         <Card bg="light" >
                             <Card.Body >
                                 <Card.Text className="text-center m-3" > Select options to create task  </Card.Text>
-                                <Form.Select className="my-3" aria-label="Default select example">
-                                    <option selected disabled>
-                                        Choose language
-                                    </option>
-                                    {languages.map(language => (
-                                        <option value={language.name}>
-                                            {language.name}
-                                        </option>
-                                    ))};
-                                </Form.Select>
+                                <LanguagesDropDown className="my-3" />
                                 <Form.Select className="my-3" aria-label="Default select example">
                                     <option selected disabled>
                                         Choose category
