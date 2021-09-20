@@ -10,10 +10,7 @@ class CreateUserAPIView(APIView):
     permission_classes = (AllowAny,)
     
 
-    # def validate_role_id(self, value):
-    #     if value in ["Moderator", "Admin"]:
-    #         raise ValidationError("U cannot ")
-    
+  
     
     def post(self, request):
         user = request.data
