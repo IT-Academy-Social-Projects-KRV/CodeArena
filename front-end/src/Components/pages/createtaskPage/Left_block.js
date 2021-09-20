@@ -1,33 +1,11 @@
 import React from 'react';
 import { Container, Card, CardGroup, Button, Form, Col, FloatingLabel } from 'react-bootstrap';
-import axios from "axios";
 
+import CategoriesDropDown from '../../Common/CategoryDropDown';
 import LanguagesDropDown from '../../Common/LanguagesDropDown';
 
 class Left_block extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            languages: [],
-            categories: [],
-        };
-    }
-
-    async getCategory() {
-        // Geting list of category from API
-
-        const response = await axios.get("/task/get_category/");
-        return response.data;
-    }
-
-    componentDidMount() {
-        this.getCategory().then(response => {
-            this.setState({ categories: response });
-        });
-    }
-
     render(){
-    const { categories } = this.state
     return (
         <>
             <h3 className="text-center m-3 type">Creating task</h3>
@@ -38,16 +16,7 @@ class Left_block extends React.Component {
                             <Card.Body >
                                 <Card.Text className="text-center m-3" > Select options to create task  </Card.Text>
                                 <LanguagesDropDown className="my-3" />
-                                <Form.Select className="my-3" aria-label="Default select example">
-                                    <option selected disabled>
-                                        Choose category
-                                    </option>
-                                    {categories.map(category => (
-                                        <option value={category.name}>
-                                            {category.name}
-                                        </option>
-                                    ))};
-                                </Form.Select>
+                                <CategoriesDropDown className="my-3" />
                                 <Form.Group className="my-3" controlId="formGroupText">
                                     <Form.Label>Enter name of task:</Form.Label>
                                     <Form.Control type="email" placeholder="Enter name" />
