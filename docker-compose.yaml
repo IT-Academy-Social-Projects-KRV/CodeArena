@@ -27,7 +27,7 @@ services:
       - postgres
 
   mongo:
-    image: mongo
+    image: mongo:4.4
     container_name: mongo
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGODB_USER}
@@ -45,6 +45,16 @@ services:
       - 80:8080
     depends_on:
       - api
+
+  checker:
+    build:
+      context: .
+      dockerfile: checker.Dockerfile
+    container_name: checker
+    env_file:
+      - ./etc/.env.local
+    depends_on:
+      - mongo
 
 volumes:
   postgres_db:
