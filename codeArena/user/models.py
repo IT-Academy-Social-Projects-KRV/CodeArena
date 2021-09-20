@@ -54,7 +54,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     nickname = models.CharField(max_length=70, unique=True)
     first_name = models.CharField(max_length=70)
     last_name = models.CharField(max_length=70)
-    password = models.CharField(max_length=70)
+    password = models.CharField(max_length=512)
     role_id = models.ForeignKey(Role, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
