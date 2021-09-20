@@ -21,6 +21,8 @@ class UserManager(BaseUserManager):
         """
         if not email:
             raise ValueError('The given email must be set')
+        elif not password:
+            raise ValueError("the given password must be set")
         try:
             with transaction.atomic():
                 user = self.model(email=email, **extra_fields)
@@ -38,7 +40,6 @@ class UserManager(BaseUserManager):
     def create_superuser(self, email, password, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
- 
         return self._create_user(email, password=password, **extra_fields)
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -71,7 +72,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return f'{self.pk}, {self.email}, {self.nickname}, {self.first_name}, {self.last_name} \
-            {(True if self.password is not None else False)}, {self.role_id}, {self.created_at}, {self.updated_at}, {self.status}'
+            {(True if self.password else False)}, {self.role_id}, {self.created_at}, {self.updated_at}, {self.status}'
 
     
 
