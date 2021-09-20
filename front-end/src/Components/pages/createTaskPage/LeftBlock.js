@@ -4,7 +4,7 @@ import { Container, Card, CardGroup, Button, Form, Col, FloatingLabel } from 're
 import CategoriesDropDown from '../../Common/CategoryDropDown';
 import LanguagesDropDown from '../../Common/LanguagesDropDown';
 
-class Left_block extends React.Component {
+class LeftBlock extends React.Component {
     render(){
     return (
         <>
@@ -47,4 +47,4 @@ class Left_block extends React.Component {
     }
 }
 
-export default Left_block;
+export default LeftBlock;
