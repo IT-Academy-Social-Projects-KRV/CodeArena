@@ -1,6 +1,13 @@
 from rest_framework import serializers
-
 from .models import Task, Language, Category
+
+
+class TaskListSerializer(serializers.ModelSerializer):
+    """Serialize all data from Task table"""
+
+    class Meta:
+        model = Task
+        fields = '__all__'
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -51,3 +58,4 @@ class CreateTaskSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         return Task.objects.create(**validated_data)
+

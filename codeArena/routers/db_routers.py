@@ -48,7 +48,8 @@ class MongoRouter:
         'sessions',
         'admin',
         'task',
-        'competition'
+        'competition',
+        'news'
     }
 
     def db_for_read(self, model, **hints):
