@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Card, CardGroup, Button, Form, Col, FloatingLabel } from 'react-bootstrap';
 
 
-export default function Right_block() {
+export default function RightBlock() {
 
     return (
         <>

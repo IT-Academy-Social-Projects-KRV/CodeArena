@@ -5,6 +5,10 @@ import Header from '../src/Components/Header/Header';
 import { Route } from 'react-router-dom';
 import Footer from './Components/Footer/Footer';
 
+
+{/* Auth_Header - use for registered users */ }
+{/* Header - use for unregistered users */ }
+
 function App() {
   return (
     <>
