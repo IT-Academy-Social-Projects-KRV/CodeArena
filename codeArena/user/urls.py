@@ -1,10 +1,10 @@
 from django.urls import path
-from .views import *
+from . import views
 
 urlpatterns = [
-    path('create_user/', CreateUserAPIView.as_view()),
-    path('users/', UserListAPIView.as_view()),
-    path('<pk>/', GetUserDetailView.as_view()),
-    path('create_role/', CreateRoleAPIView.as_view()),
-    path('roles/', RolesAPIView.as_view()),
+    path('create_user/', views.CreateUserAPIView),
+    path('users/', views.UserListAPIView),
+    path('<pk>/', views.GetUserDetailView),
+    path('create_role/', views.CreateRoleAPIView),
+    path('roles/', views.RolesAPIView),
 ]
