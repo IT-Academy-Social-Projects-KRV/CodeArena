@@ -26,7 +26,7 @@ export class LanguagesDropDown extends React.Component {
         const { languages } = this.state;
         return (
             <Form.Select
-                className={this.props.ovrrideStyle}
+                className={this.props.overrideStyle}
                 disabled={languages.length === 0}
             >
                 <option selected disabled>
@@ -43,11 +43,11 @@ export class LanguagesDropDown extends React.Component {
 }
 
 LanguagesDropDown.propTypes = {
-    ovrrideStyle: PropTypes.string,
+    overrideStyle: PropTypes.string,
 }
 
 LanguagesDropDown.defaultProps = {
-    ovrrideStyle: "",
+    overrideStyle: "",
 }
 
 export default LanguagesDropDown;
