@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Card, CardGroup, Button, Form, Col, FloatingLabel } from 'react-bootstrap';
 
-import CategoriesDropDown from '../../Common/CategoryDropDown';
+import CategoriesDropDown from '../../Common/CategoriesDropDown';
 import LanguagesDropDown from '../../Common/LanguagesDropDown';
 
 class LeftBlock extends React.Component {
