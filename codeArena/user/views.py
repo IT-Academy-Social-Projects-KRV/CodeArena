@@ -69,7 +69,7 @@ class GetUserDetailView(APIView):
         return Response({"message": f'User with id {pk} has been deleted.'}, status=status.HTTP_204_NO_CONTENT)
 
     def put(self, request, pk):
-        user = User.objects.filter(id=pk).first()
+        user = User.objects.filter(id=pk).get()
         data = request.data.get('user')
         serializer = UserSerializer(
             instance=user, data=data, partial=True)
