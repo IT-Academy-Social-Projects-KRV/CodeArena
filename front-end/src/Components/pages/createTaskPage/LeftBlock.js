@@ -15,7 +15,7 @@ class LeftBlock extends React.Component {
                         <Card bg="light" >
                             <Card.Body >
                                 <Card.Text className="text-center m-3" > Select options to create task  </Card.Text>
-                                <LanguagesDropDown className="my-3" />
+                                <LanguagesDropDown overrideStyle="my-3" />
                                 <CategoriesDropDown className="my-3" />
                                 <Form.Group className="my-3" controlId="formGroupText">
                                     <Form.Label>Enter name of task:</Form.Label>

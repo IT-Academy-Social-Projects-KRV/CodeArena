@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { Form } from "react-bootstrap";
+import PropTypes from "prop-types";
 
 export class LanguagesDropDown extends React.Component {
     constructor(props) {
@@ -14,7 +15,7 @@ export class LanguagesDropDown extends React.Component {
         // Geting list of language from API
 
         try {
-            const response = await axios.get("/task/get_languag/");
+            const response = await axios.get("/task/get_language/");
             this.setState({ languages: response.data });
         } catch (error) {
             console.log(error);
@@ -25,7 +26,7 @@ export class LanguagesDropDown extends React.Component {
         const { languages } = this.state;
         return (
             <Form.Select
-                className={this.props.className}
+                className={this.props.ovrrideStyle}
                 disabled={languages.length === 0}
             >
                 <option selected disabled>
@@ -39,6 +40,14 @@ export class LanguagesDropDown extends React.Component {
             </Form.Select>
         );
     }
+}
+
+LanguagesDropDown.propTypes = {
+    ovrrideStyle: PropTypes.string,
+}
+
+LanguagesDropDown.defaultProps = {
+    ovrrideStyle: "",
 }
 
 export default LanguagesDropDown;
