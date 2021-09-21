@@ -3,6 +3,7 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
+
 from .serializers import UserSerializer, RoleSerializer
 from .models import Role, User
 from .serializers import UserRegistrationSerializer, UserSerializer
@@ -61,12 +62,12 @@ class GetUserDetailView(APIView):
             serializer.is_valid()
             return Response(serializer.data)
         else:
-            return Response(status=404)
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
     def delete(self, request, pk):
         user = User.objects.filter(id=pk)
         user.delete()
-        return Response({"message": f'User with id {pk} has been deleted.'}, status=204)
+        return Response({"message": f'User with id {pk} has been deleted.'}, status=status.HTTP_204_NO_CONTENT)
 
     def put(self, request, pk):
         user = User.objects.filter(id=pk).first()
@@ -74,7 +75,7 @@ class GetUserDetailView(APIView):
         serializer = UserSerializer(
             instance=user, data=data, partial=True)
         if serializer.is_valid(raise_exception=True):
-            user_updated= serializer.save()
+            user_updated = serializer.save()
         return Response({
             "success": f'The user {user_updated.nickname} updated successfully'
         })
