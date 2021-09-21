@@ -8,6 +8,7 @@ import MainContainer from '../pages/homePage/MainContainer';
 import CreatePage from '../pages/createtaskPage/CreatePage';
 import NewsPage from '../pages/newsPage/NewsPage';
 import AboutPage from '../pages/aboutPage/AboutPage';
+import CreateCompetitionPage from '../pages/CreateCompetition/CreateCompetitionPage';
 
 export default class Auth_Header extends Component {
     render() {
@@ -23,9 +24,10 @@ export default class Auth_Header extends Component {
                                     <Nav className="m-2">
                                         <Nav.Link href="/" >Home </Nav.Link>
                                         <Nav.Link href="profile" >Profile </Nav.Link>
-                                        <Nav.Link href="/list_competitions">List of competitions</Nav.Link>
+                                        <Nav.Link href="/competition">List of competitions</Nav.Link>
                                         <Nav.Link href="/list_vacancies">Vacancies list</Nav.Link>
                                         <Nav.Link href="/creating_task">Creating task</Nav.Link>
+                                        <Nav.Link href="/create_competition">Create competition</Nav.Link>
 
 
                                     </Nav>
@@ -49,6 +51,7 @@ export default class Auth_Header extends Component {
                         <Route exact path="/creating_task" component={CreatePage} />
                         <Route exact path="/news" component={NewsPage} />
                         <Route exact path="/about" component={AboutPage} />
+                        <Route exact path="/create_competition" component={CreateCompetitionPage} />
                     </Switch>
                 </Router>
             </>
