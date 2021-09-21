@@ -8,7 +8,6 @@ from django.contrib.auth.models import (
 class Role(models.Model):
     name = models.CharField(max_length=100)
 
-
     def __str__(self):
         return self.name
 
@@ -75,7 +74,6 @@ class User(AbstractBaseUser, PermissionsMixin):
             {(True if self.password else False)}, {self.role_id}, {self.created_at}, {self.updated_at}, {self.status}'
 
     
-
 
 class Level(models.Model):
     name = models.CharField(max_length=100)

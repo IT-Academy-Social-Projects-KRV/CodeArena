@@ -159,6 +159,7 @@ ALLOWED_HOSTS = ['127.0.0.1']
 DATABASE_ROUTERS = ['routers.db_routers.PostgresRouter',
                     'routers.db_routers.MongoRouter']
 
+
 REST_FRAMEWORK = {
   'DEFAULT_AUTHENTICATION_CLASSES': (
     'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
