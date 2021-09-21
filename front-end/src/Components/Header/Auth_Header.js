@@ -3,7 +3,7 @@ import Navigation from '../Header/Navigation';
 import { Navbar, Nav, Button } from 'react-bootstrap';
 import { BrowserRouter as Router, Switch, Route,  } from "react-router-dom"
 import MainContainer from '../pages/homePage/MainContainer';
-import CreatePage from '../pages/createtaskPage/CreatePage';
+import CreatePage from '../pages/createTaskPage/CreatePage';
 import NewsPage from '../pages/newsPage/NewsPage';
 import AboutPage from '../pages/aboutPage/AboutPage';
 import CompetitionPage from '../pages/competitionPage/CompetitionPage';

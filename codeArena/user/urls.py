@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 
+
 urlpatterns = [
     path('create_role/', views.CreateRoleAPIView.as_view()),
     path('roles/', views.RolesAPIView.as_view()),
@@ -8,3 +9,7 @@ urlpatterns = [
     path('users/', views.UserListAPIView.as_view()),
     path('<pk>/', views.GetUserDetailView.as_view()),
 ]
+ 
+  if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)

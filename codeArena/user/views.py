@@ -4,9 +4,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 
-from .serializers import UserSerializer, RoleSerializer
 from .models import Role, User
-from .serializers import UserRegistrationSerializer, UserSerializer
+from .serializers import UserRegistrationSerializer, UserSerializer, RoleSerializer
 
 
 class CreateUserAPIView(APIView):
@@ -79,3 +78,4 @@ class GetUserDetailView(APIView):
         return Response({
             "success": f'The user {user_updated.nickname} updated successfully'
         })
+

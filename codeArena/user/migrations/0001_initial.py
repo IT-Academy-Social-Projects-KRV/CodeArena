@@ -42,7 +42,14 @@ class Migration(migrations.Migration):
             name='Role',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100)),
+                ('email', models.EmailField(max_length=254)),
+                ('nickname', models.CharField(max_length=70)),
+                ('first_name', models.CharField(max_length=70)),
+                ('last_name', models.CharField(max_length=70)),
+                ('password', models.CharField(max_length=70)),
+                ('created_at', models.DateField(auto_now_add=True)),
+                ('updated_at', models.DateTimeField(auto_now_add=True)),
+                ('role_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='user.role')),
             ],
         ),
         migrations.CreateModel(
