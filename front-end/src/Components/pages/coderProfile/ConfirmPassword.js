@@ -42,7 +42,7 @@ const RegistrationForm = () => {
 		if (name === "confirmPass") {
 			setPasswordError({
 				...passwordError,
-				confirmPass: User.newpassword == value,
+				confirmPass: User.newpassword === value,
 			});
 		}
 	};
@@ -84,7 +84,7 @@ const RegistrationForm = () => {
 							<li className={passwordError.hasLower ? "text-success" : "text-danger"}> At least one lower case</li>
 							<li className={passwordError.hasNumber ? "text-success" : "text-danger"}> At least one number</li>
 						</ul>
-						<Button variant="primary" type="submit" >Submit</Button>
+						<Button variant="primary" type="submit" disabled={Object.values(passwordError).includes(false)}>Submit</Button>
 					</Form>
 				</Col>
 			</Row>
