@@ -2,8 +2,7 @@ FROM python:latest
 
 WORKDIR /usr/src/checker
 
-COPY ./solution-checker/index.py .
-COPY ./solution-checker/requirements.txt .
+COPY ./solution-checker .
 
 RUN pip install --no-cache-dir -r requirements.txt
 

@@ -6,25 +6,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from bson.objectid import ObjectId
-
-from django.http import HttpResponse
-
-from .models import Task
-
-
-def index(request):
-    return HttpResponse("Hello, World!")
-
-
-def create(request): 
-    t = Task.objects.create(
-        name='Task 523',
-        languages=["Pascal", "Basic"],
-        categories=["Algorithms"]
-        )
-    t.save()
-    return HttpResponse("Created successfully.")
-    
+  
 
 class GetTaskListView(APIView):
     """Gets all data from Task table"""
