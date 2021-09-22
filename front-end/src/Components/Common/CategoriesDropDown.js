@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { Form } from "react-bootstrap";
+import PropTypes from "prop-types";
 
 export class CategoriesDropDown extends React.Component {
     constructor(props) {
@@ -25,7 +26,7 @@ export class CategoriesDropDown extends React.Component {
         const { categories } = this.state;
         return (
             <Form.Select
-                className={this.props.className}
+                className={this.props.overrideStyle}
                 disabled={categories.length === 0}
             >
                 <option selected disabled>
@@ -39,6 +40,14 @@ export class CategoriesDropDown extends React.Component {
             </Form.Select>
         );
     }
+}
+
+CategoriesDropDown.propTypes = {
+    ovrrideStyle: PropTypes.string,
+}
+
+CategoriesDropDown.defaultProps = {
+    ovrrideStyle: "",
 }
 
 export default CategoriesDropDown;
