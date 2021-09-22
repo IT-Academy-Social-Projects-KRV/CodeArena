@@ -19,3 +19,4 @@ class CreateVacanciesView(APIView):
             vacancy1 = vacancy.save()
             return Response({"success": f'News {vacancy1.name} created successfully'})
         return Response(status=status.HTTP_201_CREATED)
+        
