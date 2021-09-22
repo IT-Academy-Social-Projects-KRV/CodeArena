@@ -8,13 +8,12 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.generics import RetrieveUpdateAPIView
 from .serializers import UserSerializer, RoleSerializer
 from .models import Role, User
-from .serializers import UserRegistrationSerializer, UserSerializer
+from .serializers import UserRegistrationSerializer, UserSerializer, RoleSerializer
 from rest_framework.decorators import api_view, permission_classes, schema
 import jwt
 from rest_framework_jwt.utils import jwt_payload_handler
 from django.contrib.auth.signals import user_logged_in
 from decouple import config
-
 
 
 
@@ -129,20 +128,21 @@ class GetUserDetailView(APIView):
             serializer.is_valid()
             return Response(serializer.data)
         else:
-            return Response(status=404)
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
     def delete(self, request, pk):
         user = User.objects.filter(id=pk)
         user.delete()
-        return Response({"message": f'User with id {pk} has been deleted.'}, status=204)
+        return Response({"message": f'User with id {pk} has been deleted.'}, status=status.HTTP_204_NO_CONTENT)
 
     def put(self, request, pk):
-        user = User.objects.filter(id=pk).first()
+        user = User.objects.filter(id=pk).get()
         data = request.data.get('user')
         serializer = UserSerializer(
             instance=user, data=data, partial=True)
         if serializer.is_valid(raise_exception=True):
-            user_updated= serializer.save()
+            user_updated = serializer.save()
         return Response({
             "success": f'The user {user_updated.nickname} updated successfully'
         })
+

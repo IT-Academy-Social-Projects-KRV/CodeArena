@@ -1,0 +1,67 @@
+.competition_info {
+    padding: 60px 0;
+    background-color: #292929;
+    color: #fff;
+    font-size: 20px;
+}
+
+.competition_info h2 {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.competition_info input, .competition_info textarea {
+    caret-color: #fff;
+    background: transparent;
+    border: 3px solid #fff;
+}
+
+.competition_info input:focus, .competition_info textarea:focus {
+    background: transparent;
+    box-shadow: none;
+    color: #fff;
+}
+
+.competition_info_inner {
+    width: 1400px;
+    max-width: 100%;
+    margin: 0 auto;
+    display: flex;
+}
+
+.competition_info_about {
+    flex: 0 0 30%;
+    transform: translateX(-98%);
+    opacity: 0;
+    transition: all 2s ease;
+}
+
+.competition_info_form {
+    flex: 0 0 70%;
+    transform: translateX(800px);
+    opacity: 0;
+    transition: all 2s ease;
+}
+
+.competition_info_about.show, .competition_info_form.show {
+    transform: translate(0px);
+    opacity: 1;
+}
+
+.competition_info_form form {
+   width: 70%;
+   margin: 0 auto;
+}
+
+.competition_info_inner form > div {
+    margin-bottom: 20px;
+}
+
+.react-datepicker__input-container input {
+    color: #fff;
+}
+
+.competition_info_form button {
+    background: #2C6AA0;
+    border-color: #2C6AA0;
+}

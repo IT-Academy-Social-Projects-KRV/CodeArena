@@ -23,6 +23,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
+
         fields = ['email', 'nickname', 'password', 'confirm_password', 'role_id', 'first_name', 'last_name']
         extra_kwargs = {
                 'password': {'write_only': True}
@@ -71,3 +72,4 @@ class RoleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Role
         fields = '__all__'
+        

@@ -1,13 +1,13 @@
 import { Component } from "react"
 import Functional from "./Functional"
-import Main_menu from "./Main_menu"
+import MainMenu from "./MainMenu"
 
 export default class CreatePage extends Component {
     render() {
         return (
             <div>
                 <Functional />
-                <Main_menu />
+                <MainMenu />
             </div>
 
         )
