@@ -1,5 +1,7 @@
 # dependencies
 front-end/node_modules
+codeArena/node_modules/
+node_modules/
 jspm_packages/
 /.pnp
 .pnp.js
