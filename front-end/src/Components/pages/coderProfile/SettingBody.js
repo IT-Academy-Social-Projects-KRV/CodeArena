@@ -1,9 +1,9 @@
 import { Component } from "react";
 import { Card, Button, Form, InputGroup, Col, Row } from 'react-bootstrap';
-import RegistrationForm from "./ConfirmPassword";
-import LinkedinLogo from "./images/LinkedinLogo.png"
-import TwitterLogo from "./images/TwitterLogo.png"
 import FacebookLogo from "./images/FacebookLogo.png"
+import LinkedinLogo from "./images/LinkedinLogo.png"
+import RegistrationForm from "./ConfirmPassword";
+import TwitterLogo from "./images/TwitterLogo.png"
 
 export default class SettingsBody extends Component {
     render() {
@@ -22,6 +22,7 @@ export default class SettingsBody extends Component {
                                 type="text"
                                 placeholder="First name"
                                 defaultValue={card.first_name}
+                                required
                             />
                         </Form.Group>
                         <Form.Group as={Col} md="4">
@@ -31,6 +32,7 @@ export default class SettingsBody extends Component {
                                 type="text"
                                 placeholder="Last name"
                                 defaultValue={card.second_name}
+                                required
                             />
                         </Form.Group>
                         <Form.Group as={Col} md="4">

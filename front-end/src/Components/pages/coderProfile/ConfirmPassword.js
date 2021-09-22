@@ -14,22 +14,16 @@ const passVerificationError = {
 };
 
 const RegistrationForm = () => {
-
-	const [User, setUser] = useState(initialState);
+	const [user, setUser] = useState(initialState);
 	const [passwordError, setPasswordError] = useState(passVerificationError);
-	useEffect(() => { }, [User]);
-
 	const handleOnChange = (e) => {
 		const { name, value } = e.target;
-
-		setUser({ User, [name]: value });
-
+		setUser({ user, [name]: value });
 		if (name === "newpassword") {
 			const isLenthy = value.length > 8;
 			const hasUpper = /[A-Z]/.test(value);
 			const hasLower = /[a-z]/.test(value);
 			const hasNumber = /[0-9]/.test(value);
-
 			setPasswordError({
 				...passwordError,
 				isLenthy,
@@ -38,11 +32,10 @@ const RegistrationForm = () => {
 				hasNumber,
 			});
 		}
-
 		if (name === "confirmPass") {
 			setPasswordError({
 				...passwordError,
-				confirmPass: User.newpassword === value,
+				confirmPass: user.newpassword === value,
 			});
 		}
 	};
@@ -57,7 +50,7 @@ const RegistrationForm = () => {
 							<Form.Control
 								type="text"
 								name="newpassword"
-								value={User.newpassword}
+								value={user.newpassword}
 								onChange={handleOnChange}
 								placeholder="New password"
 								required
@@ -69,7 +62,7 @@ const RegistrationForm = () => {
 							<Form.Control
 								type="text"
 								name="confirmPass"
-								value={User.confirmPass}
+								value={user.confirmPass}
 								onChange={handleOnChange}
 								placeholder="Confirm Password"
 								required
@@ -84,7 +77,7 @@ const RegistrationForm = () => {
 							<li className={passwordError.hasLower ? "text-success" : "text-danger"}> At least one lower case</li>
 							<li className={passwordError.hasNumber ? "text-success" : "text-danger"}> At least one number</li>
 						</ul>
-						<Button variant="primary" type="submit" disabled={Object.values(passwordError).includes(false)}>Submit</Button>
+						<Button variant="primary" type="submit" disabled={passwordError.confirmPass == false}>Submit</Button>
 					</Form>
 				</Col>
 			</Row>
