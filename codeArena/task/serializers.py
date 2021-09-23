@@ -35,8 +35,7 @@ class CreateTaskSerializer(serializers.ModelSerializer):
 
         language_list = Language.objects.values_list('name', flat=True)
 
-        if value in set(language_list): # for models.CharField in DB Mongo
-        # if set(value).issubset(set(language_list)):
+        if value in set(language_list):
             return value
 
         raise serializers.ValidationError(
