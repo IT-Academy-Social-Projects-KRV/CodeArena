@@ -3,7 +3,7 @@ import { Card, Button, Form } from 'react-bootstrap';
 import LanguagesDropDown from '../../Common/LanguagesDropDown'
 import CategoryDropDown from '../../Common/CategoriesDropDown'
 
-export default function Leftcol() {
+export default function LeftColumn() {
 
     return (
 
@@ -14,7 +14,7 @@ export default function Leftcol() {
 
                     <Form.Group style={{margin: '10px', marginBottom: '30px'}}>
                         <Form.Label for='language-choosing'> Choose the language </Form.Label>
-                        <LanguagesDropDown className='language'/>
+                        <LanguagesDropDown className='language-choosing'/>
                     </Form.Group>
 
                     <Form.Group style={{margin: '10px', marginBottom: '30px'}}>
