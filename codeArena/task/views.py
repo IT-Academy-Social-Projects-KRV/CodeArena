@@ -23,6 +23,8 @@ class GetTaskListView(APIView):
 
 
 class GetTaskDetailView(APIView):
+    """Gets object from Task table by _id field"""
+    
     def get(self, request, pk, format=None):
         tasks = Task.objects.filter(_id=ObjectId(pk))
 
