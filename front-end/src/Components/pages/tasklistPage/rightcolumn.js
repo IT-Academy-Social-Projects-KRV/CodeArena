@@ -45,8 +45,6 @@ export default class Rightcol extends Component {
                             </ListGroup.Item>
                         
                             <ListGroup.Item variant='dark' style={{ width: '10rem' }}>
-                                {/* <Image src={dict_of_langs[card.languages.substr(2, card.languages.length-4)]} style={{width: '2rem', }}>
-                                </Image> -------if languages will change to array*/} 
                                 <Image src={dict_of_langs[card.languages]} style={{width: '2rem', }}></Image>
                             </ListGroup.Item>   
 
