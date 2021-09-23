@@ -76,7 +76,7 @@ class CreateLanguageView(APIView):
         one_language = LanguageSerializer(data=request.data)
         if one_language.is_valid(raise_exception=True):
             one_language_saved = one_language.save()
-        return Response({"success": f'Language {one_language_saved.name} created successfully'})
+        return Response({"success": f'Language {one_language_saved.name} created successfully'}, status=http_status.HTTP_201_CREATED)
 
 
 class GetLanguageDetailView(APIView):
@@ -121,7 +121,7 @@ class CreateCategoryView(APIView):
         one_category = CategorySerializer(data=request.data)
         if one_category.is_valid(raise_exception=True):
             one_category_saved = one_category.save()
-        return Response({"success": f'Category {one_category_saved.name} created successfully'})
+        return Response({"success": f'Category {one_category_saved.name} created successfully'}, status=http_status.HTTP_201_CREATED)
 
 
 class GetCategoryDetailView(APIView):
