@@ -16,11 +16,6 @@ class GetTaskListView(APIView):
         serializer.is_valid()
         return Response(serializer.data)
 
-    def delete(self, request, format=None):
-        tasks = Task.objects.all()
-        tasks.delete()
-        return Response ("All tasks was deleted")
-
 
 class GetTaskDetailView(APIView):
     """Gets object from Task table by _id field"""
