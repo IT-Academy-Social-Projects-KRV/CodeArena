@@ -1,7 +1,7 @@
 from django.db import models
 from rest_framework import serializers
 from user.models import User, Coder, Role
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import get_hasher, make_password
 
 
 
@@ -23,7 +23,8 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['email', 'nickname', 'password', 'confirm_password', 'role_id']
+
+        fields = ['email', 'nickname', 'password', 'confirm_password', 'role_id', 'first_name', 'last_name']
         extra_kwargs = {
                 'password': {'write_only': True}
         }
@@ -33,6 +34,8 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             email = self.validated_data['email'],
             nickname = self.validated_data['nickname'],
             role_id = self.validated_data['role_id'],
+            first_name = self.validated_data['first_name'],
+            last_name = self.validated_data['last_name'],
         )
         password = self.validated_data['password']
         confirm_password = self.validated_data['confirm_password']
@@ -49,6 +52,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
 def create(self, validated_data):
     if 'password' in validated_data:
         validated_data['password'] = make_password(validated_data['password'])
+        print(get_hasher)
     return super(UserSerializer, self).create(validated_data)
 
 
