@@ -7,7 +7,7 @@ import py from './images/p2.svg' ;
 import js from './images/js.svg' ;
 import c_sharp from './images/c_sharp.svg' ;
 
-export default class Rightcol extends Component {
+export default class RightColumn extends Component {
 
     state = {alltasks:[]}
 
