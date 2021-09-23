@@ -34,7 +34,6 @@ class GetTaskDetailView(APIView):
             return Response(serializer.data)
         else:
             return Response(status=http_status.HTTP_404_NOT_FOUND)
-    
         
     def delete(self, request, pk):
         new_id = Task.objects.filter(_id=ObjectId(pk))
@@ -54,6 +53,7 @@ class GetTaskDetailView(APIView):
 
 
 class CreateTaskView(APIView):
+    
     def post(self, request, format='json'):
         task = CreateTaskSerializer(data=request.data)
         if task.is_valid():
@@ -64,16 +64,11 @@ class CreateTaskView(APIView):
                     status=http_status.HTTP_409_CONFLICT)
 
             return Response(status=http_status.HTTP_201_CREATED)
-
-        # if task.is_valid(raise_exception=True):
-        #     t = task.save()
-            # return Response({"success": f'Task {task.name} created successfully'})
-
-
         return Response(status=http_status.HTTP_422_UNPROCESSABLE_ENTITY)
 
 
 class GetLanguageListView(APIView):
+    
     def get(self, request, format='json'):
         serializer = LanguageSerializer(data=Language.objects.all(), many=True)
         serializer.is_valid()
@@ -117,8 +112,8 @@ class GetLanguageDetailView(APIView):
         })
 
 
-
 class GetCategoryListView(APIView):
+    
     def get(self, request, format='json'):
         serializer = CategorySerializer(data=Category.objects.all(), many=True)
         serializer.is_valid()
