@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -26,12 +27,12 @@ class GetNewsDetailView(APIView):
             serializer.is_valid()
             return Response(serializer.data)
         else:
-            return Response(status=404)
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
     def delete(self, request, pk):
         new_id = News.objects.filter(_id=ObjectId(pk))
         new_id.delete()
-        return Response({"message": f'Article with id {pk} has been deleted.'}, status=204)
+        return Response({"message": f'Article with id {pk} has been deleted.'}, status=status.HTTP_204_NO_CONTENT)
 
     def put(self, request, pk):
         saved_news = News.objects.filter(_id=ObjectId(pk)).first()
