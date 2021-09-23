@@ -23,12 +23,10 @@ class LanguageSerializer(serializers.ModelSerializer):
 
 
 class CreateTaskSerializer(serializers.ModelSerializer):
-    unit_test = serializers.FileField(
-        max_length=500, allow_null=True, allow_empty_file=True)
-
+    
     class Meta:
         model = Task
-        exclude = ['_id', 'created_at', 'updated_at']
+        exclude = ['_id', 'created_at', 'updated_at', 'user_id']
 
     def validate_languages(self, value):
         """
@@ -37,7 +35,8 @@ class CreateTaskSerializer(serializers.ModelSerializer):
 
         language_list = Language.objects.values_list('name', flat=True)
 
-        if set(value).issubset(set(language_list)):
+        if value in set(language_list): # for models.CharField in DB Mongo
+        # if set(value).issubset(set(language_list)):
             return value
 
         raise serializers.ValidationError(

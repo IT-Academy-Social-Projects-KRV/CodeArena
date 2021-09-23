@@ -12,6 +12,7 @@ import CreateVacancy from '../pages/createVacancyPage/CreateVacancy';
 import VacanciesPage from '../pages/vacanciesPage/VacanciesPage';
 import AchievementsPage from '../pages/achievementsPage/AchievementsPage';
 import TableProfileSetting from '../pages/coderProfile/DataCard';
+import TasklistPage from '../pages/tasklistPage/TasklistPage';
 
 
 export default class Auth_Header extends Component {
@@ -37,6 +38,7 @@ export default class Auth_Header extends Component {
                                         <Nav.Link href="/creating_task">Creating task</Nav.Link>
                                         <Nav.Link href="/creating_vacancy">Creating vacancy</Nav.Link>
                                         <Nav.Link href="/achievements">Achievements</Nav.Link>
+                                        <Nav.Link href="/tasklist">List of tasks</Nav.Link>
                                     </Nav>
                                     <Nav.Link href="exit" className="ms-auto">
                                         <Button variant="danger" className="me-2" >sign out</Button >
@@ -64,6 +66,7 @@ export default class Auth_Header extends Component {
                         <Route exact path="/creating_vacancy" component={CreateVacancy}/>
                         <Route exact path="/achievements" component={AchievementsPage}/>
                         <Route exact path="/profile" component={TableProfileSetting}/>
+                        <Route exact path="/tasklist" component={TasklistPage}/>
                     </Switch>
                 </Router>
             </>
