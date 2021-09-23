@@ -11,6 +11,7 @@ import CompetitionPage from '../pages/competitionPage/CompetitionPage';
 import CreateVacancy from '../pages/createVacancyPage/CreateVacancy';
 import VacanciesPage from '../pages/vacanciesPage/VacanciesPage';
 import AchievementsPage from '../pages/achievementsPage/AchievementsPage';
+import TableProfileSetting from '../pages/coderProfile/DataCard';
 
 
 export default class Auth_Header extends Component {
@@ -62,6 +63,7 @@ export default class Auth_Header extends Component {
                         <Route exact path="/jobs" component={VacanciesPage}/>
                         <Route exact path="/creating_vacancy" component={CreateVacancy}/>
                         <Route exact path="/achievements" component={AchievementsPage}/>
+                        <Route exact path="/profile" component={TableProfileSetting}/>
                     </Switch>
                 </Router>
             </>
