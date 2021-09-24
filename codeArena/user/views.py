@@ -14,7 +14,7 @@ import jwt
 from rest_framework_jwt.utils import jwt_payload_handler
 from django.contrib.auth.signals import user_logged_in
 from decouple import config
-
+from django.conf.urls.static import static
 
 
 class CreateUserAPIView(APIView):
