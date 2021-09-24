@@ -13,7 +13,6 @@ class CreateCompetitionSerializer(serializers.ModelSerializer):
             model = Competition
             fields = '__all__'
 
-
         def validate(self, data):
             if data['start_time'] > data['finish_time']:
                 raise serializers.ValidationError("finish must occur after start")
