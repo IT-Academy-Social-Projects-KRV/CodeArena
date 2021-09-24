@@ -8,7 +8,6 @@ class CompetitionSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-
 class CreateCompetitionSerializer(serializers.ModelSerializer):
         class Meta:
             model = Competition
