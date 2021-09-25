@@ -1,4 +1,4 @@
-from rest_framework import serializers
+from rest_framework import fields, serializers
 from .models import Task, Language, Category
 
 
@@ -7,18 +7,6 @@ class TaskListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Task
-        fields = '__all__'
-
-
-class CategorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Category
-        fields = '__all__'
-
-
-class LanguageSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Language
         fields = '__all__'
 
 
@@ -35,8 +23,7 @@ class CreateTaskSerializer(serializers.ModelSerializer):
 
         language_list = Language.objects.values_list('name', flat=True)
 
-        if value in set(language_list): # for models.CharField in DB Mongo
-        # if set(value).issubset(set(language_list)):
+        if value in language_list:
             return value
 
         raise serializers.ValidationError(
@@ -58,3 +45,23 @@ class CreateTaskSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         return Task.objects.create(**validated_data)
 
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = '__all__'
+
+class CreateCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = '__all__'
+
+class LanguageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Language
+        fields = '__all__'
+
+class CreateLanguageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Language
+        fields = '__all__'

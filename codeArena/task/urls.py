@@ -15,4 +15,12 @@ urlpatterns = [
     path('get_category/', views.GetCategoryListView.as_view()),
     path('get_category/add/', views.CreateCategoryView.as_view()),
     path('get_category/<pk>/', views.GetCategoryDetailView.as_view()),
+
+    # path('get_category/', views.Category.as_view()),
+    # path('get_category/add/', views.Category.as_view()),
+    # path('get_category/<pk>/', views.Category.as_view()),
+
+    # path('get_category/', views.GetCategoryListView.as_view()),
+    # path('get_category/add/', views.CreateCategoryView.as_view()),
+    # path('get_category/<pk>/', views.GetCategoryDetailView.as_view()),
 ]

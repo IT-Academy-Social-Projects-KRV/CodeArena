@@ -7,9 +7,9 @@ import py from './images/p2.svg' ;
 import js from './images/js.svg' ;
 import c_sharp from './images/c_sharp.svg' ;
 
-export default class Rightcol extends Component {
+export default class RightColumn extends Component {
 
-    state = {alltasks:[]}
+    state = {allTasks:[]}
 
     constructor() {
         super();
@@ -19,15 +19,15 @@ export default class Rightcol extends Component {
     getTasks = async() => {
         try{
             let datas = await axios.get('/task/get_task/')
-            this.setState({alltasks: datas.data})
+            this.setState({allTasks: datas.data})
         } catch(err) {console.log(err)}
     }
     
     render() {
 
-        const {alltasks} = this.state
+        const {allTasks} = this.state
 
-        let dict_of_langs = {
+        let languagesDict = {
             "C++": cpp,
             'Python': py,
             'Ruby': ruby,
@@ -35,9 +35,8 @@ export default class Rightcol extends Component {
             'JavaScript': js
         }
         return (
-            alltasks.map(card => {
+            allTasks.map(card => {
                 return (
-
                     <Card bg='dark' style={{marginBottom: '10px'}}>
                         <ListGroup horizontal variant="flush" fluid > 
                             <ListGroup.Item action href='#task'variant='dark' style={{ height: 60 }}>
@@ -45,17 +44,12 @@ export default class Rightcol extends Component {
                             </ListGroup.Item>
                         
                             <ListGroup.Item variant='dark' style={{ width: '10rem' }}>
-                                {/* <Image src={dict_of_langs[card.languages.substr(2, card.languages.length-4)]} style={{width: '2rem', }}>
-                                </Image> -------if languages will change to array*/} 
-                                <Image src={dict_of_langs[card.languages]} style={{width: '2rem', }}></Image>
+                                <Image src={languagesDict[card.languages]} style={{width: '2rem', }}></Image>
                             </ListGroup.Item>   
-
                         </ListGroup>
                     </Card>
-
                 )
-            }
-            )
+            })
         )
     }
 }

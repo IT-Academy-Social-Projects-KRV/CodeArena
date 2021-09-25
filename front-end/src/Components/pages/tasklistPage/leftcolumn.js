@@ -3,10 +3,8 @@ import { Card, Button, Form } from 'react-bootstrap';
 import LanguagesDropDown from '../../Common/LanguagesDropDown'
 import CategoryDropDown from '../../Common/CategoriesDropDown'
 
-export default function Leftcol() {
-
+export default function LeftColumn() {
     return (
-
         <Card className="text-center" bg='dark' text='light'>
             <Card.Body>
                     <Card.Text>
@@ -35,8 +33,8 @@ export default function Leftcol() {
                     </Form.Group>
 
                     <Form.Group style={{margin: '10px', marginBottom: '30px'}}>
-                        <Form.Label> Search a task by the name </Form.Label>
-                        <Form.Control placeholder='Enter the name of the task' />
+                        <Form.Label for='searching-by-name'> Search a task by the name </Form.Label>
+                        <Form.Control className='searching-by-name' placeholder='Enter the name of the task' />
                     </Form.Group>
                     </Form>
 
