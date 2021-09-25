@@ -38,7 +38,7 @@ class GetTaskDetailView(APIView):
             return Response(serializer.data, status=http_status.HTTP_200_OK)
         else:
             return Response(status=http_status.HTTP_404_NOT_FOUND)
-
+            
     def delete(self, request, pk):
         Task.objects.filter(_id=ObjectId(pk)).delete()
         return Response({"message": f'Task with id {pk} has been deleted.'}, status=http_status.HTTP_200_OK)
@@ -63,16 +63,28 @@ class CreateTaskView(APIView):
 
         try:
             task_ = task.save()
+            return Response({"success": f'Task {task_} created successfully'}, status=http_status.HTTP_201_CREATED)
+
         except DatabaseError:
             return Response(
                 status=http_status.HTTP_409_CONFLICT)
 
-            return Response({"success": f'Task {task_} created successfully'}, status=http_status.HTTP_201_CREATED)
-        return Response(status=http_status.HTTP_422_UNPROCESSABLE_ENTITY)
+    
+    # def post(self, request, format='json'):
+    #     task = CreateTaskSerializer(data=request.data)
+    #     if task.is_valid():
+    #         try:
+    #             task.save()
+    #         except DatabaseError:
+    #             return Response(
+    #                 status=http_status.HTTP_409_CONFLICT)
+
+    #         return Response(status=http_status.HTTP_201_CREATED)
+    #     return Response(status=http_status.HTTP_422_UNPROCESSABLE_ENTITY)
 
 
 class GetLanguageListView(APIView):
-
+    
     def get(self, request, format='json'):
         serializer = LanguageSerializer(data=Language.objects.all(), many=True)
         serializer.is_valid()
@@ -115,8 +127,8 @@ class GetLanguageDetailView(APIView):
             "success": f'The language {language_.name} updated successfully'
         }, status=http_status.HTTP_200_OK)
 
-
 class GetCategoryListView(APIView):
+    
     def get(self, request, format='json'):
         serializer = CategorySerializer(data=Category.objects.all(), many=True)
         serializer.is_valid()
@@ -159,8 +171,7 @@ class GetCategoryDetailView(APIView):
         if serializer.is_valid(raise_exception=True):
             category_ = serializer.save()
         return Response({
-            "success": f'The category {category_.name} updated successfully'
-        }, status=http_status.HTTP_200_OK)
+            "success": f'The category {category_.name} updated successfully'}, status=http_status.HTTP_200_OK)
 
 
 # class Category(generics.ListCreateAPIView):
