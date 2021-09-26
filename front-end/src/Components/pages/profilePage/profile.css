@@ -1,0 +1,65 @@
+.nav-link {
+    color: #292929;
+}
+
+.nav-link:hover {
+    color: #404040;
+    background: #3b89cc;
+    cursor: pointer;
+}
+
+.nav-item > a {
+    line-height: 40px;
+}
+
+.nav-item > .active {
+    background: #31ab29 !important;
+}
+
+.nav-pills {
+    background: #2c6aa0;
+    height: 55px;
+}
+
+.profile-pic {
+    width: 80%;
+    justify-self: center;
+    background-color: white;
+}
+
+.settings-pic {
+    width: 42px;
+    padding-bottom: 10px;
+}
+
+.dot {
+    height: 0;
+    width: 25%;
+    padding-bottom: 25%;
+    background-color: #31ab29;
+    color: white;
+    text-align: center;
+    line-height: 4.6vw;
+    font-weight: 900;
+    font-size: 30px;
+    font-size: 3.5vw;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 0;
+    right: 20%;
+}
+
+.profile-info {
+    color: #bbbbbb;
+    font-size: 20px;
+    padding: 20px 30px;
+}
+
+.profile-info > p {
+    padding: 0;
+    margin: 0;
+}
+
+.profile-info-nickname {
+    font-weight: 800;
+}
