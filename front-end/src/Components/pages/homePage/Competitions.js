@@ -4,7 +4,7 @@ import './blueBlocks.css';
 function Competition () {
     return (
         <section className="competitions blue_block">
-            <h2>Competition</h2>
+            <h2><a href="/"> Competition</a></h2>
             <div>
                 <ol>
                     <li><a href="/competitions">Competition from first company</a></li>

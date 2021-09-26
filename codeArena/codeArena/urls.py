@@ -19,15 +19,15 @@ from django.conf.urls import url
 from django.conf.urls.static import static
 from django.urls import path, include
 
-from news import views
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/task/', include('task.urls')),
+    path('api/user/', include('user.urls')),
     path('api/news/', include('news.urls')),
-    path('upload/', views.add_news),
+    path('api/vacancies', include('vacancies.urls'))
 ]
+
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)
