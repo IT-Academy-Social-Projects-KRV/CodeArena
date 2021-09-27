@@ -1,0 +1,113 @@
+.MainWrapper{
+    font-family: Rubik, serif;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    align-content: center;
+    background-color: #292929;
+    padding: 5px;
+    color: aliceblue;
+    box-shadow: 1px 1px 2px grey;
+}
+
+.Button{
+    width: 33.33%;
+}
+
+.StatusTooltip{
+    width: 8px;
+    height: 18px;
+    padding: 5px;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 50%;
+    font-size: x-small;
+}
+
+.TooltipText{
+    text-align: left;
+}
+
+.TaskCard{
+    vertical-align: middle;
+    margin: auto;
+    padding: auto;
+    width: 90%;
+    text-align: center;
+    border-bottom: 1px solid grey;
+
+}
+
+.TaskShortInfo:hover{
+    background-color: #333333;
+}
+
+.FieldHeader{
+    margin: auto;
+    padding-bottom: 15px;
+    width: 90%;
+    text-align: center;
+    font-weight: bolder;
+    font-size: large;
+}
+
+.TaskShortInfo{
+    height: 5%;
+    cursor:pointer;
+    margin: auto;
+    padding: auto;
+    vertical-align: middle;
+}
+
+.TaskMoreInfo{
+    padding-top: auto;
+    width: 80%;
+    text-align: left;
+    margin: auto;
+}
+
+.DateTime{
+    color: #000000;
+    background-color: #292929;
+}
+
+.CurrentFile{
+    color: rgb(150, 150, 150);
+    font-size: medium;
+}
+
+.DescriptionTextField{
+    height: 200px;
+}
+
+.InLine{
+    display: inline-block;
+}
+
+.TaskShortInfoName{
+    width: 20%;
+}
+
+.TaskShortInfoRate{
+    width: 10%;
+}
+
+.TaskShortInfoStatus{
+    width: 10%;
+}
+
+.TaskShortInfoLevel{
+    width: 15%;
+}
+
+.TaskShortInfoAuthor{
+    width: 15%;
+}
+
+.TaskShortInfoCreated{
+    width: 15%;
+}
+
+.TaskShortInfoUpdated{
+    width: 15%;
+}
