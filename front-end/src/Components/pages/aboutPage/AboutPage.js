@@ -28,16 +28,16 @@ function AboutPage() {
                     <div>
                         <ol>
                             <li><a href="/">Intern's Softserve - authors</a></li>
-                            <li><a href="/">Viktoriia Zakharko - moderathor</a></li>
-                            <li><a href="/">Sofiia Tkachuck - moderathor</a></li>
-                            <li><a href="/">Oksana Lisovska - moderathor</a></li>
-                            <li><a href="/">Dmytro Baryshnuik - moderathor</a></li>
-                            <li><a href="/">Oleksandr Havron - moderathor</a></li>
-                            <li><a href="/">Dmytro Smetanin - moderathor</a></li>
-                            <li><a href="/">Maryna Kucher - moderathor</a></li>
-                            <li><a href="/">Maksym Kovalchuk - moderathor</a></li>
-                            <li><a href="/">Oleksandr Vozny - moderathor</a></li>
-                            <li><a href="/">Oleksandr Voitovych - moderathor</a></li>
+                            <li><a href="/">Viktoriia Zakharko - moderator</a></li>
+                            <li><a href="/">Sofiia Tkachuck - moderator</a></li>
+                            <li><a href="/">Oksana Lisovska - moderator</a></li>
+                            <li><a href="/">Dmytro Baryshnuik - moderator</a></li>
+                            <li><a href="/">Oleksandr Havron - moderator</a></li>
+                            <li><a href="/">Dmytro Smetanin - moderator</a></li>
+                            <li><a href="/">Maryna Kucher - moderator</a></li>
+                            <li><a href="/">Maksym Kovalchuk - moderator</a></li>
+                            <li><a href="/">Oleksandr Vozny - moderator</a></li>
+                            <li><a href="/">Oleksandr Voitovych - moderator</a></li>
                         </ol>
                     </div>
                 </section>

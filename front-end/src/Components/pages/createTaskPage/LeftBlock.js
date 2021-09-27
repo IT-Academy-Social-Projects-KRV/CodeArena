@@ -1,8 +1,11 @@
 import React from 'react';
 import { Container, Card, CardGroup, Button, Form, Col, FloatingLabel } from 'react-bootstrap';
 
-export default function Left_block() {
+import CategoriesDropDown from '../../Common/CategoriesDropDown';
+import LanguagesDropDown from '../../Common/LanguagesDropDown';
 
+class LeftBlock extends React.Component {
+    render(){
     return (
         <>
             <h3 className="text-center m-3 type">Creating task</h3>
@@ -12,21 +15,8 @@ export default function Left_block() {
                         <Card bg="light" >
                             <Card.Body >
                                 <Card.Text className="text-center m-3" > Select options to create task  </Card.Text>
-                                <Form.Select className="my-3" aria-label="Default select example">
-                                    <option>Choose language</option>
-                                    <option value="1">Java</option>
-                                    <option value="2">С</option>
-                                    <option value="3">C++</option>
-                                    <option value="4">Python</option>
-                                    <option value="5">CSS</option>
-                                    <option value="6">Javascript</option>
-                                </Form.Select>
-                                <Form.Select className="my-3" aria-label="Default select example">
-                                    <option >Choose category</option>
-                                    <option value="1">Functions and modules</option>
-                                    <option value="2">Сlasses and objects</option>
-                                    <option value="3">SOLID</option>
-                                </Form.Select>
+                                <LanguagesDropDown overrideStyle="my-3" />
+                                <CategoriesDropDown overrideStyle="my-3" />
                                 <Form.Group className="my-3" controlId="formGroupText">
                                     <Form.Label>Enter name of task:</Form.Label>
                                     <Form.Control type="email" placeholder="Enter name" />
@@ -53,5 +43,8 @@ export default function Left_block() {
                 </Container>
             </Col>
         </>
-    )
+    );
+    }
 }
+
+export default LeftBlock;
