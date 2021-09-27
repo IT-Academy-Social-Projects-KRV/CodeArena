@@ -24,6 +24,7 @@ export class LanguagesDropDown extends React.Component {
 
     render() {
         const { languages } = this.state;
+        const { selected } = this.props;
         return (
             <Form.Select
                 className={this.props.overrideStyle}
@@ -35,7 +36,7 @@ export class LanguagesDropDown extends React.Component {
                         : "Choose language"}
                 </option>
                 {languages.map((language) => (
-                    <option value={language.name}>{language.name}</option>
+                    <option selected={selected === language.name} value={language.name}>{language.name}</option>
                 ))};
             </Form.Select>
         );

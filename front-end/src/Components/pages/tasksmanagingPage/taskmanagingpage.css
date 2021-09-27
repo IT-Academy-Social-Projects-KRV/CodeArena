@@ -1,0 +1,86 @@
+.main-wrapper {
+    font-family: Rubik, serif;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    align-content: center;
+    background-color: #292929;
+    padding: 5px;
+    color: aliceblue;
+    box-shadow: 1px 1px 2px grey;
+}
+
+.task-card-button {
+    width: 33.33%;
+}
+
+.tooltip-text {
+    text-align: left;
+}
+
+.task-card {
+    vertical-align: middle;
+    margin: auto;
+    padding: auto;
+    width: 90%;
+    text-align: center;
+    border-bottom: 1px solid grey;
+}
+
+.task-shortinfo:hover {
+    background-color: #333333;
+}
+
+.header-row {
+    margin: auto;
+    padding-bottom: 15px;
+    width: 90%;
+    text-align: center;
+    font-weight: bolder;
+    font-size: large;
+}
+
+.task-shortinfo {
+    height: 5%;
+    cursor: pointer;
+    margin: auto;
+    padding: auto;
+    vertical-align: middle;
+}
+
+.task-moreinfo {
+    padding-top: auto;
+    width: 80%;
+    text-align: left;
+    margin: auto;
+}
+
+.datetime {
+    color: #000000;
+    background-color: #292929;
+}
+
+.current-file {
+    color: rgb(150, 150, 150);
+    font-size: medium;
+}
+
+.description-textfield {
+    height: 200px;
+}
+
+.inline {
+    display: inline-block;
+}
+
+.task-shortinfo-name {
+    width: 20%;
+}
+
+.task-shortinfo-rate, .task-shortinfo-status {
+    width: 10%;
+}
+
+.task-shortinfo-level, .task-shortinfo-created, .task-shortinfo-author, .task-shortinfo-updated {
+    width: 15%;
+}

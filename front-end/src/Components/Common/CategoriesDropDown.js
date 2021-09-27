@@ -24,6 +24,7 @@ export class CategoriesDropDown extends React.Component {
 
     render() {
         const { categories } = this.state;
+        const { selected } = this.props;
         return (
             <Form.Select
                 className={this.props.overrideStyle}
@@ -35,7 +36,7 @@ export class CategoriesDropDown extends React.Component {
                         : "Choose category"}
                 </option>
                 {categories.map((category) => (
-                    <option value={category.name}>{category.name}</option>
+                    <option selected={selected === category.name} value={category.name}>{category.name}</option>
                 ))};
             </Form.Select>
         );
