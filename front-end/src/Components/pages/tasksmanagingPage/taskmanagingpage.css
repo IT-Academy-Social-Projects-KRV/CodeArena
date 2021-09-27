@@ -1,4 +1,4 @@
-.MainWrapper{
+.main-wrapper {
     font-family: Rubik, serif;
     width: 100%;
     height: 100%;
@@ -10,39 +10,28 @@
     box-shadow: 1px 1px 2px grey;
 }
 
-.Button{
+.task-card-button {
     width: 33.33%;
 }
 
-.StatusTooltip{
-    width: 8px;
-    height: 18px;
-    padding: 5px;
-    text-align: center;
-    vertical-align: middle;
-    border-radius: 50%;
-    font-size: x-small;
-}
-
-.TooltipText{
+.tooltip-text {
     text-align: left;
 }
 
-.TaskCard{
+.task-card {
     vertical-align: middle;
     margin: auto;
     padding: auto;
     width: 90%;
     text-align: center;
     border-bottom: 1px solid grey;
-
 }
 
-.TaskShortInfo:hover{
+.task-shortinfo:hover {
     background-color: #333333;
 }
 
-.FieldHeader{
+.header-row {
     margin: auto;
     padding-bottom: 15px;
     width: 90%;
@@ -51,63 +40,63 @@
     font-size: large;
 }
 
-.TaskShortInfo{
+.task-shortinfo {
     height: 5%;
-    cursor:pointer;
+    cursor: pointer;
     margin: auto;
     padding: auto;
     vertical-align: middle;
 }
 
-.TaskMoreInfo{
+.task-moreinfo {
     padding-top: auto;
     width: 80%;
     text-align: left;
     margin: auto;
 }
 
-.DateTime{
+.datetime {
     color: #000000;
     background-color: #292929;
 }
 
-.CurrentFile{
+.current-file {
     color: rgb(150, 150, 150);
     font-size: medium;
 }
 
-.DescriptionTextField{
+.description-textfield {
     height: 200px;
 }
 
-.InLine{
+.inline {
     display: inline-block;
 }
 
-.TaskShortInfoName{
+.task-shortinfo-name {
     width: 20%;
 }
 
-.TaskShortInfoRate{
+.task-shortinfo-rate {
     width: 10%;
 }
 
-.TaskShortInfoStatus{
+.task-shortinfo-status {
     width: 10%;
 }
 
-.TaskShortInfoLevel{
+.task-shortinfo-level {
     width: 15%;
 }
 
-.TaskShortInfoAuthor{
+.task-shortinfo-author {
     width: 15%;
 }
 
-.TaskShortInfoCreated{
+.task-shortinfo-created {
     width: 15%;
 }
 
-.TaskShortInfoUpdated{
+.task-shortinfo-updated {
     width: 15%;
 }

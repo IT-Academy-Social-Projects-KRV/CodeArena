@@ -25,34 +25,34 @@ class TaskManagingPage extends Component {
     }
 
     render() {
-        const { tasks } = this.state;git
+        const { tasks } = this.state;
         return (
             <>
-                <div className='MainWrapper'>
-                    <div className="FieldHeader">
-                        <div className="TaskShortInfoName InLine">
+                <div className='main-wrapper'>
+                    <div className="header-row">
+                        <div className="task-shortinfo-name inline">
                             Name
                         </div>
-                        <div className="TaskShortInfoAuthor InLine">
+                        <div className="task-shortinfo-author inline">
                             Author
                         </div>
-                        <div className="TaskShortInfoRate InLine">
+                        <div className="task-shortinfo-rate inline">
                             Rate
                         </div>
-                        <div className="TaskShortInfoLevel InLine">
+                        <div className="task-shortinfo-level inline">
                             Level
                         </div>
-                        <div className="TaskShortInfoStatus InLine">
-                            <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"><div className="TooltipText">"DR" - Draft<br /> "PB" - Published</div></Tooltip>}>
+                        <div className="task-shortinfo-status inline">
+                            <OverlayTrigger overlay={<Tooltip id="tooltip-disabled"><div className="tooltip-text">"DR" - Draft<br /> "PB" - Published</div></Tooltip>}>
                                 <span className="d-inline-block">
                                     Status
                                 </span>
                             </OverlayTrigger>
                         </div>
-                        <div className="TaskShortInfoCreated InLine">
+                        <div className="task-shortinfo-created inline">
                             Created
                         </div>
-                        <div className="TaskShortInfoUpdated InLine">
+                        <div className="task-shortinfo-updated inline">
                             Updated
                         </div>
                     </div>

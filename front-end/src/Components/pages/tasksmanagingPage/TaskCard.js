@@ -31,37 +31,37 @@ class TaskCard extends Component {
         const { task } = this.props;
         return (
             <>
-                <div className="TaskCard" id={`TaskCard${this.state.task._id}`}>
+                <div className="task-card" id={`TaskCard${this.state.task._id}`}>
                     <div
-                        className="TaskShortInfo"
+                        className="task-shortnfo"
                         onClick={() => this.setState({ open: !this.state.open })}
-                        aria-controls="TaskMoreInfo"
+                        aria-controls="task-moreinfo"
                         aria-expanded={this.state.open}
                     >
-                        <div className="TaskShortInfoName InLine">
+                        <div className="task-shortinfo-name inline">
                             {this.state.task.name}
                         </div>
-                        <div className="TaskShortInfoAuthor InLine">
+                        <div className="task-shortinfo-author inline">
                             {this.state.task.user_id}
                         </div>
-                        <div className="TaskShortInfoRate InLine">
+                        <div className="task-shortinfo-rate inline">
                             {this.state.task.rate}
                         </div>
-                        <div className="TaskShortInfoLevel InLine">
+                        <div className="task-shortinfo-level inline">
                             {this.state.task.level}
                         </div>
-                        <div className="TaskShortInfoStatus InLine">
+                        <div className="task-shortinfo-status inline">
                             {this.state.task.status}
                         </div>
-                        <div className="TaskShortInfoCreated InLine">
+                        <div className="task-shortinfo-created inline">
                             {(new Date(this.state.task.created_at)).toLocaleString("ua-UK")}
                         </div>
-                        <div className="TaskShortInfoUpdated InLine">
+                        <div className="task-shortinfo-updated inline">
                             {(new Date(this.state.task.updated_at)).toLocaleString("ua-UK")}
                         </div>
                     </div>
                     <Collapse in={this.state.open}>
-                        <div id="TaksMoreInfo" className="TaskMoreInfo">
+                        <div id="TaksMoreInfo" className="task-moreinfo">
                             <Form id={`TaskForm${this.state.task._id}`}>
                                 <Form.Group as={Row}>
                                     <Form.Label column sm={2}>
@@ -77,7 +77,7 @@ class TaskCard extends Component {
                                     </Form.Label>
                                     <Col sm={10}>
                                         <FloatingLabel controlId="floatingTextarea" label="Description">
-                                            <Form.Control name="description" className="DescriptionTextField" as="textarea">
+                                            <Form.Control name="description" className="description-textfield" as="textarea">
                                                 {this.state.task.description}
                                             </Form.Control>
                                         </FloatingLabel>
@@ -97,7 +97,7 @@ class TaskCard extends Component {
                                     </Form.Label>
                                     <Col sm={10}>
                                         <Form.Control name="tests" type="file" ref="sa" label={this.state.task.unit_test} multiple />
-                                        <div className="CurrentFile">
+                                        <div className="current-file">
                                             Current file: {this.state.task.unit_test ? <a href={this.state.task.unit_test}>{this.state.task.unit_test}</a> : "No file uploaded"}
                                         </div>
                                     </Col>
@@ -123,7 +123,7 @@ class TaskCard extends Component {
                                         Status:
                                     </Form.Label>
                                     <Col sm={10}>
-                                        <FormSelect name="status" className="InLine">
+                                        <FormSelect name="status" className="inline">
                                             <option selected={this.state.task.status == "DR"} value="DR">Draft</option>
                                             <option selected={this.state.task.status == "PB"} value="PB">Published</option>
                                         </FormSelect>
@@ -150,7 +150,7 @@ class TaskCard extends Component {
                                         Created:
                                     </Form.Label>
                                     <Col sm={10}>
-                                        <Datetime className="DateTime" value={(new Date(this.state.task.created_at)).toLocaleString("ua-UK")} />
+                                        <Datetime className="datetime" value={(new Date(this.state.task.created_at)).toLocaleString("ua-UK")} />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup as={Row} >
@@ -159,7 +159,7 @@ class TaskCard extends Component {
                                     </Form.Label>
                                     <Col sm={10}>
                                         <Datetime
-                                            className="DateTime"
+                                            className="datetime"
                                             value={(new Date(this.state.task.updated_at)).toLocaleString("ua-UK")}
                                         />
                                     </Col>
@@ -167,7 +167,7 @@ class TaskCard extends Component {
                             </Form>
                             <Button
                                 variant="secondary"
-                                className="Button"
+                                className="task-card-button"
                                 onClick={() => this.setState({ open: !this.state.open })}
                                 aria-controls="TaskMoreInfo"
                                 aria-expanded={this.state.open}
@@ -176,14 +176,14 @@ class TaskCard extends Component {
                             </Button>
                             <Button
                                 variant="secondary"
-                                className="Button"
+                                className="task-card-button"
                                 onClick={() => this.updateTask(this.state.task._id)}
                             >
                                 Update
                             </Button>
                             <Button
                                 variant="secondary"
-                                className="Button"
+                                className="task-card-button"
                                 onClick={() => this.deleteTask(this.state.task._id)}
                             >
                                 Delete
