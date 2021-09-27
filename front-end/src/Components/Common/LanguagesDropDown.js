@@ -15,7 +15,7 @@ export class LanguagesDropDown extends React.Component {
         // Geting list of language from API
 
         try {
-            const response = await axios.get("/task/get_language/");
+            const response = await axios.get("/api/task/get_language/");
             this.setState({ languages: response.data });
         } catch (error) {
             console.log(error);

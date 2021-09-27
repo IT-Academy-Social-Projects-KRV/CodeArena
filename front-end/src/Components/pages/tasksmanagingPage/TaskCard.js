@@ -16,14 +16,14 @@ class TaskCard extends Component {
     }
 
     async deleteTask(pk) {
-        const response = await axios.delete(`/task/task/${pk}`);
+        const response = await axios.delete(`/api/task/task/${pk}`);
         var task = document.getElementById(`TaskCard${pk}`)
         task.remove()
     }
 
     async updateTask(pk) {
         var form = document.getElementById(`TaskForm${pk}`)
-        const response = await axios.put(`/task/task/${pk}`, new FormData(form), { "Content-Type": "multipart/form-data" })
+        const response = await axios.put(`/api/task/task/${pk}`, new FormData(form), { "Content-Type": "multipart/form-data" })
     }
 
     render() {
