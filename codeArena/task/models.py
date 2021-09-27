@@ -29,7 +29,7 @@ class Task(models.Model):
     name = models.CharField(max_length=150, unique=True)
     description = models.TextField()
     user_id = models.UUIDField()
-    unit_test = models.FileField(max_length=500)   # todo: upload_to= ?
+    unit_test = models.FileField(max_length=500, upload_to="tests")
     rate = models.IntegerField()
     level = models.CharField(max_length=20)        # todo: choices
     status = models.CharField(
