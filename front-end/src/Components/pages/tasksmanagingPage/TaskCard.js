@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { Component, useState } from 'react';
-import {Form, Button, Collapse, FormGroup, FormControl, FormSelect, Row, Col, FloatingLabel } from "react-bootstrap";
+import { Form, Button, Collapse, FormGroup, FormControl, FormSelect, Row, Col, FloatingLabel } from "react-bootstrap";
 import Datetime from 'react-datetime';
 import "react-datetime/css/react-datetime.css";
 import CategoriesDropDown from '../../Common/CategoriesDropDown';
@@ -12,7 +12,6 @@ class TaskCard extends Component {
         super(props);
         this.state = {
             open: false,
-            task: props.task,
         }
     }
 
@@ -31,44 +30,44 @@ class TaskCard extends Component {
         const { task } = this.props;
         return (
             <>
-                <div className="task-card" id={`TaskCard${this.state.task._id}`}>
+                <div className="task-card" id={`TaskCard${task._id}`}>
                     <div
-                        className="task-shortnfo"
+                        className="task-shortinfo"
                         onClick={() => this.setState({ open: !this.state.open })}
                         aria-controls="task-moreinfo"
                         aria-expanded={this.state.open}
                     >
                         <div className="task-shortinfo-name inline">
-                            {this.state.task.name}
+                            {task.name}
                         </div>
                         <div className="task-shortinfo-author inline">
-                            {this.state.task.user_id}
+                            {task.user_id}
                         </div>
                         <div className="task-shortinfo-rate inline">
-                            {this.state.task.rate}
+                            {task.rate}
                         </div>
                         <div className="task-shortinfo-level inline">
-                            {this.state.task.level}
+                            {task.level}
                         </div>
                         <div className="task-shortinfo-status inline">
-                            {this.state.task.status}
+                            {task.status}
                         </div>
                         <div className="task-shortinfo-created inline">
-                            {(new Date(this.state.task.created_at)).toLocaleString("ua-UK")}
+                            {(new Date(task.created_at)).toLocaleString("ua-UK")}
                         </div>
                         <div className="task-shortinfo-updated inline">
-                            {(new Date(this.state.task.updated_at)).toLocaleString("ua-UK")}
+                            {(new Date(task.updated_at)).toLocaleString("ua-UK")}
                         </div>
                     </div>
                     <Collapse in={this.state.open}>
                         <div id="TaksMoreInfo" className="task-moreinfo">
-                            <Form id={`TaskForm${this.state.task._id}`}>
+                            <Form id={`TaskForm${task._id}`}>
                                 <Form.Group as={Row}>
                                     <Form.Label column sm={2}>
                                         Name:
                                     </Form.Label>
                                     <Col sm={10}>
-                                        <Form.Control name="name" type="text" defaultValue={this.state.task.name} />
+                                        <Form.Control name="name" type="text" defaultValue={task.name} />
                                     </Col>
                                 </Form.Group>
                                 <FormGroup as={Row} >
@@ -78,7 +77,7 @@ class TaskCard extends Component {
                                     <Col sm={10}>
                                         <FloatingLabel controlId="floatingTextarea" label="Description">
                                             <Form.Control name="description" className="description-textfield" as="textarea">
-                                                {this.state.task.description}
+                                                {task.description}
                                             </Form.Control>
                                         </FloatingLabel>
                                     </Col>
@@ -88,7 +87,7 @@ class TaskCard extends Component {
                                         Author:
                                     </Form.Label>
                                     <Col sm={10}>
-                                        <FormControl name="user_id" type="text" defaultValue={this.state.task.user_id} />
+                                        <FormControl name="user_id" type="text" defaultValue={task.user_id} />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup as={Row} >
@@ -96,9 +95,9 @@ class TaskCard extends Component {
                                         Tests:
                                     </Form.Label>
                                     <Col sm={10}>
-                                        <Form.Control name="tests" type="file" ref="sa" label={this.state.task.unit_test} multiple />
+                                        <Form.Control name="tests" type="file" />
                                         <div className="current-file">
-                                            Current file: {this.state.task.unit_test ? <a href={this.state.task.unit_test}>{this.state.task.unit_test}</a> : "No file uploaded"}
+                                            Current file: {task.unit_test ? <a href={task.unit_test}>{task.unit_test}</a> : "No file uploaded"}
                                         </div>
                                     </Col>
                                 </FormGroup>
@@ -107,7 +106,7 @@ class TaskCard extends Component {
                                         Rate:
                                     </Form.Label>
                                     <Col sm={10}>
-                                        <FormControl name="rate" type="number" defaultValue={this.state.task.rate} />
+                                        <FormControl name="rate" type="number" defaultValue={task.rate} />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup as={Row} >
@@ -115,7 +114,7 @@ class TaskCard extends Component {
                                         Level:
                                     </Form.Label>
                                     <Col sm={10}>
-                                        <FormControl name="level" type="text" defaultValue={this.state.task.level} />
+                                        <FormControl name="level" type="text" defaultValue={task.level} />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup as={Row} >
@@ -124,8 +123,8 @@ class TaskCard extends Component {
                                     </Form.Label>
                                     <Col sm={10}>
                                         <FormSelect name="status" className="inline">
-                                            <option selected={this.state.task.status == "DR"} value="DR">Draft</option>
-                                            <option selected={this.state.task.status == "PB"} value="PB">Published</option>
+                                            <option selected={task.status == "DR"} value="DR">Draft</option>
+                                            <option selected={task.status == "PB"} value="PB">Published</option>
                                         </FormSelect>
                                     </Col>
                                 </FormGroup>
@@ -134,7 +133,7 @@ class TaskCard extends Component {
                                         Languages:
                                     </Form.Label>
                                     <Col sm={10}>
-                                        <LanguagesDropDown selected={this.state.task.languages} />
+                                        <LanguagesDropDown selected={task.languages} />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup as={Row} >
@@ -142,7 +141,7 @@ class TaskCard extends Component {
                                         Categories:
                                     </Form.Label>
                                     <Col sm={10}>
-                                        <CategoriesDropDown selected={this.state.task.categories} />
+                                        <CategoriesDropDown selected={task.categories} />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup as={Row} >
@@ -150,7 +149,7 @@ class TaskCard extends Component {
                                         Created:
                                     </Form.Label>
                                     <Col sm={10}>
-                                        <Datetime className="datetime" value={(new Date(this.state.task.created_at)).toLocaleString("ua-UK")} />
+                                        <Datetime className="datetime" value={(new Date(task.created_at)).toLocaleString("ua-UK")} />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup as={Row} >
@@ -160,7 +159,7 @@ class TaskCard extends Component {
                                     <Col sm={10}>
                                         <Datetime
                                             className="datetime"
-                                            value={(new Date(this.state.task.updated_at)).toLocaleString("ua-UK")}
+                                            value={(new Date(task.updated_at)).toLocaleString("ua-UK")}
                                         />
                                     </Col>
                                 </FormGroup>
@@ -177,14 +176,14 @@ class TaskCard extends Component {
                             <Button
                                 variant="secondary"
                                 className="task-card-button"
-                                onClick={() => this.updateTask(this.state.task._id)}
+                                onClick={() => this.updateTask(task._id)}
                             >
                                 Update
                             </Button>
                             <Button
                                 variant="secondary"
                                 className="task-card-button"
-                                onClick={() => this.deleteTask(this.state.task._id)}
+                                onClick={() => this.deleteTask(task._id)}
                             >
                                 Delete
                             </Button>

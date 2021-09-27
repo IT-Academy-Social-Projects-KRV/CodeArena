@@ -13,15 +13,13 @@ class TaskManagingPage extends Component {
         }
     }
 
-    async getTasks() {
-        const response = await axios.get('/task/get_task/');
-        return response.data;
-    }
-
     async componentDidMount() {
-        this.getTasks().then(response => {
-            this.setState({ tasks: response });
-        });
+        try {
+            const response = await axios.get("/task/get_task/");
+            this.setState({ tasks: response.data });
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     render() {
@@ -58,11 +56,7 @@ class TaskManagingPage extends Component {
                     </div>
                     {tasks.length === 0
                         ? <h1>No tasks found</h1>
-                        : tasks.map(task =>
-                            <>
-                                <TaskCard className="taskCard" task={task} />
-                            </>
-                        )}
+                        : tasks.map(task => <TaskCard className="taskCard" task={task} />)}
                 </div>
             </>
         )
