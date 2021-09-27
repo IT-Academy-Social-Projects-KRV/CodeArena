@@ -77,26 +77,10 @@
     width: 20%;
 }
 
-.task-shortinfo-rate {
+.task-shortinfo-rate, .task-shortinfo-status {
     width: 10%;
 }
 
-.task-shortinfo-status {
-    width: 10%;
-}
-
-.task-shortinfo-level {
-    width: 15%;
-}
-
-.task-shortinfo-author {
-    width: 15%;
-}
-
-.task-shortinfo-created {
-    width: 15%;
-}
-
-.task-shortinfo-updated {
+.task-shortinfo-level, .task-shortinfo-created, .task-shortinfo-author, .task-shortinfo-updated {
     width: 15%;
 }
