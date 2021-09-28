@@ -15,7 +15,7 @@ class TaskManagingPage extends Component {
 
     async componentDidMount() {
         try {
-            const response = await axios.get("/task/get_task/");
+            const response = await axios.get("/api/task/get_task/");
             this.setState({ tasks: response.data });
         } catch (error) {
             console.log(error);

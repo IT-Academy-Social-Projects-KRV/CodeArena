@@ -12,10 +12,10 @@ export class CategoriesDropDown extends React.Component {
     }
 
     async componentDidMount() {
-        // Geting list of category from API
+        // Get categories from API
 
         try {
-            const response = await axios.get("/task/get_category/");
+            const response = await axios.get("/api/task/get_category/");
             this.setState({ categories: response.data });
         } catch (error) {
             console.log(error);
