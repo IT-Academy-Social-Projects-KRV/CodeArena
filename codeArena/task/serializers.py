@@ -51,17 +51,8 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = '__all__'
 
-class CreateCategorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Category
-        fields = '__all__'
 
 class LanguageSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Language
-        fields = '__all__'
-
-class CreateLanguageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Language
         fields = '__all__'
