@@ -12,7 +12,7 @@ export class CategoriesDropDown extends React.Component {
     }
 
     async componentDidMount() {
-        // Geting list of category from API
+        // Get categories from API
 
         try {
             const response = await axios.get("/api/task/get_category/");
