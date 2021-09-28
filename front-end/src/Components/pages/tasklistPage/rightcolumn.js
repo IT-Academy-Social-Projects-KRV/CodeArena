@@ -1,20 +1,18 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { Card, ListGroup, Image} from 'react-bootstrap';
+
 import axios from 'axios';
-import ruby from './images/ruby.svg' ;
+
 import cpp from './images/cpp.svg' ;
-import py from './images/p2.svg' ;
-import js from './images/js.svg' ;
 import c_sharp from './images/c_sharp.svg' ;
+import js from './images/js.svg' ;
+import py from './images/p2.svg' ;
+import ruby from './images/ruby.svg' ;
+
 
 export default class RightColumn extends Component {
 
     state = {allTasks:[]}
-
-    constructor() {
-        super();
-        this.getTasks()
-        }
 
     getTasks = async() => {
         try{
@@ -23,6 +21,10 @@ export default class RightColumn extends Component {
         } catch(err) {console.log(err)}
     }
     
+    async componentDidMount() {
+        await this.getTasks()
+    }
+
     render() {
 
         const {allTasks} = this.state

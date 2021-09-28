@@ -1,15 +1,11 @@
-from django.db.models import manager
-from django.db.utils import DatabaseError
-from rest_framework import fields, generics, status as http_status
-from rest_framework.serializers import Serializer
-from .serializers import *
-from .models import *
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from django.shortcuts import get_object_or_404
-from rest_framework import viewsets
-
 from bson.objectid import ObjectId
+from rest_framework import status as http_status
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
+from .models import *
+from .serializers import *
+
 
 class GetTaskListView(APIView):
     """Gets all data from Task table"""
@@ -18,14 +14,7 @@ class GetTaskListView(APIView):
         tasks = Task.objects.all()
         serializer = TaskListSerializer(data=tasks, many=True)
         serializer.is_valid()
-        return Response(serializer.data, status=http_status.HTTP_200_OK)
-
-
-    # TO DELETE
-    def delete(self, request, format=None):
-        tasks = Task.objects.all()
-        tasks.delete()
-        return Response ("All tasks was deleted")
+        return Response(serializer.data)
 
 
 class GetTaskDetailView(APIView):
@@ -35,13 +24,13 @@ class GetTaskDetailView(APIView):
         if task:
             serializer = TaskListSerializer(data=task, many=True)
             serializer.is_valid()
-            return Response(serializer.data, status=http_status.HTTP_200_OK)
+            return Response(serializer.data)
         else:
             return Response(status=http_status.HTTP_404_NOT_FOUND)
             
     def delete(self, request, pk):
         Task.objects.filter(_id=ObjectId(pk)).delete()
-        return Response({"message": f'Task with id {pk} has been deleted.'}, status=http_status.HTTP_200_OK)
+        return Response({"message": f'Task with id {pk} has been deleted.'})
 
     def put(self, request, pk):
         task = Task.objects.filter(_id=ObjectId(pk)).get()
@@ -51,36 +40,16 @@ class GetTaskDetailView(APIView):
         if serializer.is_valid(raise_exception=True):
             task_ = serializer.save()
         return Response({
-            "success": f'The task {task_.name} updated successfully'}, status=http_status.HTTP_200_OK)
+            "success": f'The task {task_.name} updated successfully'})
 
 
 class CreateTaskView(APIView):
 
     def post(self, request, format='json'):
         task = CreateTaskSerializer(data=request.data)
-        # if task.is_valid(raise_exception=True):
-        #     task_ = task.save()
-
-        try:
+        if task.is_valid(raise_exception=True):
             task_ = task.save()
-            return Response({"success": f'Task {task_} created successfully'}, status=http_status.HTTP_201_CREATED)
-
-        except DatabaseError:
-            return Response(
-                status=http_status.HTTP_409_CONFLICT)
-
-    
-    # def post(self, request, format='json'):
-    #     task = CreateTaskSerializer(data=request.data)
-    #     if task.is_valid():
-    #         try:
-    #             task.save()
-    #         except DatabaseError:
-    #             return Response(
-    #                 status=http_status.HTTP_409_CONFLICT)
-
-    #         return Response(status=http_status.HTTP_201_CREATED)
-    #     return Response(status=http_status.HTTP_422_UNPROCESSABLE_ENTITY)
+            return Response({"success": f'Task {task_.name} created successfully'}, status=http_status.HTTP_201_CREATED)
 
 
 class GetLanguageListView(APIView):
@@ -88,7 +57,7 @@ class GetLanguageListView(APIView):
     def get(self, request, format='json'):
         serializer = LanguageSerializer(data=Language.objects.all(), many=True)
         serializer.is_valid()
-        return Response(data=serializer.data, status=http_status.HTTP_200_OK)
+        return Response(data=serializer.data)
 
 
 class CreateLanguageView(APIView):
@@ -119,20 +88,22 @@ class GetLanguageDetailView(APIView):
         # language = Language.objects.get(_id=ObjectId(pk))
         language = Language.objects.filter(_id=ObjectId(pk)).first()
         data = request.data.get('language_some')        
-        serializer = CreateLanguageSerializer(
+        serializer = LanguageSerializer(
+        # serializer = CreateLanguageSerializer(
             instance=language, data=data, partial=True)
         if serializer.is_valid(raise_exception=True):
             language_ = serializer.save()
         return Response({
             "success": f'The language {language_.name} updated successfully'
-        }, status=http_status.HTTP_200_OK)
+        }, )
+
 
 class GetCategoryListView(APIView):
     
     def get(self, request, format='json'):
         serializer = CategorySerializer(data=Category.objects.all(), many=True)
         serializer.is_valid()
-        return Response(data=serializer.data, status=http_status.HTTP_200_OK)
+        return Response(data=serializer.data)
 
 
 class CreateCategoryView(APIView):
@@ -142,10 +113,6 @@ class CreateCategoryView(APIView):
         if category.is_valid(raise_exception=True):
             category_ = category.save()
         return Response({"success": f'Category {category_.name} created successfully'}, status=http_status.HTTP_201_CREATED)
-
-
-
-
 
 
 class GetCategoryDetailView(APIView):
@@ -171,27 +138,4 @@ class GetCategoryDetailView(APIView):
         if serializer.is_valid(raise_exception=True):
             category_ = serializer.save()
         return Response({
-            "success": f'The category {category_.name} updated successfully'}, status=http_status.HTTP_200_OK)
-
-
-# class Category(generics.ListCreateAPIView):
-#     queryset = Category.objects.all()
-#     serializer_class = CategorySerializer
-
-#     def list(self, request):
-#         queryset = self.get_queryset()
-#         serializer = CategorySerializer(queryset, many=True)
-#         fields = ('name')
-#         return Response(serializer.data)
-#     def post(self, request, format='json'):
-#         category = CategorySerializer(data=request.data)
-#         if category.is_valid(raise_exception=True):
-#             category_ = category.save()
-#         return Response({"success": f'Category {category_.name} created successfully'})
-
-#     def delete(self, request):
-#         queryset = self.get_queryset()
-#         serializer = CategorySerializer(queryset, many=True)
-#         fields = ('name')
-#         return Response(serializer.data)
-
+            "success": f'The category {category_.name} updated successfully'}, )

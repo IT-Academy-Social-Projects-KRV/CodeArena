@@ -29,7 +29,7 @@ class Task(models.Model):
     name = models.CharField(max_length=150, unique=True)
     description = models.TextField()
     user_id = models.UUIDField()
-    unit_test = models.TextField()   # todo: upload_to= ?
+    unit_test = models.TextField()
     rate = models.IntegerField()
     level = models.CharField(max_length=20)        # todo: choices
     status = models.CharField(
@@ -37,7 +37,7 @@ class Task(models.Model):
         choices=Status.choices,
         default=Status.DRAFT
         )
-    languages = models.CharField(max_length=100)
+    language = models.CharField(max_length=100)
     categories = models.JSONField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { Card, Button, Form } from 'react-bootstrap';
-import LanguagesDropDown from '../../Common/LanguagesDropDown'
-import CategoryDropDown from '../../Common/CategoriesDropDown'
+import { Button, Card, Form } from 'react-bootstrap';
+
+import CategoryDropDown from '../../Common/CategoriesDropDown';
+import LanguagesDropDown from '../../Common/LanguagesDropDown';
 
 export default function LeftColumn() {
     return (
