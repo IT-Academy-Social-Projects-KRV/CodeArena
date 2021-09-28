@@ -7,11 +7,8 @@ import edit_logo from "./images/edit_logo.png";
 import RolesDropDown from "./RolesDropDown";
 
 class UsersTable extends Component {
-    constructor() {
-        super();
-        this.state = {
-            users: [],
-        };
+    state = {
+        users: []
     }
 
     async componentDidMount() {

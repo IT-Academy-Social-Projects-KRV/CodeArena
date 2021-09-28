@@ -3,11 +3,8 @@ import React, { Component } from "react";
 import { Form } from "react-bootstrap";
 
 class RolesDropDown extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            roles: [],
-        };
+    state = {
+        roles: []
     }
 
     async componentDidMount() {
