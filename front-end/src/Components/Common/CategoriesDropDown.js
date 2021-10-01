@@ -1,15 +1,14 @@
 import axios from "axios";
-import React from "react";
-import { Form } from "react-bootstrap";
+import Multiselect from "multiselect-react-dropdown";
 import PropTypes from "prop-types";
+import React from "react";
 
-export class CategoriesDropDown extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            categories: [],
-        };
-    }
+class CategoriesDropDown extends React.Component {
+    state = {
+        categories: [],
+    };
+
+    handleChanges = this.handleChanges.bind(this);
 
     async componentDidMount() {
         // Get categories from API
@@ -22,33 +21,44 @@ export class CategoriesDropDown extends React.Component {
         }
     }
 
+    async handleChanges(selectedList) {
+        await this.props.overrideSelect(
+            selectedList.map((item) => item["name"]),
+            this.props.id
+        );
+    }
+
     render() {
         const { categories } = this.state;
-        const { selected } = this.props;
+        const { selected, id } = this.props;
+
         return (
-            <Form.Select
-                className={this.props.overrideStyle}
-                disabled={categories.length === 0}
-            >
-                <option selected disabled>
-                    {categories.length === 0
+            <Multiselect
+                options={categories}          // Options to display in the dropdown
+                selectedValues={selected}     // Preselected value to persist in dropdown
+                onSelect={this.handleChanges} // Function will trigger on select event
+                onRemove={this.handleChanges} // Function will trigger on remove event
+                placeholder={
+                    categories.length === 0
                         ? "Categories not finded"
-                        : "Choose category"}
-                </option>
-                {categories.map((category) => (
-                    <option selected={selected === category.name} value={category.name}>{category.name}</option>
-                ))};
-            </Form.Select>
+                        : "Choose categories"
+                }
+                disable={categories.length === 0}
+                displayValue="name" // Property name to display in the dropdown options
+                id={id}
+            />
         );
     }
 }
 
 CategoriesDropDown.propTypes = {
-    ovrrideStyle: PropTypes.string,
-}
+    selected: PropTypes.array,
+    id: PropTypes.string,
+};
 
 CategoriesDropDown.defaultProps = {
-    ovrrideStyle: "",
-}
+    selected: [],
+    id: "categories",
+};
 
 export default CategoriesDropDown;

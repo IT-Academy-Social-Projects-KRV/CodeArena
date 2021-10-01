@@ -1,15 +1,14 @@
 import axios from "axios";
-import React from "react";
-import { Form } from "react-bootstrap";
+import Multiselect from "multiselect-react-dropdown";
 import PropTypes from "prop-types";
+import React from "react";
 
-export class LanguagesDropDown extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            languages: [],
-        };
-    }
+class LanguagesDropDown extends React.Component {
+    state = {
+        languages: [],
+    };
+
+    handleChanges = this.handleChanges.bind(this);
 
     async componentDidMount() {
         // Get languages from API
@@ -22,33 +21,44 @@ export class LanguagesDropDown extends React.Component {
         }
     }
 
+    async handleChanges(selectedList) {
+        await this.props.overrideSelect(
+            selectedList.map((item) => item["name"]),
+            this.props.id
+        );
+    }
+
     render() {
         const { languages } = this.state;
-        const { selected } = this.props;
+        const { selected, id } = this.props;
+
         return (
-            <Form.Select
-                className={this.props.overrideStyle}
-                disabled={languages.length === 0}
-            >
-                <option selected disabled>
-                    {languages.length === 0
+            <Multiselect
+                options={languages}           // Options to display in the dropdown
+                selectedValues={selected}     // Preselected value to persist in dropdown
+                onSelect={this.handleChanges} // Function will trigger on select event
+                onRemove={this.handleChanges} // Function will trigger on remove event
+                placeholder={
+                    languages.length === 0
                         ? "Languages not finded"
-                        : "Choose language"}
-                </option>
-                {languages.map((language) => (
-                    <option selected={selected === language.name} value={language.name}>{language.name}</option>
-                ))};
-            </Form.Select>
+                        : "Choose languages"
+                }
+                disable={languages.length === 0}
+                displayValue="name" // Property name to display in the dropdown options
+                id={id}
+            />
         );
     }
 }
 
 LanguagesDropDown.propTypes = {
-    overrideStyle: PropTypes.string,
-}
+    selected: PropTypes.array,
+    id: PropTypes.string,
+};
 
 LanguagesDropDown.defaultProps = {
-    overrideStyle: "",
-}
+    selected: [],
+    id: "languages",
+};
 
 export default LanguagesDropDown;
