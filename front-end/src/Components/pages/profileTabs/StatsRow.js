@@ -3,7 +3,6 @@ import { Col, Row } from "react-bootstrap";
 
 
 function StatsRow(props) {
-    console.log(props.nameWidth);
     return (
         <Row className={"h" + props.size}>
             <Col className={"d-flex flex-row-reverse col-" + props.nameWidth}>
