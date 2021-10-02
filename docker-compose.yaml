@@ -27,8 +27,11 @@ services:
       - postgres
 
   mongo:
-    image: mongo
+    image: mongo:4.4
     container_name: mongo
+    networks:
+      - default
+      - no-internet
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGODB_USER}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_USER_PASS}
@@ -51,6 +54,8 @@ services:
       context: .
       dockerfile: checker.Dockerfile
     container_name: checker
+    networks:
+     - no-internet
     env_file:
       - ./etc/.env.local
     depends_on:
@@ -59,3 +64,13 @@ services:
 volumes:
   postgres_db:
   mongo_db:
+
+networks:
+  default:
+    driver: bridge  
+
+  no-internet:
+    driver: bridge
+    internal: true
+  
+  
