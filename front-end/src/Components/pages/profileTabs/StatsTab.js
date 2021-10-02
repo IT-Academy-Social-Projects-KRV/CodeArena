@@ -7,8 +7,9 @@ import StatsRow from "./StatsRow";
 
 class StatisticsTab extends React.Component {
     render() {
+        const { eventKey } = this.props;
         return (
-            <Tab.Pane eventKey={this.props.eventKey} className="light-grey">
+            <Tab.Pane eventKey={eventKey} className="light-grey">
                 <Container>
                     <Row className="gap-5">
                         <Col>
