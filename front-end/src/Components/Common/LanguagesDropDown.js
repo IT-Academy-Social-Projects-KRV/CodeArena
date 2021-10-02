@@ -22,7 +22,9 @@ class LanguagesDropDown extends React.Component {
     }
 
     async handleChanges(selectedList) {
-        await this.props.overrideSelect(
+        // Called when the item in component selected or removed
+
+        await this.props.overrideOnSelect(
             selectedList.map((item) => item["name"]),
             this.props.id
         );
@@ -30,20 +32,22 @@ class LanguagesDropDown extends React.Component {
 
     render() {
         const { languages } = this.state;
-        const { selected, id } = this.props;
+        const { selected, id, isSingleSelect } = this.props;
+        const languagesIsEmpty = languages.length === 0;
 
         return (
             <Multiselect
+                singleSelect={isSingleSelect}
                 options={languages}           // Options to display in the dropdown
                 selectedValues={selected}     // Preselected value to persist in dropdown
                 onSelect={this.handleChanges} // Function will trigger on select event
                 onRemove={this.handleChanges} // Function will trigger on remove event
                 placeholder={
-                    languages.length === 0
+                    languagesIsEmpty
                         ? "Languages not finded"
                         : "Choose languages"
                 }
-                disable={languages.length === 0}
+                disable={languagesIsEmpty}
                 displayValue="name" // Property name to display in the dropdown options
                 id={id}
             />
@@ -52,13 +56,17 @@ class LanguagesDropDown extends React.Component {
 }
 
 LanguagesDropDown.propTypes = {
-    selected: PropTypes.array,
-    id: PropTypes.string,
+    selected: PropTypes.array,        // Default selected items
+    id: PropTypes.string,             // Component id
+    isSingleSelect: PropTypes.bool,   // Define single selecting
+    overrideOnSelect: PropTypes.func, // Function what called in parent component when something changed
 };
 
 LanguagesDropDown.defaultProps = {
     selected: [],
     id: "languages",
+    isSingleSelect: false,
+    overrideOnSelect: () => {},
 };
 
 export default LanguagesDropDown;
