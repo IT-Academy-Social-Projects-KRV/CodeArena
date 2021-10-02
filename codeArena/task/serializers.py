@@ -11,10 +11,10 @@ class TaskListSerializer(serializers.ModelSerializer):
 
 
 class CreateTaskSerializer(serializers.ModelSerializer):
-    
+
     class Meta:
         model = Task
-        exclude = ['_id', 'created_at', 'updated_at', 'user_id']
+        exclude = ['_id','created_at', 'updated_at', 'user_id']
 
     def validate_languages(self, value):
         """
@@ -49,10 +49,20 @@ class CreateTaskSerializer(serializers.ModelSerializer):
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = '__all__'
+        # fields = '__all__'
+        exclude = ['_id',]
+
 
 
 class LanguageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Language
         fields = '__all__'
+        # exclude = ['_id']
+
+
+
+class CreateLanguageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Language
+        exclude = ['_id']

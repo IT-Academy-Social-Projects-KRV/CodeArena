@@ -8,8 +8,8 @@ export default class TasklistPage extends Component {
 
     render () {
         return (
-            <div style={{'background':'#292929', height: '82vh'}}>
-                <Container style={{padding: '20px', height: '100%'}}>
+            <div style={{'background':'#292929'}}>
+                <Container style={{padding: '20px'}}>
                     <Row>
                         <Col md={3} > <LeftColumn /> </Col>
                         <Col md={9}> <RightColumn allTasks={12}/> </Col>
