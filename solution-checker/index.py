@@ -1,5 +1,4 @@
 import os
-import requests
 import subprocess
 import tempfile
 
@@ -62,7 +61,7 @@ def populate_db(solutions):
     for i, solution in enumerate(solutions):
         result = db.solution.insert_one(solution)
         print(f"Added solution{i+1} with _id: {result.inserted_id}")
-        
+
 
 class BaseSolutionChecker:
     def __init__(self, solution, test_cases):
@@ -73,19 +72,19 @@ class BaseSolutionChecker:
             fp.write(self.solution.encode())
             fp.write("\n".encode())
             fp.write(self.test_cases.encode())
-        
+
     def is_solution_ok(self):
         raise NotImplementedError
 
     def remove_temp_file(self):
-        os.unlink(self.fp.name)    
-      
+        os.unlink(self.fp.name)
+
 
 class PythonSolutionChecker(BaseSolutionChecker):
     def is_solution_ok(self):
         process = subprocess.run(["python3", self.fp.name], stderr=subprocess.DEVNULL)
         return not process.returncode
-            
+
 
 class TestRunnerDaemon:
     def __init__(self, db):
@@ -96,9 +95,9 @@ class TestRunnerDaemon:
             s = db.solution.find_one({"status": "edited"})
             if s:
                 checker = LANGUAGE_MAPPING[s["language"]](s["solution"], s["test_cases"])
-                result = checker.is_solution_ok() 
+                result = checker.is_solution_ok()
                 checker.remove_temp_file()
-                status = "correct" if result else "failed"    
+                status = "correct" if result else "failed"
                 print(status)
                 db.solution.update_one({"_id": s["_id"]}, {"$set": {"status": status}})
 
@@ -109,14 +108,7 @@ if __name__ == "__main__":
     MONGODB_USER_PASS = config("MONGODB_USER_PASS")
     MONGODB_HOST = config("MONGODB_HOST")
 
-    
-    # request = subprocess.run(["curl", "https://department-project.herokuapp.com/api/departments"])
-    # print("Printing request:", request)
-    r = requests.get("https://department-project.herokuapp.com/api/departments")
-    print("Print status code: ", r.status_code)
-    print("Print text of response: ", r.text)
-
-    url = f'mongodb://{MONGODB_USER}:{MONGODB_USER_PASS}@{MONGODB_HOST}/admin?retryWrites=true&w=majority'  
+    url = f'mongodb://{MONGODB_USER}:{MONGODB_USER_PASS}@{MONGODB_HOST}/admin?retryWrites=true&w=majority'
     client = MongoClient(url)
     db = client.codearena_mdb
 
@@ -125,6 +117,6 @@ if __name__ == "__main__":
     edited_count = db.solution.count_documents({"status": "edited"})
     print(f"There are {edited_count} solutions to check.")
 
-    # test_runner = TestRunnerDaemon(db)
-    # test_runner.run()
-
+    test_runner = TestRunnerDaemon(db)
+    test_runner.run()
+    

@@ -27,7 +27,7 @@ services:
       - postgres
 
   mongo:
-    image: mongo:4.4
+    image: mongo
     container_name: mongo
     networks:
       - default
