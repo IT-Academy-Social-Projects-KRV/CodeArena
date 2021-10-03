@@ -45,9 +45,9 @@ class CreateTaskView(APIView):
                 return Response(
                     status=status.HTTP_409_CONFLICT)
 
-            return Response(status=status.HTTP_201_CREATED)
+            return Response(status=http_status.HTTP_201_CREATED)
 
-        return Response(status=status.HTTP_422_UNPROCESSABLE_ENTITY)
+        return Response(status=http_status.HTTP_422_UNPROCESSABLE_ENTITY)
 
 
 class TaskAPI(APIView):
