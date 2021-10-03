@@ -9,58 +9,54 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'email', 'nickname', 'first_name', 'last_name',
-                  'password', 'role_id', 'created_at', 'updated_at', 'status']
+        fields = ['id', 'email', 'status',
+                  'password']
         extra_kwargs = {
                 'password': {'write_only': True}
         }
 
-class UserRegistrationSerializer(serializers.ModelSerializer):
-    confirm_password = serializers.CharField(
-        write_only=True,
-        required=True
-    )
+# class UserRegistrationSerializer(serializers.ModelSerializer):
 
-    class Meta:
-        model = User
+#     class Meta:
+#         model = User
 
-        fields = ['email', 'nickname', 'password', 'confirm_password', 'role_id', 'first_name', 'last_name']
-        extra_kwargs = {
-                'password': {'write_only': True}
-        }
+#         fields = ['email', 'username', 'password', 'status']
+#         # extra_kwargs = {
+#         #         'password': {'write_only': True}
+#         # }
+#         # db_table = 'user_user'
     
-    def save(self):
-        user = User(
-            email = self.validated_data['email'],
-            nickname = self.validated_data['nickname'],
-            role_id = self.validated_data['role_id'],
-            first_name = self.validated_data['first_name'],
-            last_name = self.validated_data['last_name'],
-        )
-        password = self.validated_data['password']
-        confirm_password = self.validated_data['confirm_password']
+#     def create(self, validated_data):
+#         user = User(
+#             email = validated_data['email'],
+#             nickname = validated_data['username'],
+#             role_id = validated_data['role_id'],
+#         )
+#         password = validated_data['password']
+#         if 'password' in validated_data:
+#             validated_data['password'] = make_password(validated_data['password'])
 
-        if password != confirm_password:
-            raise serializers.ValidationError({'password': 'Password must match.'})
         
-        user.set_password(password)
-        user.save()
+#         user.set_password(password)
+#         user.save()
+#         # return super(UserRegistrationSerializer, self).create(validated_data)
 
 
 
 
-def create(self, validated_data):
-    if 'password' in validated_data:
-        validated_data['password'] = make_password(validated_data['password'])
-        print(get_hasher)
-    return super(UserSerializer, self).create(validated_data)
+# def update(self, instance, validated_data):
+#     if 'password' in validated_data:
+#         validated_data['password'] = make_password(validated_data['password'])
+#     return super(UserSerializer, self).update(instance, validated_data)
 
-
-def update(self, instance, validated_data):
-    if 'password' in validated_data:
-        validated_data['password'] = make_password(validated_data['password'])
-    return super(UserSerializer, self).update(instance, validated_data)
-
+class SocialSerializer(serializers.Serializer):
+    """
+    Serializer which accepts an OAuth2 access token.
+    """
+    access_token = serializers.CharField(
+        allow_blank=False,
+        trim_whitespace=True,
+    )
 
 class CoderSerializer(serializers.ModelSerializer):
     class Meta:

@@ -2,7 +2,7 @@ from django.db import models
 from django.db.models.fields import CharField
 from django.db import transaction
 from django.contrib.auth.models import (
-    AbstractBaseUser, PermissionsMixin, BaseUserManager
+    AbstractUser, BaseUserManager
     )
 
 class Role(models.Model):
@@ -13,8 +13,10 @@ class Role(models.Model):
 
  
 class UserManager(BaseUserManager):
+    use_in_migrations = True
+
  
-    def _create_user(self, email, password, **extra_fields):
+    def create_user(self, username, email, password, **extra_fields):
         """
         Creates and saves a User with the given email,and password.
         """
@@ -23,37 +25,39 @@ class UserManager(BaseUserManager):
         elif not password:
             raise ValueError("the given password must be set")
         try:
-            with transaction.atomic():
-                user = self.model(email=email, **extra_fields)
-                user.set_password(password)
-                user.save(using=self._db)
-                return user
+            email = self.normalize_email(email)
+            username = self.model.normalize_username(username)
+            
+            user = self.model(username=username, email=email, **extra_fields)
+            user.set_password(password)
+            user.save(using=self._db)    
+            return user
+          
         except:
-            raise
+            raise 
  
-    def create_user(self, email, password=None, **extra_fields):
-        extra_fields.setdefault('is_staff', False)
-        extra_fields.setdefault('is_superuser', False)
-        return self._create_user(email, password, **extra_fields)
+    # def create_user(self, email, password=None, **extra_fields):
+    #     extra_fields.setdefault('is_staff', False)
+    #     extra_fields.setdefault('is_superuser', False)
+    #     return self._create_user(email, password, **extra_fields)
  
-    def create_superuser(self, email, password, **extra_fields):
-        extra_fields.setdefault('is_staff', True)
-        extra_fields.setdefault('is_superuser', True)
-        return self._create_user(email, password=password, **extra_fields)
+    # def create_superuser(self, email, password, **extra_fields):
+    #     extra_fields.setdefault('is_staff', True)
+    #     extra_fields.setdefault('is_superuser', True)
+    #     return self._create_user(email, password=password, **extra_fields)
 
-class User(AbstractBaseUser, PermissionsMixin):
+class User(AbstractUser):
     class UserStatus(models.TextChoices):
         ON = "Active"
         BANNED = "Banned"
         DEL = "Deleted"
 
     status = models.CharField(max_length=10, choices=UserStatus.choices, default=UserStatus.ON)
-    
-        
+    username = models.CharField(max_length=150, unique=True, blank=True, null=True)
     email = models.EmailField(unique=True)
-    nickname = models.CharField(max_length=70, unique=True)
-    first_name = models.CharField(max_length=70)
-    last_name = models.CharField(max_length=70)
+    # nickname = models.CharField(max_length=70, unique=True)
+    first_name = models.CharField(max_length=70, blank=True, null=True)
+    last_name = models.CharField(max_length=70, blank=True, null=True)
     password = models.CharField(max_length=512)
     role_id = models.ForeignKey(Role, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -61,13 +65,14 @@ class User(AbstractBaseUser, PermissionsMixin):
     
 
     objects = UserManager()
+    
+    EMAIL_FIELD = 'email'
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = ['email', 'password', 'status', 'role_id']
  
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name']
- 
-    def save(self, *args, **kwargs):
-        super(User, self).save(*args, **kwargs)
-        return self
+    # def save(self, *args, **kwargs):
+    #     super(User, self).save(*args, **kwargs)
+    #     return self
 
     def __str__(self):
         return f'{self.pk}, {self.email}, {self.nickname}, {self.first_name}, {self.last_name} \
