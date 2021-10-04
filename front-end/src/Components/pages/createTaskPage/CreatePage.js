@@ -5,7 +5,7 @@ import MainMenu from "./MainMenu"
 export default class CreatePage extends Component {
     render() {
         return (
-            <div>
+            <div className="grey">
                 <Functional />
                 <MainMenu />
             </div>
