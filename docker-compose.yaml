@@ -67,8 +67,7 @@ volumes:
 
 networks:
   default:
-    driver: bridge  
-
+    driver: bridge
   no-internet:
     driver: bridge
     internal: true
