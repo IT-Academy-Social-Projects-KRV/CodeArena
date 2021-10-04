@@ -3,12 +3,12 @@ import sys
 
 
 solution = {
-    "coder_id": 123,
-    "task_id": 12,
-    "solution": "def subtract(x, y):\n    return x - y\n",
-    "test_cases": "assert subtract(5, 3) == 2\nassert subtract(7, 4) == 3\n",
-    "status": "edited",
-    "language": "Python"
+    'coder_id': 123,
+    'task_id': 12,
+    'solution': 'def subtract(x, y):\n    return x - y\n',
+    'test_cases': 'assert subtract(5, 3) == 2\nassert subtract(7, 4) == 3\n',
+    'status': 'edited',
+    'language': 'Python'
 }
 
 

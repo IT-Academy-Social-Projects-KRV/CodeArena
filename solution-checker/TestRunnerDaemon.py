@@ -1,23 +1,21 @@
-import os
-import tempfile
-import subprocess
-import time
-from pymongo import MongoClient
 import logging
+import os
+import subprocess
 import sys
-from threading import Lock, current_thread
+import tempfile
+
 from concurrent.futures import ThreadPoolExecutor
-from datetime import datetime
+from pymongo import MongoClient
+from threading import Lock
 
-#logging.basicConfig(level=logging.INFO)
-
+# Configuration for log output
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 stdout_handler = logging.StreamHandler(sys.stdout)
 stdout_handler.setLevel(logging.INFO)
 
-file_handler = logging.FileHandler('logs.csv')
+file_handler = logging.FileHandler('logs.log')
 file_handler.setLevel(logging.INFO)
 
 logger.addHandler(file_handler)
@@ -53,27 +51,19 @@ language_mapping = {'Python': PythonSolutionChecker}
 
 
 class TestRunnerDaemon:
-    def __init__(self, db):
+    def __init__(self, db, thread_workers=10):
         self.db = db
+        self.thread_workers = thread_workers
         self.threadlock = Lock()
-        self.start_time = datetime.now()
-        
 
-    def test_time(self):
-        return str(datetime.now() - self.start_time)
+    def check_solution(self, solution):
+        """
+        Work on the solution in a separate thread
 
-    def check_solution(self, solution, counter):
-        # self.threadlock.acquire()
-        # logging.info(f'{solution["_id"]},{counter}')
-        # db.solution.update_one(
-        #     {'_id': solution['_id']},
-        #     {'$set': {'status': 'testing'}},
-        # )
-        # self.threadlock.release()
+        Change solution status to 'correct' or 'failed'
+        """
 
-        # logging.info(f'{solution["_id"]},{counter},{self.test_time()}')
-
-        checker = PythonSolutionChecker(
+        checker = language_mapping[solution['language']](
             solution['solution'],
             solution['test_cases'])
 
@@ -85,19 +75,23 @@ class TestRunnerDaemon:
         )
 
     def run(self):
-        with ThreadPoolExecutor(max_workers=5) as executor:
-            #while True:
-            for i in range(2):
+        with ThreadPoolExecutor(max_workers=self.thread_workers) as executor:
+            while True:
                 solutions = self.db.solution.find({'status': 'edited'})
-
+                
                 for solution in solutions:
-                    # self.threadlock.acquire()
+                    self.threadlock.acquire()
+                    
+                    # Change solution status to 'testing' before solving
                     db.solution.update_one(
                         {'_id': solution['_id']},
                         {'$set': {'status': 'testing'}},
                     )
-                    executor.submit(self.check_solution, solution, i)
-            logging.info(f'{self.test_time()}')
+                    logging.info(f'Solution {solution["_id"]} prepared')
+                    
+                    self.threadlock.release()
+
+                    executor.submit(self.check_solution, solution)
 
 
 if __name__ == '__main__':
