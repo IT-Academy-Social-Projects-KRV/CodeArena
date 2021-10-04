@@ -24,12 +24,7 @@ class LeftBlock extends React.Component {
         createdStatus: null,
     };
 
-    createTask = this.createTask.bind(this);
-    handleChange = this.handleChange.bind(this);
-    handleSelect = this.handleSelect.bind(this);
-    testTask = this.testTask.bind(this);
-
-    async createTask() {
+    createTask = async () => {
         // Create a task and get its HTTP status code. Set it in state
 
         await axios
@@ -40,14 +35,15 @@ class LeftBlock extends React.Component {
             .catch((error) => {
                 this.setState({ createdStatus: error.response.status });
             });
-    }
+    };
 
-    testTask() {
+    testTask = () => {
         // TODO: Create functionality for creating the task and solution for this
-        console.log(this.state);
-    }
 
-    handleChange(event) {
+        console.log(this.state);
+    };
+
+    handleChange = (event) => {
         // Triggered when something changed in forms components. Use component id as object key
         // TODO: Create the task when it is not created, and get its ID. If ID already exist - update this task
 
@@ -57,17 +53,18 @@ class LeftBlock extends React.Component {
                 [event.target.id]: event.target.value,
             },
         }));
-    }
+    };
 
-    handleSelect(itemList, id) {
+    handleSelect = (itemList, id) => {
         // Triggered when something changed in drop-down components. Use component id as object key
+
         this.setState((prevState) => ({
             task: {
                 ...prevState.task,
                 [id]: itemList,
             },
         }));
-    }
+    };
 
     render() {
         const { createdStatus } = this.state;
@@ -150,19 +147,18 @@ class LeftBlock extends React.Component {
                                 </FloatingLabel>
                             </Form.Group>
 
-                            {createdStatus === 422 ? (
+                            {createdStatus ? (
                                 <Alert
-                                    variant="danger"
+                                    variant={
+                                        createdStatus === 422
+                                            ? "danger"
+                                            : "success"
+                                    }
                                     className="m-0 mt-3 p-2"
                                 >
-                                    Get a problem when creating a task
-                                </Alert>
-                            ) : createdStatus === 201 ? (
-                                <Alert
-                                    variant="success"
-                                    className="m-0 mt-3 p-2"
-                                >
-                                    Task created successfully
+                                    {createdStatus === 422
+                                        ? "Get a problem when creating a task"
+                                        : "Task created successfully"}
                                 </Alert>
                             ) : null}
                         </FormWrapper>
