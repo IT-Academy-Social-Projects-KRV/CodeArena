@@ -72,5 +72,4 @@ networks:
   no-internet:
     driver: bridge
     internal: true
-  
-  
+

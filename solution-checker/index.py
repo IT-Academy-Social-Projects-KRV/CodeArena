@@ -1,3 +1,8 @@
+"""This is a continuously running service for checking the solutions
+for correctness and changing their status
+from "edited" to "correct" or "failed" respectively.
+"""
+
 import os
 import subprocess
 import tempfile
@@ -58,13 +63,20 @@ solutions = [
 
 
 def populate_db(solutions):
+    """Populate database with given solutions."""
     for i, solution in enumerate(solutions):
         result = db.solution.insert_one(solution)
         print(f"Added solution{i+1} with _id: {result.inserted_id}")
 
 
 class BaseSolutionChecker:
+    """This class to check solutions for correctness.
+
+    It is intended to be subclassed.
+    """
+
     def __init__(self, solution, test_cases):
+        """Initialize the object and create a temporary file"""
         self.solution = solution
         self.test_cases = test_cases
         with tempfile.NamedTemporaryFile(delete=False) as fp:
@@ -74,23 +86,35 @@ class BaseSolutionChecker:
             fp.write(self.test_cases.encode())
 
     def is_solution_ok(self):
+        """Check solution for correctness."""
         raise NotImplementedError
 
     def remove_temp_file(self):
+        """Remove the temporary file"""
         os.unlink(self.fp.name)
 
 
 class PythonSolutionChecker(BaseSolutionChecker):
+    """Check solutions written in Python."""
+
     def is_solution_ok(self):
+        """Override BaseSolutioChecker.is_solution_ok()."""
         process = subprocess.run(["python3", self.fp.name], stderr=subprocess.DEVNULL)
         return not process.returncode
 
 
 class TestRunnerDaemon:
+    """This class is the solutions checking service.
+
+    It looks for solutions to be checked,
+    checks their correctness, and changes their status respectively.
+    """
+
     def __init__(self, db):
         self.db = db
 
     def run(self):
+        """Start the continuous checking service."""
         while True:
             s = db.solution.find_one({"status": "edited"})
             if s:
@@ -119,4 +143,4 @@ if __name__ == "__main__":
 
     test_runner = TestRunnerDaemon(db)
     test_runner.run()
-    
+
