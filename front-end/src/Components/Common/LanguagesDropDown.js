@@ -8,8 +8,6 @@ class LanguagesDropDown extends React.Component {
         languages: [],
     };
 
-    handleChanges = this.handleChanges.bind(this);
-
     async componentDidMount() {
         // Get languages from API
 
@@ -21,14 +19,14 @@ class LanguagesDropDown extends React.Component {
         }
     }
 
-    async handleChanges(selectedList) {
+    handleChanges = async (selectedList) => {
         // Called when the item in component selected or removed
 
         await this.props.overrideOnSelect(
             selectedList.map((item) => item["name"]),
             this.props.id
         );
-    }
+    };
 
     render() {
         const { languages } = this.state;
@@ -44,7 +42,7 @@ class LanguagesDropDown extends React.Component {
                 onRemove={this.handleChanges} // Function will trigger on remove event
                 placeholder={
                     languagesIsEmpty
-                        ? "Languages not finded"
+                        ? "Languages not found"
                         : "Choose languages"
                 }
                 disable={languagesIsEmpty}

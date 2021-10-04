@@ -8,8 +8,6 @@ class CategoriesDropDown extends React.Component {
         categories: [],
     };
 
-    handleChanges = this.handleChanges.bind(this);
-
     async componentDidMount() {
         // Get categories from API
 
@@ -21,14 +19,14 @@ class CategoriesDropDown extends React.Component {
         }
     }
 
-    async handleChanges(selectedList) {
+    handleChanges = async (selectedList) => {
         // Called when the item in component selected or removed
 
         await this.props.overrideOnSelect(
             selectedList.map((item) => item["name"]),
             this.props.id
         );
-    }
+    };
 
     render() {
         const { categories } = this.state;
@@ -44,7 +42,7 @@ class CategoriesDropDown extends React.Component {
                 onRemove={this.handleChanges} // Function will trigger on remove event
                 placeholder={
                     categoriesIsEmpty
-                        ? "Categories not finded"
+                        ? "Categories not found"
                         : "Choose categories"
                 }
                 disable={categoriesIsEmpty}
