@@ -54,18 +54,15 @@ class CoderTask(models.Model):
         CORRECT = "CR"
         FAILED = "FL"
         PUBLISHED = "PB"
+        TESTING = "TS"
 
 
     _id = models.ObjectIdField()
     coder_id = models.CharField(max_length=36, default='')
-    task_id = models.ForeignKey(
-        Task,
-        on_delete=models.CASCADE,
-    )
+    task = models.CharField(max_length=24) #add _id of Task without 'ObjectId()'
     solution = models.TextField()
     status = models.CharField(
         max_length=2,
         choices=SolutionStatus.choices,
         default=SolutionStatus.DRAFT
         )
-
