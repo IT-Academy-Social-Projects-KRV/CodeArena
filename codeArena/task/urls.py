@@ -10,4 +10,6 @@ urlpatterns = [
     path('task/<pk>', views.TaskAPI.as_view()),
     path('get_language/', views.GetLanguageListView.as_view()),
     path('get_category/', views.GetCategoryListView.as_view()),
+    path('create_codertask/', views.CreateCoderTaskView.as_view()),
+    path('codertasks/', views.CoderTaskListView.as_view()),
 ]
