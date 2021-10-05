@@ -11,3 +11,4 @@ urlpatterns = [
     path('get_language/', views.GetLanguageListView.as_view()),
     path('get_category/', views.GetCategoryListView.as_view()),
 ]
+
