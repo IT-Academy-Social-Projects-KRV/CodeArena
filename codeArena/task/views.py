@@ -147,12 +147,3 @@ class CoderTaskDetailView(APIView):
         return Response({
             "success": f'Solution was updated successfully'
         })
-
-
-class CreateNewsView(APIView):
-
-    def post(self, request, format='json'):
-        one_news = CreateNewsSerializer(data=request.data)
-        if one_news.is_valid(raise_exception=True):
-            one_news_saved = one_news.save()
-        return Response({"success": f'News {one_news_saved.title} created successfully'})
