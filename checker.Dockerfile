@@ -6,5 +6,5 @@ COPY ./solution-checker .
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-CMD ["python3", "index.py"]
+CMD ["python3", "checker_service.py"]
 
