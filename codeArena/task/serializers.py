@@ -59,3 +59,17 @@ class CreateTaskSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         return Task.objects.create(**validated_data)
 
+
+class CoderTaskListSerializer(serializers.ModelSerializer):
+    """Serialize all data from CoderTask table"""
+
+    class Meta:
+        model = CoderTask
+        fields = '__all__'
+
+
+class CreateCoderTaskSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = CoderTask
+        exclude = ['_id']
