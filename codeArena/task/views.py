@@ -90,13 +90,6 @@ class GetCategoryListView(APIView):
         return Response(data=serializer.data, status=http_status.HTTP_200_OK)
 
 
-class GetCategoryListView(APIView):
-    def get(self, request, format='json'):
-        serializer = CategorySerializer(data=Category.objects.all(), many=True)
-        serializer.is_valid()
-        return Response(data=serializer.data, status=http_status.HTTP_200_OK)
-
-
 class CoderTaskListView(APIView):
     """Gets all data from CoderTask table with task detail"""
 
