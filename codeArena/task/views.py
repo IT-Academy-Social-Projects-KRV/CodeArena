@@ -119,3 +119,40 @@ class CreateCoderTaskView(APIView):
         if coder_task.is_valid(raise_exception=True):
             coder_task_saved = coder_task.save()
         return Response({"success": f'CoderTask created successfully'})
+
+
+class CoderTaskDetailView(APIView):
+
+    def get(self, request, pk, format=None):
+        codertask = CoderTask.objects.filter(_id=ObjectId(pk))
+        if codertask:
+            serializer = CoderTaskListSerializer(data=codertask, many=True)
+            serializer.is_valid()
+            return Response(serializer.data)
+        else:
+            return Response(status=http_status.HTTP_404_NOT_FOUND)
+
+    def delete(self, request, pk):
+        codertask = CoderTask.objects.filter(_id=ObjectId(pk))
+        codertask.delete()
+        return Response({"message": f'Solution has been deleted.'}, status=http_status.HTTP_204_NO_CONTENT)
+
+    def put(self, request, pk):
+        saved_codertask = CoderTask.objects.filter(_id=ObjectId(pk)).get()
+        data = request.data.get('codersolution')
+        serializer = CreateCoderTaskSerializer(
+            instance=saved_codertask, data=data, partial=True)
+        if serializer.is_valid(raise_exception=True):
+            codertask_updated = serializer.save()
+        return Response({
+            "success": f'Solution was updated successfully'
+        })
+
+
+class CreateNewsView(APIView):
+
+    def post(self, request, format='json'):
+        one_news = CreateNewsSerializer(data=request.data)
+        if one_news.is_valid(raise_exception=True):
+            one_news_saved = one_news.save()
+        return Response({"success": f'News {one_news_saved.title} created successfully'})
