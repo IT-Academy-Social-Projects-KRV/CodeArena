@@ -88,3 +88,34 @@ class GetCategoryListView(APIView):
         serializer = CategorySerializer(data=Category.objects.all(), many=True)
         serializer.is_valid()
         return Response(data=serializer.data, status=http_status.HTTP_200_OK)
+
+
+class GetCategoryListView(APIView):
+    def get(self, request, format='json'):
+        serializer = CategorySerializer(data=Category.objects.all(), many=True)
+        serializer.is_valid()
+        return Response(data=serializer.data, status=http_status.HTTP_200_OK)
+
+
+class CoderTaskListView(APIView):
+    """Gets all data from CoderTask table with task detail"""
+
+    def get(self, request, format=None):
+        codertasks = CoderTask.objects.all()
+        serializer = CoderTaskListSerializer(data=codertasks, many=True)
+        serializer.is_valid()
+        for coder_task in serializer.data:
+            task = Task.objects.filter(_id=ObjectId(coder_task['task_id']))
+            task_serializer = TaskListSerializer(data=task, many=True)
+            task_serializer.is_valid()
+            coder_task['task_id'] = task_serializer.data
+        return Response(serializer.data)
+
+
+class CreateCoderTaskView(APIView):
+
+    def post(self, request, format='json'):
+        coder_task = CreateCoderTaskSerializer(data=request.data)
+        if coder_task.is_valid(raise_exception=True):
+            coder_task_saved = coder_task.save()
+        return Response({"success": f'CoderTask created successfully'})
