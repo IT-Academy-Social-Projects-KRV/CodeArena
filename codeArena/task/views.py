@@ -105,10 +105,10 @@ class CoderTaskListView(APIView):
         serializer = CoderTaskListSerializer(data=codertasks, many=True)
         serializer.is_valid()
         for coder_task in serializer.data:
-            task = Task.objects.filter(_id=ObjectId(coder_task['task_id']))
+            task = Task.objects.filter(_id=ObjectId(coder_task['task']))
             task_serializer = TaskListSerializer(data=task, many=True)
             task_serializer.is_valid()
-            coder_task['task_id'] = task_serializer.data
+            coder_task['task'] = task_serializer.data
         return Response(serializer.data)
 
 

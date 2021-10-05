@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Task, Language, Category
+from .models import Task, Language, Category, CoderTask
 
 
 class TaskListSerializer(serializers.ModelSerializer):
