@@ -11,12 +11,14 @@ class TaskListSerializer(serializers.ModelSerializer):
 
 
 class CategorySerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Category
         fields = '__all__'
 
 
 class LanguageSerializer(serializers.ModelSerializer):
+    
     class Meta:
         model = Language
         fields = '__all__'
