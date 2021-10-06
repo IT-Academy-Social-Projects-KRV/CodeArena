@@ -23,8 +23,6 @@ class LanguageSerializer(serializers.ModelSerializer):
 
 
 class CreateTaskSerializer(serializers.ModelSerializer):
-    unit_test = serializers.FileField(
-        max_length=500, allow_null=True, allow_empty_file=True)
 
     class Meta:
         model = Task
