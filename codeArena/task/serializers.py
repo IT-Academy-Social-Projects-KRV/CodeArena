@@ -11,20 +11,20 @@ class TaskListSerializer(serializers.ModelSerializer):
 
 
 class CategorySerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Category
         fields = '__all__'
 
 
 class LanguageSerializer(serializers.ModelSerializer):
+    
     class Meta:
         model = Language
         fields = '__all__'
 
 
 class CreateTaskSerializer(serializers.ModelSerializer):
-    unit_test = serializers.FileField(
-        max_length=500, allow_null=True, allow_empty_file=True)
 
     class Meta:
         model = Task
