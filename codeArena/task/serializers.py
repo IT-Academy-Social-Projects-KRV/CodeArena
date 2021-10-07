@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Task, Language, Category
+from .models import Task, Language, Category, CoderTask
 
 
 class TaskListSerializer(serializers.ModelSerializer):
@@ -11,20 +11,20 @@ class TaskListSerializer(serializers.ModelSerializer):
 
 
 class CategorySerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Category
         fields = '__all__'
 
 
 class LanguageSerializer(serializers.ModelSerializer):
+    
     class Meta:
         model = Language
         fields = '__all__'
 
 
 class CreateTaskSerializer(serializers.ModelSerializer):
-    unit_test = serializers.FileField(
-        max_length=500, allow_null=True, allow_empty_file=True)
 
     class Meta:
         model = Task
@@ -59,3 +59,17 @@ class CreateTaskSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         return Task.objects.create(**validated_data)
 
+
+class CoderTaskListSerializer(serializers.ModelSerializer):
+    """Serialize all data from CoderTask table"""
+
+    class Meta:
+        model = CoderTask
+        fields = '__all__'
+
+
+class CreateCoderTaskSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = CoderTask
+        exclude = ['_id']

@@ -1,15 +1,12 @@
 import axios from "axios";
-import React from "react";
-import { Form } from "react-bootstrap";
+import Multiselect from "multiselect-react-dropdown";
 import PropTypes from "prop-types";
+import React from "react";
 
-export class LanguagesDropDown extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            languages: [],
-        };
-    }
+class LanguagesDropDown extends React.Component {
+    state = {
+        languages: [],
+    };
 
     async componentDidMount() {
         // Get languages from API
@@ -22,33 +19,52 @@ export class LanguagesDropDown extends React.Component {
         }
     }
 
+    handleChanges = async (selectedList) => {
+        // Called when the item in component selected or removed
+
+        await this.props.overrideOnSelect(
+            selectedList.map((item) => item["name"]),
+            this.props.id
+        );
+    };
+
     render() {
         const { languages } = this.state;
-        const { selected } = this.props;
+        const { selected, id, isSingleSelect } = this.props;
+        const languagesIsEmpty = languages.length === 0;
+
         return (
-            <Form.Select
-                className={this.props.overrideStyle}
-                disabled={languages.length === 0}
-            >
-                <option selected disabled>
-                    {languages.length === 0
-                        ? "Languages not finded"
-                        : "Choose language"}
-                </option>
-                {languages.map((language) => (
-                    <option selected={selected === language.name} value={language.name}>{language.name}</option>
-                ))};
-            </Form.Select>
+            <Multiselect
+                singleSelect={isSingleSelect}
+                options={languages}           // Options to display in the dropdown
+                selectedValues={selected}     // Preselected value to persist in dropdown
+                onSelect={this.handleChanges} // Function will trigger on select event
+                onRemove={this.handleChanges} // Function will trigger on remove event
+                placeholder={
+                    languagesIsEmpty
+                        ? "Languages not found"
+                        : "Choose languages"
+                }
+                disable={languagesIsEmpty}
+                displayValue="name" // Property name to display in the dropdown options
+                id={id}
+            />
         );
     }
 }
 
 LanguagesDropDown.propTypes = {
-    overrideStyle: PropTypes.string,
-}
+    selected: PropTypes.array,        // Default selected items
+    id: PropTypes.string,             // Component id
+    isSingleSelect: PropTypes.bool,   // Define single selecting
+    overrideOnSelect: PropTypes.func, // Function what called in parent component when something changed
+};
 
 LanguagesDropDown.defaultProps = {
-    overrideStyle: "",
-}
+    selected: [],
+    id: "languages",
+    isSingleSelect: false,
+    overrideOnSelect: () => {},
+};
 
 export default LanguagesDropDown;
