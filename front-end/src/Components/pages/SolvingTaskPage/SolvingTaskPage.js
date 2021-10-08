@@ -12,18 +12,34 @@ class SolvingTaskPage extends React.Component {
             task: "",
             solution: "",
             status: "DR",
-        }
+        },
     };
 
     handleChange = (event) => {
         // Triggered when something changed in forms components. Use component id as object key
 
-        this.setState((prevState) => ({
-            solution: {
-                ...prevState.solution,
-                solution: event.target.value,
-            },
-        }));
+        this.setState(
+            (prevState) => ({
+                solution: {
+                    ...prevState.solution,
+                    solution: event.target.value,
+                },
+            }),
+            async () => await this.sendSolution()
+        );
+    };
+
+    sendSolution = async () => {
+        await axios
+            .post("/api/task/create_codertask/", this.state.solution)
+            .then((response) => {
+                this.setState({ solution: response.data });
+            })
+            .catch((error) => {
+                console.log(error);
+                // this.setState({ createdStatus: error.response.status });
+            });
+        console.log(this.state);
     };
 
     getTask = async () => {
@@ -41,7 +57,6 @@ class SolvingTaskPage extends React.Component {
                 task: this.state.task._id,
             },
         }));
-        console.log(this.state)
     }
 
     render() {
@@ -83,14 +98,11 @@ class SolvingTaskPage extends React.Component {
                             <Button
                                 className="col-2"
                                 variant="primary"
-                                onClick={this.putSolution}
+                                onClick={this.sendSolution}
                             >
                                 Create task
                             </Button>
-                            <Button
-                                className=" col-2"
-                                variant="success"
-                            >
+                            <Button className=" col-2" variant="success">
                                 Test task
                             </Button>
                         </Card.Footer>
