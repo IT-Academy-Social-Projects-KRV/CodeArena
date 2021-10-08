@@ -40,3 +40,22 @@
     padding: 0;
   }
 }
+
+.main_menu {
+  background-color: #292929;
+  padding: 5px 0;
+}
+
+.main_menu div {
+  text-align: right;
+}
+
+.navbar-nav {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.navbar-nav .nav-link {
+  width: 25%;
+  text-align: center;
+}
