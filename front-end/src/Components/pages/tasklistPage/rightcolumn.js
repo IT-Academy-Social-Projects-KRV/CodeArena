@@ -11,55 +11,35 @@ import ruby from './images/ruby.svg' ;
 
 
 export default class RightColumn extends Component {
+    constructor(props){
+        super(props);
+    }
 
-    // constructor() {
-    //     super();
-    //     this.handleClick = this.handleClick.bind(this);
-    //     this.state = {allTasks:[], s:[], way: `/task/task/` }
+    // state = this.props
 
-
+    // getTasks = async() => {
+    //     try{
+    //         let datas = await axios.get(this.state.way)
+    //         this.setState({allTasks: datas.data, s: datas.data})
+    //         // console.log(this.state.allTasks === this.state.s)
+    //     } catch(err) {console.log(err)}
     // }
 
 
-    state = {allTasks:[], s:[], way: `/task/task/` }
-
-    getTasks = async() => {
-        try{
-            let datas = await axios.get(this.state.way)
-            this.setState({allTasks: datas.data, s: datas.data})
-            // console.log(this.state.allTasks === this.state.s)
-        } catch(err) {console.log(err)}
-    }
-
-    // via making a new query
-    // handleClick = async (language) => {
-    //     this.setState({
-    //         way: `/task/task/?language=${language}`
-    //     } );
-    //     // console.log('--------');
-    //     this.getTasks()}
 
 
-    handleClick = async (language) => {
-        await this.setState({
-            way: `/task/task/?language=${language}`
-        } );
-        // console.log('--------');
-        this.getTasks()}
-
-
-
-    async componentDidMount() {
-        await this.getTasks()
-    }
+    // async componentDidMount() {
+    //     await this.getTasks()
+    // }
 
   
 
 
     render() {
+        // this.props.getTasks()
         
 
-        const {s} = this.state
+        const {selectedTasks} = this.props
 
         let languagesDict = {
             "C++": cpp,
@@ -68,17 +48,19 @@ export default class RightColumn extends Component {
             'C#': c_sharp,
             'JavaScript': js
         }
+
         return (
-            s.map(card => {
+
+            selectedTasks.map(card => {
                 return (
                     <Card bg='dark' style={{marginBottom: '10px'}}>
                         {/* <Button onClick={this.setState({way: this.state.way+`?language=Python`})}>info</Button> */}
                         {/* <Button onClick={this.handleClick(`Python`)}>Python</Button>
                         <Button onClick={this.handleClick(`Ruby`)}>Ruby</Button>
                         <Button onClick={this.handleClick(`C#`)}>C#</Button> */}
-                        <Button onClick={this.handleClick.bind(this, `Ruby`)}>Ruby</Button>
+                        {/* <Button onClick={this.handleClick.bind(this, `Ruby`)}>Ruby</Button>
                         <Button onClick={this.handleClick.bind(this, `Python`)}>Python</Button>
-                        <Button onClick={this.handleClick.bind(this, `С#`)}>C#</Button>
+                        <Button onClick={this.props.handleClick.bind(this, `С#`)}>C#</Button> */}
                         {/* <Button onClick={this.setState({s: this.lan})}>info</Button> */}
 
 
