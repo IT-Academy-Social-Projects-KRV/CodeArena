@@ -54,6 +54,8 @@ services:
       context: .
       dockerfile: checker.Dockerfile
     container_name: checker
+    volumes:
+     - ./solution-checker:/usr/src/checker
     networks:
      - no-internet
     env_file:

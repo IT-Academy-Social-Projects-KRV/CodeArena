@@ -6,6 +6,7 @@ from "edited" to "correct" or "failed" respectively.
 import os
 import subprocess
 import tempfile
+import time
 
 from decouple import config
 from pymongo import MongoClient
@@ -99,7 +100,7 @@ class PythonSolutionChecker(BaseSolutionChecker):
 
     def is_solution_ok(self):
         """Override BaseSolutioChecker.is_solution_ok()."""
-        process = subprocess.run(["python3", self.fp.name], stderr=subprocess.DEVNULL)
+        process = subprocess.run(["python3", self.fp.name])#, stderr=subprocess.DEVNULL)
         return not process.returncode
 
 
@@ -133,13 +134,18 @@ if __name__ == "__main__":
     MONGODB_HOST = config("MONGODB_HOST")
 
     url = f'mongodb://{MONGODB_USER}:{MONGODB_USER_PASS}@{MONGODB_HOST}/admin?retryWrites=true&w=majority'
+    print("Printing")
     client = MongoClient(url)
     db = client.codearena_mdb
 
     populate_db(solutions)
 
-    edited_count = db.solution.count_documents({"status": "edited"})
-    print(f"There are {edited_count} solutions to check.")
+    # edited_count = db.solution.count_documents({"status": "edited"})
+    # print(f"There are {edited_count} solutions to check.")
+    print("Needs to be printed 1")
+    
+    # while True:
+    #     print('Hi')
 
     test_runner = TestRunnerDaemon(db)
     test_runner.run()
