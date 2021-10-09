@@ -131,11 +131,11 @@ class CreateCoderTaskView(APIView):
         else:
             serializer = CreateCoderTaskSerializer(data=request.data)
 
-        if not serializer.is_valid():
-            return Response(status=http_status.HTTP_418_IM_A_TEAPOT)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(data=serializer.data, status=http_status.HTTP_201_CREATED)
 
-        serializer.save()
-        return Response(data=serializer.data, status=http_status.HTTP_201_CREATED)
+        return Response(status=http_status.HTTP_418_IM_A_TEAPOT)
 
 
 class CoderTaskDetailView(APIView):
