@@ -3,67 +3,88 @@ from django.contrib.auth.hashers import check_password
 from rest_framework import serializers, status
 from rest_framework.exceptions import ValidationError
 from rest_framework.views import APIView
+from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.generics import RetrieveUpdateAPIView
 from .serializers import UserSerializer, RoleSerializer
 from .models import Role, User
-from .serializers import UserRegistrationSerializer, UserSerializer, RoleSerializer
+from .serializers import UserSerializer, RoleSerializer, SocialSerializer
 from rest_framework.decorators import api_view, permission_classes, schema
-import jwt
-from rest_framework_jwt.utils import jwt_payload_handler
+
+# from rest_framework_jwt.utils import jwt_payload_handler
 from django.contrib.auth.signals import user_logged_in
 from decouple import config
 from django.conf.urls.static import static
 
+from requests.exceptions import HTTPError
 
-class CreateUserAPIView(APIView):
-    # Allow any user (authenticated or not) to access this url 
-    permission_classes = (AllowAny,)
+from social_django.utils import psa
+
+
+# class CreateUserAPIView(APIView):
+#     # Allow any user (authenticated or not) to access this url 
+#     permission_classes = (AllowAny,)
     
 
-    def post(self, request):
-        user = request.data
-        serializer = UserRegistrationSerializer(data=user)
-        serializer.is_valid(raise_exception=True)
-        if str(serializer.validated_data["role_id"]) in ["Admin", "Moderator"]: 
-            content = {"You can't be admin or moderator" : "please, provide the correct role!"}
-            return Response(content, status=status.HTTP_403_FORBIDDEN)
-        else:
-            serializer.save()
-        
-        return Response(serializer.data, status=status.HTTP_201_CREATED) #delete on production
+#     def post(self, request):
+#         user = request.data
+#         serializer = UserRegistrationSerializer(data=user)
+#         serializer.is_valid(raise_exception=True)
+#         if str(serializer.validated_data["role_id"]) in ["Admin", "Moderator"]: 
+#             content = {"You can't be admin or moderator" : "please, provide the correct role!"}
+#             return Response(content, status=status.HTTP_403_FORBIDDEN)
+#         else:
+#             serializer.save()
+           
+#         return Response(serializer.data, status=status.HTTP_201_CREATED) #delete on production
 
-@api_view(['POST'])
-@permission_classes([AllowAny, ])
-def authenticate_user(request):
- 
-    try:
-        email = request.data['email']
-        password = request.data['password']
+
+
+#this function is temporary and gonna be tested and might be edited
+#it's gonna be used for OAuth through social media
+@api_view(http_method_names=['POST'])
+@permission_classes([AllowAny])
+@psa()
+def exchange_token(request, backend):
+    
+    serializer = SocialSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        
+        try:
+            nfe = settings.NON_FIELD_ERRORS_KEY
+        except AttributeError:
+            nfe = 'non_field_errors'
+
+        try:
           
-        user = User.objects.get(email=email)
-       
-        if user and check_password(password, user.password):
-            try:
-                payload = jwt_payload_handler(user)
-                token = jwt.encode(payload, config('JWT_SECRET_KEY'))
-                user_details = {}
-                user_details['name'] = f'{user.first_name} {user.last_name}'
-                user_details['token'] = token
-                user_logged_in.send(sender=user.__class__,
-                                    request=request, user=user)
-                return Response(user_details, status=status.HTTP_200_OK)
- 
-            except Exception as e:
-                raise e
+            user = request.backend.do_auth(serializer.validated_data['access_token'])
+        except HTTPError as e:
+          
+            return Response(
+                {'errors': {
+                    'token': 'Invalid token',
+                    'detail': str(e),
+                }},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        if user:
+            if user.is_active:
+                token, _ = Token.objects.get_or_create(user=user)
+                return Response({'token': token.key})
+            else:
+             
+                return Response(
+                    {'errors': {nfe: 'This user account is inactive'}},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
         else:
-            res = {
-                'error': 'can not authenticate with the given credentials or the account has been deactivated'}
-            return Response(res, status=status.HTTP_403_FORBIDDEN)
-    except KeyError:
-        res = {'error': 'please provide a email and a password'}
-        return Response(res)
+           
+            return Response(
+                {'errors': {nfe: "Authentication Failed"}},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
 
 
 
@@ -71,7 +92,7 @@ class UserRetrieveUpdateAPIView(RetrieveUpdateAPIView):
 
     # Allow only authenticated users to access this url
     permission_classes = (IsAuthenticated,)
-    serializer_class = UserRegistrationSerializer
+    serializer_class = UserSerializer
     
     def get(self, request, *args, **kwargs):
         # serializer to handle turning our `User` object into something that

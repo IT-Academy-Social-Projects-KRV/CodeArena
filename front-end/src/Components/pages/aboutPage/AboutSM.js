@@ -11,10 +11,10 @@ function AboutSM() {
              <div className="about_sm_container">
             <h2>Find us in social media</h2>
                 <ol>
-                    <li><a href="https://www.linkedin.com/"><img src={linkedinlogo}/></a></li>
-                    <li><a href="https://twitter.com/login"><img src={twitterlogo}/></a></li>
-                    <li><a href="https://www.facebook.com/"><img src={facebooklogo}/></a></li>
-                    <li><a href="https://web.telegram.org/k/"><img src={telegramlogo}/></a></li>                
+                    <li><a href="https://www.linkedin.com/" target="_blank"><img src={linkedinlogo}/></a></li>
+                    <li><a href="https://twitter.com/login" target="_blank"><img src={twitterlogo}/></a></li>
+                    <li><a href="https://www.facebook.com/" target="_blank"><img src={facebooklogo}/></a></li>
+                    <li><a href="https://web.telegram.org/k/" target="_blank"><img src={telegramlogo}/></a></li>                
                 </ol>
             </div>
         </section>
