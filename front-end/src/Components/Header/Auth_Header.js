@@ -15,6 +15,7 @@ import TableProfileSetting from '../pages/coderProfile/DataCard';
 import TaskManagingPage from '../pages/tasksmanagingPage/TaskManagingPage';
 import UsersTable from '../pages/userslistPage/UsersTable';
 import ContactsPage from '../pages/contactsPage/contactsPage';
+import SolvingTaskPage from '../pages/SolvingTaskPage/SolvingTaskPage';
 
 
 export default class Auth_Header extends Component {
@@ -72,6 +73,7 @@ export default class Auth_Header extends Component {
                         <Route exact path="/admin/tasks" component={TaskManagingPage}/>
                         <Route exact path="/users" component={UsersTable}/>
                         <Route exact path="/contacts" component={ContactsPage} />
+                        <Route exact path="/solve_task/:task_id/:solution_id?" component={SolvingTaskPage}/>
                     </Switch>
                 </Router>
             </>
