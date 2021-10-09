@@ -6,7 +6,7 @@ import { Button, Card, Form } from 'react-bootstrap';
 // import LeftBlock from '../../Common/MainMenu';
 import LanguagesDropDown from "../../Common/LanguagesDropDown";
 import CategoriesDropDown from "../../Common/CategoriesDropDown";
-
+// import './s.css'
 
 // export default function LeftColumn() {
 export default class LeftColumn extends Component {
@@ -48,6 +48,8 @@ export default class LeftColumn extends Component {
                             <Form.Group style={{margin: '10px', marginBottom: '30px'}}>
                                 <Form.Label for='language-choosing'> Choose the language </Form.Label>
                                 <LanguagesDropDown className='language-choosing' overrideOnSelect={this.props.handleSelect} isSingleSelect='false'
+                                style={{'font-size': '24px'}} 
+                                // font-size='24px'
                                 // id='la_id'
                                 />
                             </Form.Group>

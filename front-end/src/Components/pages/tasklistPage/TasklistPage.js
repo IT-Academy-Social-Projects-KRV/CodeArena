@@ -87,7 +87,6 @@ export default class TasklistPage extends Component {
         try{
             let datas = await axios.get(path)
             this.setState({selectedTasks: this.state.allTasks})
-            // console.log(this.state.allTasks === this.state.s)
         } catch(err) {console.log(err)}
     }
 
@@ -102,39 +101,27 @@ export default class TasklistPage extends Component {
 
     filterCats = (one_task) => {
         return this.state.categories.every(val => one_task.categories.includes(val))
-        // return (one_task.categories.every(val => this.state.categories.includes(val)))
     }
 
     customFunc = (langs = this.state.languages[0], cats = this.state.categories, tasks = this.state.allTasks) => {
-        // try {
-        // for ( const i of this.state.allTasks) {
-        //     // if (cats.filter(x => i.categories.includes(x)).length > 0 && langs == i.languages) {
-        //     //     pl.push(i)
-        //         if (this.state.categories.every(val => i.categories.includes(val))) {
-        //             pl.push(i)
-        //         }
-        //     }
-        // } catch (error) {
-        //     console.error(error);
-        // }
+
         console.log('langs: ', langs)
         console.log('cats:', cats)
 
         if (typeof(langs) === 'undefined' && cats.length == 0) {
             return tasks
         } else {
-            return tasks.filter(this.filterLangs).filter(this.filterCats)
+            if (typeof(langs) === 'undefined') {
+                return tasks.filter(this.filterCats)
+            }
+            else {
+                return tasks.filter(this.filterLangs).filter(this.filterCats)
+            }
         }
-
-        let pl = tasks.filter(task => task.language == langs)
-
-
-
-
-        console.log(pl)
-
-        return pl
-
+        
+        // else {
+        //     return tasks.filter(this.filterLangs).filter(this.filterCats)
+        // }
     }
 
 
@@ -166,7 +153,7 @@ export default class TasklistPage extends Component {
 
     async componentDidMount() {
         // await this.getTasks()
-        let s = await axios.get('/task/task/')
+        let s = await axios.get('/task/task/?status=PB')
         this.setState({allTasks: s.data, selectedTasks: s.data})
         // console.log(this.state)
     }

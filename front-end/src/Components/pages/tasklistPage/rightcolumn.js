@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { Card, ListGroup, Image, Button} from 'react-bootstrap';
+import { Card, ListGroup, Image, Button, Col} from 'react-bootstrap';
 
 import axios from 'axios';
 
@@ -69,6 +69,12 @@ export default class RightColumn extends Component {
                             <ListGroup.Item action href='#task'variant='dark' style={{ height: 60 }}>
                                 {card.name}
                             </ListGroup.Item>
+                            {/* <ListGroup.Item action href='#task'variant='dark' style={{ height: 60 }}>
+                                {card.categories.map(e => {<Col>{e}</Col>})}
+                            </ListGroup.Item>
+                            <ListGroup.Item action href='#task'variant='dark' style={{ height: 60 }}>
+                                {card.name}
+                            </ListGroup.Item> */}
                         
                             <ListGroup.Item variant='dark' style={{ width: '10rem' }}>
                                 <Image src={languagesDict[card.language]} style={{width: '2rem', }}></Image>
