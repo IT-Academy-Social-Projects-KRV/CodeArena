@@ -4,6 +4,7 @@ import subprocess
 import sys
 import tempfile
 
+from decouple import config
 from bson.objectid import ObjectId
 from concurrent.futures import ThreadPoolExecutor
 from pymongo import MongoClient
@@ -24,7 +25,17 @@ logger.addHandler(stdout_handler)
 
 
 class BaseSolutionChecker:
+    """
+    This class to check solutions for correctness.
+
+    It is intended to be subclassed.
+    """
+
     def __init__(self, solution, test_cases):
+        """
+        Initialize the object and create a temporary file
+        """
+
         self.solution = solution
         self.test_cases = test_cases
 
@@ -35,23 +46,43 @@ class BaseSolutionChecker:
             fp.write(test_cases.encode())
 
     def is_solution_ok(self):
+        """
+        Check solution for correctness.
+        """
+
         raise NotImplementedError
 
     def remove_temp_file(self):
+        """
+        Remove the temporary file
+        """
+
         os.unlink(self.fp.name)
 
 
 class PythonSolutionChecker(BaseSolutionChecker):
+    """
+    Check solutions written in Python.
+    """
+
     def is_solution_ok(self):
+        """
+        Override BaseSolutioChecker.is_solution_ok().
+        """
+
         proces = subprocess.run(['python3', self.fp.name])
         self.remove_temp_file()
         return not proces.returncode
 
 
-language_mapping = {'Python': PythonSolutionChecker}
-
-
 class TestRunnerDaemon:
+    """
+    This class is the solutions checking service.
+
+    It looks for solutions to be checked,
+    checks their correctness, and changes their status respectively.
+    """
+
     def __init__(self, db, thread_workers=10):
         self.db = db
         self.thread_workers = thread_workers
@@ -61,14 +92,14 @@ class TestRunnerDaemon:
         """
         Work on the solution in a separate thread
 
-        Change solution status to 'correct' or 'failed'
+        Change solution status to 'CR' (correct) or 'FL' (failed)
         """
 
         task = self.db.task_task.find({'_id': ObjectId(solution['task'])})[0]
         language = task['languages'][0]
         test = task['unit_test']
 
-        checker = language_mapping[language](
+        checker = LANGUAGE_MAPPING[language](
             solution['solution'],
             test)
 
@@ -80,29 +111,34 @@ class TestRunnerDaemon:
         )
 
     def run(self):
+        """
+        Start the continuous checking service.
+        """
+
         with ThreadPoolExecutor(max_workers=self.thread_workers) as executor:
             while True:
                 solutions = self.db.task_codertask.find({'status': 'ED'})
-                
+
                 for solution in solutions:
                     self.threadlock.acquire()
-                    
-                    # Change solution status to 'testing' before solving
+
+                    # Change solution status to 'TS' (testing) before solving
                     db.task_codertask.update_one(
                         {'_id': solution['_id']},
                         {'$set': {'status': 'TS'}},
                     )
                     logging.info(f'Solution {solution["_id"]} prepared')
-                    
+
                     self.threadlock.release()
 
                     executor.submit(self.check_solution, solution)
 
 
 if __name__ == '__main__':
-    MONGODB_USER = 'mongo-ad'
-    MONGODB_USER_PASS = 'mongo-ad'
-    MONGODB_HOST = 'localhost'
+    LANGUAGE_MAPPING = {"Python": PythonSolutionChecker}
+    MONGODB_USER = config("MONGODB_USER")
+    MONGODB_USER_PASS = config("MONGODB_USER_PASS")
+    MONGODB_HOST = config("MONGODB_HOST")
 
     url = f'mongodb://{MONGODB_USER}:{MONGODB_USER_PASS}@{MONGODB_HOST}/admin?retryWrites=true&w=majority'
     db = MongoClient(url).codearena_mdb

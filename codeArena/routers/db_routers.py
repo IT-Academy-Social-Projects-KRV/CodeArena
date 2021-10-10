@@ -1,6 +1,6 @@
 class PostgresRouter:
     # List what contain apps what can use default database.
-    route_app_labels = {'auth', 'contenttypes', 'sessions', 'admin', 'user', 'vacancies'}
+    route_app_labels = {'auth', 'contenttypes', 'sessions', 'admin', 'user', 'vacancies', 'social_django'}
 
     def db_for_read(self, model, **hints):
         """
@@ -43,10 +43,6 @@ class PostgresRouter:
 class MongoRouter:
     # List what contain apps what can use mongo database.
     route_app_labels = {
-        'auth',
-        'contenttypes',
-        'sessions',
-        'admin',
         'task',
         'competition',
         'news'
