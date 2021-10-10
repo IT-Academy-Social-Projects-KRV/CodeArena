@@ -4,6 +4,7 @@ import subprocess
 import sys
 import tempfile
 
+from bson.objectid import ObjectId
 from concurrent.futures import ThreadPoolExecutor
 from pymongo import MongoClient
 from threading import Lock
@@ -15,7 +16,7 @@ logger.setLevel(logging.INFO)
 stdout_handler = logging.StreamHandler(sys.stdout)
 stdout_handler.setLevel(logging.INFO)
 
-file_handler = logging.FileHandler('logs.log')
+file_handler = logging.FileHandler('test_runner_logs.log')
 file_handler.setLevel(logging.INFO)
 
 logger.addHandler(file_handler)
@@ -63,13 +64,17 @@ class TestRunnerDaemon:
         Change solution status to 'correct' or 'failed'
         """
 
-        checker = language_mapping[solution['language']](
+        task = self.db.task_task.find({'_id': ObjectId(solution['task'])})[0]
+        language = task['languages'][0]
+        test = task['unit_test']
+
+        checker = language_mapping[language](
             solution['solution'],
-            solution['test_cases'])
+            test)
 
-        status = 'correct' if checker.is_solution_ok() else 'failed'
+        status = 'CR' if checker.is_solution_ok() else 'FL'
 
-        db.solution.update_one(
+        db.task_codertask.update_one(
             {'_id': solution['_id']},
             {'$set': {'status': status}},
         )
@@ -77,15 +82,15 @@ class TestRunnerDaemon:
     def run(self):
         with ThreadPoolExecutor(max_workers=self.thread_workers) as executor:
             while True:
-                solutions = self.db.solution.find({'status': 'edited'})
+                solutions = self.db.task_codertask.find({'status': 'ED'})
                 
                 for solution in solutions:
                     self.threadlock.acquire()
                     
                     # Change solution status to 'testing' before solving
-                    db.solution.update_one(
+                    db.task_codertask.update_one(
                         {'_id': solution['_id']},
-                        {'$set': {'status': 'testing'}},
+                        {'$set': {'status': 'TS'}},
                     )
                     logging.info(f'Solution {solution["_id"]} prepared')
                     
