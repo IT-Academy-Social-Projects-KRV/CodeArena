@@ -27,14 +27,14 @@ assert subtract(7, 4) == 3
 """
 
 solutions = [
-    # {
-    #     "coder_id": 123,
-    #     "task_id": 12,
-    #     "solution": solution_1,
-    #     "test_cases": test_cases_1,
-    #     "language": "Python",
-    #     "status": "correct"
-    # },
+    {
+        "coder_id": 123,
+        "task_id": 12,
+        "solution": solution_1,
+        "test_cases": test_cases_1,
+        "language": "Python",
+        "status": "correct"
+    },
     {
         "coder_id": 124,
         "task_id": 17,
@@ -140,7 +140,6 @@ if __name__ == "__main__":
 
     all_count = db.solution.count_documents({})
     print(f"There are {all_count} solutions in database.")
-
     edited_count = db.solution.count_documents({"status": "edited"})
     print(f"There are {edited_count} solutions to check.")
    

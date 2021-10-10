@@ -1,6 +1,6 @@
 FROM python:latest
 
-# allow stdout be printed in console
+# allow stdout to be printed in console
 ENV PYTHONUNBUFFERED 1
 
 WORKDIR /usr/src/checker
