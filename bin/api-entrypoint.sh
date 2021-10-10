@@ -1,5 +1,6 @@
 #!/bin/bash
-# TODO divide migration for each database
+
+# migrate for each database
 python manage.py migrate --database=default
 python manage.py migrate --database=mongo
 # start gunicorn server on port 8000

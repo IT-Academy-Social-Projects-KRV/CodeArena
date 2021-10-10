@@ -6,7 +6,6 @@ from "edited" to "correct" or "failed" respectively.
 import os
 import subprocess
 import tempfile
-import time
 
 from decouple import config
 from pymongo import MongoClient
@@ -28,14 +27,14 @@ assert subtract(7, 4) == 3
 """
 
 solutions = [
-    {
-        "coder_id": 123,
-        "task_id": 12,
-        "solution": solution_1,
-        "test_cases": test_cases_1,
-        "language": "Python",
-        "status": "correct"
-    },
+    # {
+    #     "coder_id": 123,
+    #     "task_id": 12,
+    #     "solution": solution_1,
+    #     "test_cases": test_cases_1,
+    #     "language": "Python",
+    #     "status": "correct"
+    # },
     {
         "coder_id": 124,
         "task_id": 17,
@@ -100,7 +99,7 @@ class PythonSolutionChecker(BaseSolutionChecker):
 
     def is_solution_ok(self):
         """Override BaseSolutioChecker.is_solution_ok()."""
-        process = subprocess.run(["python3", self.fp.name])#, stderr=subprocess.DEVNULL)
+        process = subprocess.run(["python3", self.fp.name], stderr=subprocess.DEVNULL)
         return not process.returncode
 
 
@@ -134,19 +133,17 @@ if __name__ == "__main__":
     MONGODB_HOST = config("MONGODB_HOST")
 
     url = f'mongodb://{MONGODB_USER}:{MONGODB_USER_PASS}@{MONGODB_HOST}/admin?retryWrites=true&w=majority'
-    print("Printing")
     client = MongoClient(url)
     db = client.codearena_mdb
 
     populate_db(solutions)
 
-    # edited_count = db.solution.count_documents({"status": "edited"})
-    # print(f"There are {edited_count} solutions to check.")
-    print("Needs to be printed 1")
-    
-    # while True:
-    #     print('Hi')
+    all_count = db.solution.count_documents({})
+    print(f"There are {all_count} solutions in database.")
 
+    edited_count = db.solution.count_documents({"status": "edited"})
+    print(f"There are {edited_count} solutions to check.")
+   
     test_runner = TestRunnerDaemon(db)
     test_runner.run()
 
