@@ -122,17 +122,24 @@ class LeftBlock extends React.Component {
                                 </Form.Text>
                             </Form.Group>
 
-                            <Form.Group
-                                controlId="unit_test"
-                                className="mb-3"
-                                onChange={handleChange}
-                            >
-                                <Form.Label>Choose file for test</Form.Label>
-                                <Form.Control type="file" />
+                            <Form.Group>
+                                <Form.Label>Add tests:</Form.Label>
+                                <FloatingLabel
+                                    controlId="unit_test"
+                                    label="Tests"
+                                    onChange={handleChange}
+                                >
+                                    <Form.Control
+                                        as="textarea"
+                                        placeholder="Tests"
+                                        className="my-2"
+                                        style={{ height: "100px" }}
+                                    />
+                                </FloatingLabel>
                             </Form.Group>
 
                             <Form.Group>
-                                <Form.Label>Add solutions:</Form.Label>
+                                <Form.Label>Add solution:</Form.Label>
                                 <FloatingLabel
                                     controlId="solution"
                                     label="Solution"
@@ -173,7 +180,7 @@ class LeftBlock extends React.Component {
                                 <Form.Control
                                     as="textarea"
                                     placeholder="Description"
-                                    style={{ height: "548px" }}
+                                    style={{ height: "610px" }}
                                 />
                             </FloatingLabel>
                         </FormWrapper>
