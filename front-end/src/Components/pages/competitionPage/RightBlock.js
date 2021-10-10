@@ -12,7 +12,6 @@ class RightBlock extends Component {
         return (
             <Card bg="light" style={{ width: '14.4rem' }} >
                 <Card.Body style={{ height: 'auto' }}>
-                    <Card.Img variant="top" style={{ height: '10rem' }} src={card.src} />
                     <Card.Text className="text-center m-3" >
                         <h5> {card.company_name} </h5>
                     </Card.Text>
