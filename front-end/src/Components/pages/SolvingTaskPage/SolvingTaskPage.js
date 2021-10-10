@@ -173,7 +173,7 @@ class SolvingTaskPage extends React.Component {
                                     className="m-0"
                                     style={{ height: "200px" }}
                                     defaultValue={solution.solution}
-                                    disabled={solution.status === "ED"}
+                                    disabled={["ED", "TS"].includes(solution.status)}
                                 />
                             </FloatingLabel>
 
