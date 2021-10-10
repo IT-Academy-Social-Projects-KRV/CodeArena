@@ -73,3 +73,17 @@ class CreateCoderTaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = CoderTask
         exclude = ['_id']
+        
+
+class CreateLanguageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Language
+        exclude = ['_id']
+        
+
+class CreateCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        exclude = ['_id']
+
+        
