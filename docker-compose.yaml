@@ -5,6 +5,8 @@ services:
     # get postgres image
     image: postgres:alpine
     container_name: postgres
+    env_file:
+      - ./etc/.env.local 
     # set volume for postgers database
     volumes:
       - postgres_db:/var/lib/postgresql/data
@@ -29,6 +31,8 @@ services:
   mongo:
     image: mongo
     container_name: mongo
+    env_file:
+      - ./etc/.env.local 
     networks:
       - default
       - no-internet

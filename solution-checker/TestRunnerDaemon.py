@@ -4,6 +4,7 @@ import subprocess
 import sys
 import tempfile
 
+from decouple import config
 from bson.objectid import ObjectId
 from concurrent.futures import ThreadPoolExecutor
 from pymongo import MongoClient
@@ -100,9 +101,9 @@ class TestRunnerDaemon:
 
 
 if __name__ == '__main__':
-    MONGODB_USER = 'mongo-ad'
-    MONGODB_USER_PASS = 'mongo-ad'
-    MONGODB_HOST = 'localhost'
+    MONGODB_USER = config("MONGODB_USER")
+    MONGODB_USER_PASS = config("MONGODB_USER_PASS")
+    MONGODB_HOST = config("MONGODB_HOST")
 
     url = f'mongodb://{MONGODB_USER}:{MONGODB_USER_PASS}@{MONGODB_HOST}/admin?retryWrites=true&w=majority'
     db = MongoClient(url).codearena_mdb
