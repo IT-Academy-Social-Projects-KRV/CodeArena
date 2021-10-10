@@ -17,6 +17,7 @@ import TaskManagingPage from '../pages/tasksmanagingPage/TaskManagingPage';
 import UsersTable from '../pages/userslistPage/UsersTable';
 import ContactsPage from '../pages/contactsPage/contactsPage';
 import SolvingTaskPage from '../pages/SolvingTaskPage/SolvingTaskPage';
+import TasklistPage from '../pages/tasklistPage/TasklistPage'
 
 
 export default class Auth_Header extends Component {
@@ -41,6 +42,7 @@ export default class Auth_Header extends Component {
                                             <Nav.Link href="/achievements">Achievements</Nav.Link>
                                             <Nav.Link href="/admin/tasks">Tasks</Nav.Link>
                                             <Nav.Link href="/users">List of users</Nav.Link>
+                                            <Nav.Link href="/tasklist">Choose task</Nav.Link>
                                     </Nav>
                                     <Nav.Link href="exit" className="ms-auto">
                                         <Button variant="danger" className="me-2" >sign out</Button >
@@ -72,6 +74,7 @@ export default class Auth_Header extends Component {
                         <Route exact path="/users" component={UsersTable}/>
                         <Route exact path="/contacts" component={ContactsPage} />
                         <Route exact path="/solve_task/:task_id/:solution_id?" component={SolvingTaskPage}/>
+                        <Route exact path="/tasklist" component={TasklistPage}/>
                     </Switch>
                 </Router>
             </>

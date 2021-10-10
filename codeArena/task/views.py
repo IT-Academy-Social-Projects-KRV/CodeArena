@@ -3,6 +3,7 @@ from .serializers import *
 from .models import *
 from rest_framework.views import APIView
 from rest_framework.response import Response
+import django_filters
 
 from bson.objectid import ObjectId
   
@@ -18,6 +19,12 @@ class GetTaskListView(APIView):
         serializer = TaskListSerializer(data=tasks, many=True)
         serializer.is_valid()
         return Response(serializer.data)
+
+class TasksListAPIView(generics.ListAPIView):
+    queryset = Task.objects.all()
+    serializer_class = TaskListSerializer
+    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
+    filterset_fields = ['status']
 
 
 class GetTaskDetailView(APIView):

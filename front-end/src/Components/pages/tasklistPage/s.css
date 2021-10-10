@@ -1,0 +1,49 @@
+/* .multiselectContainer: { // To change css for multiselect (Widthheightetc..)
+      ....
+    }
+.searchBox: { // To change search box element look
+      border: none;
+      font-size: 10px;
+      min-height: 50px;
+    }
+.inputField: { // To change input field position or margin
+        margin: 5px;
+    }
+.chips: {
+      background: red;
+    }
+.optionContainer: {
+      border: 2px solid;
+    }
+.option: {
+      color: blue;
+    }
+.groupHeading: {
+      ....
+    } */
+
+.text-light {
+  --bs-text-opacity: 1;
+  color: rgb(197, 197, 197) !important;
+}
+.multiSelectContainer li {
+  padding: 10px;
+  color: white;
+  background-color: #292929;
+}
+.chip, .singleChip {
+  white-space: nowrap;
+  font-size: 18px;
+}
+
+.multiSelectContainer input {
+  border: none;
+  margin-top: 3px;
+  background: transparent;
+  color: white;
+  text-align: left;
+  /* background-color: transparent; */
+}
+.searchWrapper {
+  background-color: #292929;
+}

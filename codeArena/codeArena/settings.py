@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'news',
     'djoser',
     'rest_framework_simplejwt',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
