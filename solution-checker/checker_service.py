@@ -138,9 +138,10 @@ if __name__ == "__main__":
 
     populate_db(solutions)
 
+    all_count = db.solution.count_documents({})
+    print(f"There are {all_count} solutions in database.")
     edited_count = db.solution.count_documents({"status": "edited"})
     print(f"There are {edited_count} solutions to check.")
 
     test_runner = TestRunnerDaemon(db)
     test_runner.run()
-

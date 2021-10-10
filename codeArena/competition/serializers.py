@@ -11,9 +11,5 @@ class CompetitionSerializer(serializers.ModelSerializer):
 class CreateCompetitionSerializer(serializers.ModelSerializer):
         class Meta:
             model = Competition
-            fields = '__all__'
+            fields = ('name', 'start_time', 'finish_time', 'description')
 
-        def validate(self, data):
-            if data['start_time'] > data['finish_time']:
-                raise serializers.ValidationError("finish must occur after start")
-            return Competition.objects.create(data)

@@ -3,6 +3,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from django.views.decorators.csrf import csrf_exempt
+
 from .models import Competition
 from .serializers import CreateCompetitionSerializer, CompetitionSerializer
 
@@ -21,3 +23,4 @@ class CreateCompetitionView(APIView):
         if competition.is_valid(raise_exception=True):
             competition.save()
         return Response(status=status.HTTP_201_CREATED)
+        

@@ -124,11 +124,18 @@ class CoderTaskListView(APIView):
 
 class CreateCoderTaskView(APIView):
 
-    def post(self, request, format='json'):
-        coder_task = CreateCoderTaskSerializer(data=request.data)
-        if coder_task.is_valid(raise_exception=True):
-            coder_task_saved = coder_task.save()
-        return Response({"success": f'CoderTask created successfully'})
+    def post(self, request, format=None):
+        if '_id' in request.data:
+            coder_task = CoderTask.objects.get(_id=ObjectId(request.data['_id']))
+            serializer = CreateCoderTaskSerializer(coder_task, data=request.data)
+        else:
+            serializer = CreateCoderTaskSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(data=serializer.data, status=http_status.HTTP_201_CREATED)
+
+        return Response(status=http_status.HTTP_418_IM_A_TEAPOT)
 
 
 class CoderTaskDetailView(APIView):

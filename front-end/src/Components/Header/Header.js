@@ -7,6 +7,8 @@ import MainContainer from '../pages/homePage/MainContainer';
 import NewsPage from '../pages/newsPage/NewsPage';
 import VacanciesPage from '../pages/vacanciesPage/VacanciesPage';
 import AboutPage from '../pages/aboutPage/AboutPage';
+import ContactsPage from '../pages/contactsPage/contactsPage';
+
 
 function Header() {
 
@@ -122,6 +124,7 @@ function Header() {
                     <Route exact path="/news" component={NewsPage} />
                     <Route exact path="/jobs" component={VacanciesPage}/>
                     <Route exact path="/about" component={AboutPage} />
+                    <Route exact path="/contacts" component={ContactsPage} />
                 </Switch>
             </Router>
         </>

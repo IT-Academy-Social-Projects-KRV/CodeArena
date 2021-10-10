@@ -1,9 +1,21 @@
 from rest_framework import serializers
 from .models import Task, Language, Category, CoderTask
+from bson.objectid import ObjectId
+
+
+class ObjectIdField(serializers.Field):
+    def to_representation(self, value):
+        return str(value)
+
+    def to_internal_value(self, data):
+        return ObjectId(data)
 
 
 class TaskListSerializer(serializers.ModelSerializer):
     """Serialize all data from Task table"""
+
+    languages = serializers.JSONField()
+    categories = serializers.JSONField()
 
     class Meta:
         model = Task
@@ -69,7 +81,17 @@ class CoderTaskListSerializer(serializers.ModelSerializer):
 
 
 class CreateCoderTaskSerializer(serializers.ModelSerializer):
-    
+    solution = serializers.CharField(style={'base_template': 'textarea.html'}, allow_blank=True)
+
     class Meta:
         model = CoderTask
-        exclude = ['_id']
+        fields = '__all__'
+
+    def create(self, validated_data):
+        return CoderTask.objects.create(**validated_data)
+
+    def update(self, instance, validated_data):
+        instance.solution = validated_data.get('solution', instance.solution)
+        instance.status = validated_data.get('status', instance.status)
+        instance.save()
+        return instance
