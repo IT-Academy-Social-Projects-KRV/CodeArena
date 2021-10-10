@@ -86,7 +86,7 @@ class GetLanguageListView(APIView):
 
 class CreateLanguageView(APIView): 
     def post(self, request):
-        serializer = CreateLanguageSerializer(data=request.data)
+        serializer = LanguageSerializer(data=request.data)
         print("print request.data: ", request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
@@ -102,7 +102,7 @@ class GetCategoryListView(APIView):
 
 class CreateCategoryView(APIView): 
     def post(self, request):
-        serializer = CreateCategorySerializer(data=request.data)
+        serializer = CategorySerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
         return Response(serializer.data, status=http_status.HTTP_201_CREATED)         
