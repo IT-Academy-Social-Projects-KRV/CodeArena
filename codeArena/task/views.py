@@ -1,4 +1,3 @@
-from django.db.utils import DatabaseError
 from rest_framework import generics, status as http_status
 from .serializers import *
 from .models import *
@@ -6,6 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from bson.objectid import ObjectId
+  
 
 from .services import delete_testsfile, create_testsfile
 
@@ -39,15 +39,10 @@ class CreateTaskView(APIView):
         task = CreateTaskSerializer(data=request.data)
 
         if task.is_valid():
-            try:
-                task.save()
-            except django.db.utils.DatabaseError:
-                return Response(
-                    status=status.HTTP_409_CONFLICT)
+            task.save()
+            return Response(status=http_status.HTTP_201_CREATED)
 
-            return Response(status=status.HTTP_201_CREATED)
-
-        return Response(status=status.HTTP_422_UNPROCESSABLE_ENTITY)
+        return Response(status=http_status.HTTP_422_UNPROCESSABLE_ENTITY)
 
 
 class TaskAPI(APIView):
@@ -89,8 +84,83 @@ class GetLanguageListView(APIView):
         return Response(data=serializer.data, status=http_status.HTTP_200_OK)
 
 
+class CreateLanguageView(APIView): 
+    def post(self, request):
+        serializer = LanguageSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+        return Response(serializer.data, status=http_status.HTTP_201_CREATED)        
+
+
 class GetCategoryListView(APIView):
     def get(self, request, format='json'):
         serializer = CategorySerializer(data=Category.objects.all(), many=True)
         serializer.is_valid()
         return Response(data=serializer.data, status=http_status.HTTP_200_OK)
+
+
+class CreateCategoryView(APIView): 
+    def post(self, request):
+        serializer = CategorySerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+        return Response(serializer.data, status=http_status.HTTP_201_CREATED)         
+
+
+class CoderTaskListView(APIView):
+    """Gets all data from CoderTask table with task detail"""
+
+    def get(self, request, format=None):
+        codertasks = CoderTask.objects.all()
+        serializer = CoderTaskListSerializer(data=codertasks, many=True)
+        serializer.is_valid()
+        for coder_task in serializer.data:
+            task = Task.objects.filter(_id=ObjectId(coder_task['task']))
+            task_serializer = TaskListSerializer(data=task, many=True)
+            task_serializer.is_valid()
+            coder_task['task'] = task_serializer.data
+        return Response(serializer.data)
+
+
+class CreateCoderTaskView(APIView):
+
+    def post(self, request, format=None):
+        if '_id' in request.data:
+            coder_task = CoderTask.objects.get(_id=ObjectId(request.data['_id']))
+            serializer = CreateCoderTaskSerializer(coder_task, data=request.data)
+        else:
+            serializer = CreateCoderTaskSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(data=serializer.data, status=http_status.HTTP_201_CREATED)
+
+        return Response(status=http_status.HTTP_418_IM_A_TEAPOT)
+
+
+class CoderTaskDetailView(APIView):
+
+    def get(self, request, pk, format=None):
+        codertask = CoderTask.objects.filter(_id=ObjectId(pk))
+        if codertask:
+            serializer = CoderTaskListSerializer(data=codertask, many=True)
+            serializer.is_valid()
+            return Response(serializer.data)
+        else:
+            return Response(status=http_status.HTTP_404_NOT_FOUND)
+
+    def delete(self, request, pk):
+        codertask = CoderTask.objects.filter(_id=ObjectId(pk))
+        codertask.delete()
+        return Response({"message": f'Solution has been deleted.'}, status=http_status.HTTP_204_NO_CONTENT)
+
+    def put(self, request, pk):
+        saved_codertask = CoderTask.objects.filter(_id=ObjectId(pk)).get()
+        data = request.data.get('codersolution')
+        serializer = CreateCoderTaskSerializer(
+            instance=saved_codertask, data=data, partial=True)
+        if serializer.is_valid(raise_exception=True):
+            codertask_updated = serializer.save()
+        return Response({
+            "success": f'Solution was updated successfully'
+        })

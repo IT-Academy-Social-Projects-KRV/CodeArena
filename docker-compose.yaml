@@ -5,6 +5,8 @@ services:
     # get postgres image
     image: postgres:alpine
     container_name: postgres
+    env_file:
+      - ./etc/.env.local 
     # set volume for postgers database
     volumes:
       - postgres_db:/var/lib/postgresql/data
@@ -29,12 +31,17 @@ services:
   mongo:
     image: mongo
     container_name: mongo
+    env_file:
+      - ./etc/.env.local 
+    networks:
+      - default
+      - no-internet
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGODB_USER}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_USER_PASS}
       - MONGO_INITDB_DATABASE=${MONGODB_NAME}
     volumes:
-      - mongo_db:/var/lib/mongodb/data
+      - mongo_db:/data/db
 
   ui:
     build:
@@ -46,6 +53,27 @@ services:
     depends_on:
       - api
 
+  checker:
+    build:
+      context: .
+      dockerfile: checker.Dockerfile
+    container_name: checker
+    volumes:
+     - ./solution-checker:/usr/src/checker
+    networks:
+     - no-internet
+    env_file:
+      - ./etc/.env.local
+    depends_on:
+      - mongo
+
 volumes:
   postgres_db:
   mongo_db:
+
+networks:
+  default:
+    driver: bridge
+  no-internet:
+    driver: bridge
+    internal: true

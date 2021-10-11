@@ -10,6 +10,7 @@ import NewsPage from '../pages/newsPage/NewsPage';
 import VacanciesPage from '../pages/vacanciesPage/VacanciesPage';
 import AboutPage from '../pages/aboutPage/AboutPage';
 import ActivateAccount from './ActivateAccount';
+import ContactsPage from '../pages/contactsPage/contactsPage';
 
 function Header() {
 
@@ -200,7 +201,8 @@ const logIn = async(formLogin) => {
                     <Route exact path="/news" component={NewsPage} />
                     <Route exact path="/jobs" component={VacanciesPage}/>
                     <Route exact path="/about" component={AboutPage} />
-                    
+                    <Route exact path="/contacts" component={ContactsPage} />
+
                 </Switch>
             </Router>
 

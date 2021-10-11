@@ -6,6 +6,7 @@ from django.contrib.auth.hashers import get_hasher, make_password
 
 
 class UserSerializer(serializers.ModelSerializer):
+    role_id = serializers.StringRelatedField()
 
     class Meta:
         model = User
