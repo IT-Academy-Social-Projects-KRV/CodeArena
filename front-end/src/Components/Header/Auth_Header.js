@@ -15,8 +15,17 @@ import TableProfileSetting from '../pages/coderProfile/DataCard';
 import TaskManagingPage from '../pages/tasksmanagingPage/TaskManagingPage';
 
 
-export default class Auth_Header extends Component {
-    render() {
+function Auth_Header () {
+
+   
+        
+    const activeClick = () => {
+            localStorage.clear()
+            window.location.reload()
+        }
+    
+
+    
         return (
             <>
                 <header className="header">
@@ -40,9 +49,9 @@ export default class Auth_Header extends Component {
                                         <Nav.Link href="/achievements">Achievements</Nav.Link>
                                         <Nav.Link href="/admin/tasks">Tasks</Nav.Link>
                                     </Nav>
-                                    <Nav.Link href="exit" className="ms-auto">
-                                        <Button variant="danger" className="me-2" >sign out</Button >
-                                    </Nav.Link>
+                                    {/* <Nav.Link href="exit" className="ms-auto"> */}
+                                        <Button variant="danger" className="me-2" onClick={activeClick} >sign out</Button >
+                                    {/* </Nav.Link> */}
                                 </Navbar.Collapse>
                             </Navbar>
                         </div>
@@ -72,5 +81,6 @@ export default class Auth_Header extends Component {
             </>
         )
     }
-}
 
+
+export default Auth_Header;
