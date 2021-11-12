@@ -1,15 +1,20 @@
 # get node image
-FROM node:alpine
+FROM node:16.10.0-alpine
 
 # make directory and go to it
 RUN mkdir -p /usr/src/front-end
 WORKDIR /usr/src/front-end
 
+# copy dependencies to image
+COPY ./front-end/package.json .
+COPY ./front-end/package-lock.json .
+ 
+# install all node dependencies from package.json
+RUN npm install
+
 # copy react file to image
 COPY ./front-end/ .
 
-# install all node dependencies from package.json
-RUN npm install
 # build react app
 RUN npm run build
 

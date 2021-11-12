@@ -5,13 +5,14 @@ FROM python:latest
 RUN mkdir -p /usr/src/api
 WORKDIR /usr/src/api
 
-# copy django file to image
-COPY ./codeArena .
+# copy dependencies to image
 COPY ./requirements.txt .
-COPY ./bin/api-entrypoint.sh .
 
 # install all python packages
 RUN pip install --no-cache-dir -r requirements.txt
+
+# copy django file to image
+COPY ./codeArena .
 
 # entry point for api container
 ENTRYPOINT [ "sh", "api-entrypoint.sh" ]
