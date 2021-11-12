@@ -20,6 +20,8 @@ services:
       context: .
       dockerfile: api.Dockerfile
     container_name: api
+    volumes:
+      - ./codeArena:/usr/src/api
     # set environment variables from file
     env_file:
       - ./etc/.env.local 
@@ -48,6 +50,9 @@ services:
       context: .
       dockerfile: ui.Dockerfile
     container_name: ui
+    volumes:
+      - ./front-end:/usr/src/front-end
+      - /usr/src/front-end/node-modules
     ports:
       - 80:8080
     depends_on:
