@@ -1,0 +1,81 @@
+version: "3"
+
+services:
+  postgres:
+    image: postgres:alpine
+    container_name: postgres
+    env_file:
+      - ./etc/.env.local 
+    volumes:
+      - postgres_db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+
+  api:
+    build:
+      context: .
+      dockerfile: api-dev.Dockerfile
+    container_name: api
+    volumes:
+      - ./codeArena:/usr/src/api
+    env_file:
+      - ./etc/.env.local 
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+
+  mongo:
+    image: mongo
+    container_name: mongo
+    env_file:
+      - ./etc/.env.local 
+    networks:
+      - default
+      - no-internet
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGODB_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_USER_PASS}
+      - MONGO_INITDB_DATABASE=${MONGODB_NAME}
+    volumes:
+      - mongo_db:/data/db
+
+  ui:
+    build:
+      context: .
+      dockerfile: ui-dev.Dockerfile
+    container_name: ui
+    volumes:
+      - ./front-end:/usr/src/front-end
+      - /usr/src/front-end/node_modules
+    ports:
+      - 3000:3000
+    depends_on:
+      - api
+
+  checker:
+    build:
+      context: .
+      dockerfile: checker.Dockerfile
+    container_name: checker
+    volumes:
+     - ./solution-checker:/usr/src/checker
+    networks:
+     - no-internet
+    env_file:
+      - ./etc/.env.local
+    depends_on:
+      - mongo
+
+volumes:
+  postgres_db:
+  mongo_db:
+
+networks:
+  default:
+    driver: bridge
+  no-internet:
+    driver: bridge
+    internal: true
