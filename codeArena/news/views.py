@@ -36,9 +36,7 @@ class GetNewsDetailView(APIView):
 
     def put(self, request, pk):
         saved_news = News.objects.filter(_id=ObjectId(pk)).first()
-        data = request.data.get('one_news')
-        serializer = CreateNewsSerializer(
-            instance=saved_news, data=data, partial=True)
+        serializer = CreateNewsSerializer(instance=saved_news, data=request.data, partial=True)
         if serializer.is_valid(raise_exception=True):
             one_news_saved = serializer.save()
         return Response({
