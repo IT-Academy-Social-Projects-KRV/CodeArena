@@ -18,22 +18,13 @@ class CoderTaskTestCase(TestCase):
         u2 = uuid.uuid4()
 
         # create Tasks
-        t1 = Task.objects.create(name='Task1', description='Desc1', user_id=u1)
-        t2 = Task.objects.create(name='Task2', description='Desc2', user_id=u2)
+        t1 = Task.objects.create(name='Task1', description='Desc1', user_id=u1, unit_test='test1', languages=['js'],categories=['regex'])
+        t2 = Task.objects.create(name='Task2', description='Desc2', user_id=u2, unit_test='test2', languages=['c'],categories=['oop'])
 
         # create CoderTask relations
-        c1 = CoderTask.objects.create(coder_id=u1, task_id=t1, solution='Sol1', status=0)
-        c2 = CoderTask.objects.create(coder_id=u2, task_id=t1, solution='Sol2', status=1)
-        c3 = CoderTask.objects.create(coder_id=u1, task_id=t2, solution='Sol3', status=0)
-
-
-    def test_delete_cascade(self):
-        """CoderTask rows deletes cascade with related Task rows"""
-
-        t = Task.objects.get(name='Task1')
-        t.delete()
-        c = CoderTask.objects.filter(task_id=t)
-        self.assertEqual(c.count(), 0)
+        c1 = CoderTask.objects.create(coder_id=u1, task=t1, solution='Sol1')
+        c2 = CoderTask.objects.create(coder_id=u2, task=t1, solution='Sol2')
+        c3 = CoderTask.objects.create(coder_id=u1, task=t2, solution='Sol3')
 
 
 class TaskModelTestCase(TestCase):
@@ -43,7 +34,7 @@ class TaskModelTestCase(TestCase):
 
     def setUp(self):
         u1 = uuid.uuid4()
-        t1 = Task.objects.create(name='Task1', description='Desc1.0', user_id=u1)
+        t1 = Task.objects.create(name='Task1', description='Desc1.0', user_id=u1, unit_test='test1', languages=['js'],categories=['regex'])
         
 
     def test_updated_at(self):
@@ -120,7 +111,7 @@ class CreatingTaskTestCase(APITestCase):
             'languages': ['a', 'b'],
             'categories': ['1', '2'],
             'status': 'DR',
-            'unit_test': None
+            'unit_test': 'test test'
         }
         self.unvalid_data = {
             'name': 'task2',
@@ -131,7 +122,7 @@ class CreatingTaskTestCase(APITestCase):
             'languages': ['c', 'b'],
             'categories': ['3', '2'],
             'status': '42',
-            'unit_test': None
+            'unit_test': 'test1 test1'
         }
 
         # create Languages
